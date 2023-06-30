@@ -1,0 +1,492 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>cusl-exams-management-system</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img1/central.jpg' %}" rel="icon">
+  <link href="{% static 'assets/img1/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor1/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor1/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor1/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor1/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor1/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css1/style.css' %}" rel="stylesheet">
+</head>
+  
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div id="logo">
+        <img src="{% static 'assets/img1/cusl-logo.png' %}" alt="" style="width: 90px;">
+      </div>
+
+      <div class="search-bar">
+        <marquee style="font-size: 50px;" behavior="" direction="">Central University Results Portal</marquee>
+       </div><!-- End Search Bar -->
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a style="font-size:20px;" class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+          <li><a style="font-size:20px;" class="nav-link scrollto active" href="{% url 'login' %}">Login</a></li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="fade-in">
+      <h1 style="margin-top: 200px;">CUSL Result Management System</h1>
+      <h2>With Quality assurance of your results, be ready to go through more assessment</h2>
+      <img src="{% static 'assets/img1/hero-img.png' %}" alt="Hero Imgs" data-aos="zoom-out" data-aos-delay="100">
+      <a href="#contact" class="btn-get-started scrollto">Know More</a>
+      <div class="btns">
+        <a href="#"><i class="fa fa-apple fa-3x"></i>Home</a>
+        <a href="#"><i class="fa fa-play fa-3x"></i>Login</a>
+        <a href="#"><i class="fa fa-windows fa-3x"></i>Admin</a>
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= Get Started Section ======= -->
+    <section id="get-started" class="padd-section text-center">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+
+          <h2>Our Native Result System </h2>
+          <p style="font-size: 18px;" class="separator">Built with incredible technology</p>
+
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="feature-block">
+
+              <img src="{% static 'assets/img1/svg/cloud.svg' %}" alt="img">
+              <h3>introducing Modern Result System</h4>
+              <p style="font-size: 18px;">With CUSL-Result system we provide users with the beautiful and rich functionality</p>
+              <a style="font-size: 15px;" href="#contact">To Know more...</a>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/planet.svg' %}" alt="img">
+              <h3>user friendly interface</h4>
+              <p style="font-size: 18px;">Even the least person can understand our interface</p>
+              <a style="font-size: 15px;" href="#contact">To Know more...</a>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="feature-block">
+
+              <img src="{% static 'assets/img1/svg/asteroid.svg' %}" alt="img">
+              <h3>build the app everyone love</h4>
+              <p style="font-size: 18px;">Our University Provides the best technological innovation for everyone</p>
+              <a style="font-size: 15px;" href="#contact">To Know more...</a>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End Get Started Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about-us" class="about-us padd-section">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+
+          <div class="col-md-5 col-lg-3">
+            <img src="{% static 'assets/img1/result.jpg' %}" alt="About" data-aos="zoom-in" data-aos-delay="100" style="height:100%; width:100%;">
+          </div>
+
+          <div class="col-md-7 col-lg-5">
+            <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+
+              <h2><span>Cusl</span>Best Result System</h2>
+              <p style="font-size: 20px;">The Results Management System is a unique system in which one can be able to access their results and make firm decisions on their academic work and create possibility for better improvement there on:
+              </p>
+
+              <ul class="list-unstyled">
+                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Creative Design</li>
+                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Easy Accessibility</li>
+                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Easy to Use</li>
+                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Unlimited Features</li>
+                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Rich Features</li>
+              </ul>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="padd-section text-center">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+          <h2>Amazing Features.</h2>
+          <p style="font-size: 17px;" class="separator">with the amazing features, we can opt for more functionality .</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/paint-palette.svg' %}" alt="img">
+              <h4>creative design</h4>
+              <p style="font-size: 18px;">Our application has the best design so far. it can suit everyone</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/vector.svg' %}" alt="img">
+              <h3>User Ready</h4>
+              <p style="font-size: 18px;">With the full functionality and creativity of our application, users can find it crutial while using the applicaiton</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/design-tool.svg' %}" alt="img">
+              <h3>easy to use</h4>
+              <p style="font-size: 18px;">For the best interm of usability, users would not fine problem while using this application</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/asteroid.svg ' %}" alt="img">
+              <h3>Free Updates</h4>
+              <p style="font-size: 18px;">The updates of this application are cost free and once they are ready you can just download them for free</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/asteroid.svg' %}" alt="img">
+              <h3>Free plugins</h4>
+              <p style="font-size: 18px;">Other plugins can be integrated into the system which would make it possible for our native use</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/cloud-computing.svg' %}" alt="img">
+              <h3>App store support</h4>
+              <p style="font-size: 18px;">with responsive usability and design capability, users can access the application on any device</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/pixel.svg' %}" alt="img">
+              <h3>Perfect Pixel</h4>
+              <p style="font-size: 18px;">Perfect and quality unit description of pixels are being incorporated into the application</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-block">
+              <img src="{% static 'assets/img1/svg/code.svg' %}" alt="img">
+              <h3>clean codes</h4>
+              <p style="font-size: 18px;">The codes in this application are just too professional and can allow developers to debug the application easily</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- End Features Section -->
+
+   
+
+    <!-- ======= Video Section ======= -->
+    <section id="video" class="text-center">
+      <div class="overlay">
+        <div class="container-fluid container-full" data-aos="zoom-in">
+
+          <div class="row">
+            <a  href="https://ccmtsl.com/web/#lg=1&slide=0" class="glightbox play-btn"></a>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- End Video Section -->
+
+    
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="padd-section text-center">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+
+          <div class="col-md-8">
+
+            <div class="testimonials-content">
+              <div id="carousel-example-generic" class="carousel slide" data-bs-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+
+                  <div class="carousel-item  active">
+                    <div class="top-top">
+
+                      <h2>Our Users Speak for Us</h2>
+                      <p style="font-size: 18px;">The sprawling campus exudes natural beauty, trees and shrubs and stretches across the rolling hills of Tonkolili District, Yoni Chiefdom. This peaceful setting is home to the 
+                        state-of-the-art facilities of Central University, with lecture halls, offices, technology labs, dormitories, canteen, walkways and out buildings.</p>
+                      <h3>Yeaken Conteh<span style="font-size: 15px;">Wefare Officer</span></h4>
+
+                    </div>
+                  </div>
+
+                  <div class="carousel-item ">
+                    <div class="top-top">
+
+                      <h2>Our Users Speak for Us</h2>
+                      <p style="font-size: 18px;"></p>Imagine the potential and unique quality of your result status, having the best of result in the exams process is one of the happiest moment in the whole of you 
+                      semester careere. Quality result make a student to be bold in stating the fact that i belong to this university class..</p>
+                      <h3>Ibrahim Rahman<span style="font-size: 15px;">Developer</span></h4>
+
+                    </div>
+                  </div>
+
+                  <div class="carousel-item ">
+                    <div class="top-top">
+
+                      <h2>Our Users Speak for Us</h2>
+                      <p style="font-size: 18px;">Our University is at the zenith of Academic Excellence. With the Results Management System, students will be proud of saying we are the best. 
+                        Your result is your work, you deserve to know your academic status either weak or strong ability. stay motivated and hope for more</p>
+                      <h3>Hassan Sesay<span style="font-size: 15px;">Project Director</span></h4>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="btm-btm">
+
+                  <ul class="list-unstyled carousel-indicators">
+                    <li data-bs-target="#carousel-example-generic" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#carousel-example-generic" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#carousel-example-generic" data-bs-slide-to="2"></li>
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- End Testimonials Section -->
+
+ 
+
+  
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="padd-section">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+          <h2>Contact</h2>
+          <p style="font-size: 17px;" class="separator">If You like to know more about the system, make sure you contact us</p>
+        </div>
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-3 col-md-4">
+
+            <div class="info">
+              <div>
+                <i class="bi bi-geo-alt"></i>
+                <p style="font-size: 17px;">1 Silicon Hills Mile 91<br>Tonkolili Sierra Leone.</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <p style="font-size: 17px;">info@central.edu.sl</p>
+              </div>
+
+              <div>
+                <i class="bi bi-phone"></i>
+                <p style="font-size: 17px;">+232 76-978 720</p>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+
+          </div>
+
+          <div class="col-lg-5 col-md-8">
+            <div class="form">
+              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                </div>
+                <div class="form-group mt-3">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                </div>
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+                <div class="text-center"><button type="submit">Send Message</button></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12 col-lg-4">
+          <div class="footer-logo">
+
+            <a style="font-size: 18px;" class="navbar-brand" href="#">cusl-Exams</a>
+            <p style="font-size: 17px;">For you credible and most reliable checking platform, do contact us today. You will not regret making partners with our university</p>
+
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-2">
+          <div class="list-menu">
+
+            <h4>Abou Us</h4>
+
+            <ul class="list-unstyled">
+              <li><a style="font-size: 17px;" href="#">About us</a></li>
+              <li><a style="font-size: 17px;" href="#">Features item</a></li>
+              <li><a style="font-size: 17px;" href="#">Live chart</a></li>
+              <li><a style="font-size: 17px;" href="#">Privacy Policy</a></li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-2">
+          <div class="list-menu">
+
+            <h4>Partners</h4>
+
+            <ul class="list-unstyled">
+              <li><a style="font-size: 17px;" href="#">Informed Partners</a></li>
+              <li><a style="font-size: 17px;" href="#">Features </a></li>
+              <li><a style="font-size: 17px;" href="#"> streaming</a></li>
+              <li><a style="font-size: 17px;" href="#">Privacy </a></li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-2">
+          <div class="list-menu">
+
+            <h4>Support</h4>
+
+            <ul class="list-unstyled">
+              <li><a style="font-size: 17px;" href="#">faq</a></li>
+              <li><a style="font-size: 17px;" href="#">Editor help</a></li>
+              <li><a style="font-size: 17px;" href="#">Contact us</a></li>
+              <li><a style="font-size: 17px;" href="#">Exams</a></li>
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-2">
+          <div class="list-menu">
+
+            <h4>Education</h4>
+
+            <ul class="list-unstyled">
+              <li><a style="font-size: 17px;" href="#">Certification</li>
+              <li><a style="font-size: 17px;" href="#">Hostel and Housing</a></li>
+              <li><a style="font-size: 17px;" href="#">Technical Opportunity</a></li>
+              <li><a style="font-size: 17px;" href="#">support us</a></li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="copyrights">
+      <div class="container">
+        <p style="font-size: 18px;">&copy; Copyrights cusl-Exams. All rights reserved.</p>
+        <div class="credits">
+         
+        Designed by <a href="https://ccmtsl.com/web/">Central University</a>
+        </div>
+      </div>
+    </div>
+
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor1/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor1/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor1/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor1/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor1/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js1/main.js' %}"></script>
+
+</body>
+
+</html>
