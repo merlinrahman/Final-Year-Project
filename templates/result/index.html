@@ -1,492 +1,802 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>cusl-exams-management-system</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{% static 'assets/img1/central.jpg' %}" rel="icon">
-  <link href="{% static 'assets/img1/apple-touch-icon.png' %}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor1/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor1/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor1/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor1/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor1/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css1/style.css' %}" rel="stylesheet">
-</head>
-  
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <div id="logo">
-        <img src="{% static 'assets/img1/cusl-logo.png' %}" alt="" style="width: 90px;">
-      </div>
-
-      <div class="search-bar">
-        <marquee style="font-size: 50px;" behavior="" direction="">Central University Results Portal</marquee>
-       </div><!-- End Search Bar -->
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a style="font-size:20px;" class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
-          <li><a style="font-size:20px;" class="nav-link scrollto active" href="{% url 'login' %}">Login</a></li>
-          
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="hero-container" data-aos="fade-in">
-      <h1 style="margin-top: 200px;">CUSL Result Management System</h1>
-      <h2>With Quality assurance of your results, be ready to go through more assessment</h2>
-      <img src="{% static 'assets/img1/hero-img.png' %}" alt="Hero Imgs" data-aos="zoom-out" data-aos-delay="100">
-      <a href="#contact" class="btn-get-started scrollto">Know More</a>
-      <div class="btns">
-        <a href="#"><i class="fa fa-apple fa-3x"></i>Home</a>
-        <a href="#"><i class="fa fa-play fa-3x"></i>Login</a>
-        <a href="#"><i class="fa fa-windows fa-3x"></i>Admin</a>
-      </div>
-    </div>
-  </section><!-- End Hero Section -->
-
-  <main id="main">
-
-    <!-- ======= Get Started Section ======= -->
-    <section id="get-started" class="padd-section text-center">
-
-      <div class="container" data-aos="fade-up">
-        <div class="section-title text-center">
-
-          <h2>Our Native Result System </h2>
-          <p style="font-size: 18px;" class="separator">Built with incredible technology</p>
-
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="feature-block">
-
-              <img src="{% static 'assets/img1/svg/cloud.svg' %}" alt="img">
-              <h3>introducing Modern Result System</h4>
-              <p style="font-size: 18px;">With CUSL-Result system we provide users with the beautiful and rich functionality</p>
-              <a style="font-size: 15px;" href="#contact">To Know more...</a>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/planet.svg' %}" alt="img">
-              <h3>user friendly interface</h4>
-              <p style="font-size: 18px;">Even the least person can understand our interface</p>
-              <a style="font-size: 15px;" href="#contact">To Know more...</a>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="feature-block">
-
-              <img src="{% static 'assets/img1/svg/asteroid.svg' %}" alt="img">
-              <h3>build the app everyone love</h4>
-              <p style="font-size: 18px;">Our University Provides the best technological innovation for everyone</p>
-              <a style="font-size: 15px;" href="#contact">To Know more...</a>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section><!-- End Get Started Section -->
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about-us" class="about-us padd-section">
-      <div class="container" data-aos="fade-up">
-        <div class="row justify-content-center">
-
-          <div class="col-md-5 col-lg-3">
-            <img src="{% static 'assets/img1/result.jpg' %}" alt="About" data-aos="zoom-in" data-aos-delay="100" style="height:100%; width:100%;">
-          </div>
-
-          <div class="col-md-7 col-lg-5">
-            <div class="about-content" data-aos="fade-left" data-aos-delay="100">
-
-              <h2><span>Cusl</span>Best Result System</h2>
-              <p style="font-size: 20px;">The Results Management System is a unique system in which one can be able to access their results and make firm decisions on their academic work and create possibility for better improvement there on:
-              </p>
-
-              <ul class="list-unstyled">
-                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Creative Design</li>
-                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Easy Accessibility</li>
-                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Easy to Use</li>
-                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Unlimited Features</li>
-                <li><i style="font-size: 17px;" class="vi bi-chevron-right"></i>Rich Features</li>
-              </ul>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- End About Us Section -->
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="padd-section text-center">
-
-      <div class="container" data-aos="fade-up">
-        <div class="section-title text-center">
-          <h2>Amazing Features.</h2>
-          <p style="font-size: 17px;" class="separator">with the amazing features, we can opt for more functionality .</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/paint-palette.svg' %}" alt="img">
-              <h4>creative design</h4>
-              <p style="font-size: 18px;">Our application has the best design so far. it can suit everyone</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/vector.svg' %}" alt="img">
-              <h3>User Ready</h4>
-              <p style="font-size: 18px;">With the full functionality and creativity of our application, users can find it crutial while using the applicaiton</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/design-tool.svg' %}" alt="img">
-              <h3>easy to use</h4>
-              <p style="font-size: 18px;">For the best interm of usability, users would not fine problem while using this application</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/asteroid.svg ' %}" alt="img">
-              <h3>Free Updates</h4>
-              <p style="font-size: 18px;">The updates of this application are cost free and once they are ready you can just download them for free</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/asteroid.svg' %}" alt="img">
-              <h3>Free plugins</h4>
-              <p style="font-size: 18px;">Other plugins can be integrated into the system which would make it possible for our native use</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/cloud-computing.svg' %}" alt="img">
-              <h3>App store support</h4>
-              <p style="font-size: 18px;">with responsive usability and design capability, users can access the application on any device</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/pixel.svg' %}" alt="img">
-              <h3>Perfect Pixel</h4>
-              <p style="font-size: 18px;">Perfect and quality unit description of pixels are being incorporated into the application</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="feature-block">
-              <img src="{% static 'assets/img1/svg/code.svg' %}" alt="img">
-              <h3>clean codes</h4>
-              <p style="font-size: 18px;">The codes in this application are just too professional and can allow developers to debug the application easily</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- End Features Section -->
-
-   
-
-    <!-- ======= Video Section ======= -->
-    <section id="video" class="text-center">
-      <div class="overlay">
-        <div class="container-fluid container-full" data-aos="zoom-in">
-
-          <div class="row">
-            <a  href="https://ccmtsl.com/web/#lg=1&slide=0" class="glightbox play-btn"></a>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- End Video Section -->
-
+<!doctype html>
+<html class="no-js" lang="en">
     
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="padd-section text-center">
-      <div class="container" data-aos="fade-up">
-        <div class="row justify-content-center">
-
-          <div class="col-md-8">
-
-            <div class="testimonials-content">
-              <div id="carousel-example-generic" class="carousel slide" data-bs-ride="carousel">
-
-                <div class="carousel-inner" role="listbox">
-
-                  <div class="carousel-item  active">
-                    <div class="top-top">
-
-                      <h2>Our Users Speak for Us</h2>
-                      <p style="font-size: 18px;">The sprawling campus exudes natural beauty, trees and shrubs and stretches across the rolling hills of Tonkolili District, Yoni Chiefdom. This peaceful setting is home to the 
-                        state-of-the-art facilities of Central University, with lecture halls, offices, technology labs, dormitories, canteen, walkways and out buildings.</p>
-                      <h3>Yeaken Conteh<span style="font-size: 15px;">Wefare Officer</span></h4>
-
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>University Results Portal</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        
+		<!-- favicon
+		============================================ -->		
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico'%}">
+		
+		<!-- Google Fonts
+		============================================ -->		
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800' rel='stylesheet' type='text/css'>
+        
+		<!-- Color Swithcer CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/css/color-switcher.css'%}">
+        
+		<!-- Fontawsome CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css'%}">
+        
+		<!-- Metarial Iconic Font CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/css/material-design-iconic-font.min.css'%}">
+        
+        <!-- Bootstrap CSS
+		============================================ -->		
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+        
+		<!-- Plugins CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/css/plugins.css'%}">
+        
+		<!-- Style CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/style.css'%}">
+        
+		<!-- Color CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/css/color.css'%}">
+        
+		<!-- Responsive CSS
+		============================================ -->
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css'%}">
+        
+		<!-- Modernizr JS
+		============================================ -->		
+        <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js'%}"></script>
+	    
+        <!-- Color Css Files
+		============================================ -->	
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-one.css'%}" title="color-one" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-two.css'%}" title="color-two" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-three.css'%}" title="color-three" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-four.css'%}" title="color-four" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-five.css'%}" title="color-five" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-six.css'%}" title="color-six" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-seven.css'%}" title="color-seven" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-eight.css'%}" title="color-eight" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-nine.css'%}" title="color-nine" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-ten.css'%}" title="color-ten" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/color-ten.css'%}" title="color-ten" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/pattren1.css'%}" title="pattren1" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/pattren2.css'%}" title="pattren2" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/pattren3.css'%}" title="pattren3" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/pattren4.css'%}" title="pattren4" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/pattren5.css'%}" title="pattren5" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/background1.css'%}" title="background1" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/background2.css'%}" title="background2" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/background3.css'%}" title="background3" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/background4.css'%}" title="background4" media="screen" />
+        <link rel="alternate stylesheet" type="text/css" href="{% static 'assets/switcher/background5.css'%}" title="background5" media="screen" />
+    </head>
+    <body>
+      
+        
+        <!--Main Wrapper Start-->
+        <div class="as-mainwrapper">
+            <!--Bg White Start-->
+            <div class="bg-white">
+                <!--Header Area Start-->
+                <header>
+                    <div class="header-top">
+                        
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-5 d-none d-lg-block d-md-block">
+                                    <span>Have any question? +(232) 76 122-444 / +(232) 77 122-444</span>
+                                </div>
+                                
+                                <div class="col-lg-5 col-md-7 col-12">
+                                    <div class="header-top-right">
+                                        <div class="content h6"><a href="#"><i style="font-size: 20px; margin-top: 10px;" class="zmdi zmdi-account"></i>Login</a>
+                                            <ul class="account-dropdown">
+                                                <li><a href="{% url 'login' %}">Log In</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-md-5 d-none d-lg-block d-md-block">
+                                    <marquee behavior="" direction="" style="font-size: 30px; letter-spacing: 8px; padding-bottom: 20px;">University Results Portal</marquee>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-
-                  <div class="carousel-item ">
-                    <div class="top-top">
-
-                      <h2>Our Users Speak for Us</h2>
-                      <p style="font-size: 18px;"></p>Imagine the potential and unique quality of your result status, having the best of result in the exams process is one of the happiest moment in the whole of you 
-                      semester careere. Quality result make a student to be bold in stating the fact that i belong to this university class..</p>
-                      <h3>Ibrahim Rahman<span style="font-size: 15px;">Developer</span></h4>
-
+                    <div class="header-logo-menu sticker">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-12">
+                                    <div class="logo">
+                                        <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo.png' %}" alt="EDUCAT"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-12">
+                                    <div class="mainmenu-area pull-right">
+                                        <div class="mainmenu d-none d-lg-block">
+                                            <nav>
+                                                <ul id="nav">
+                                                    <li class="current"><a href="{% url 'index' %}">Home</a></li>
+                                                    <li><a href="{% url 'about' %}">About</a></li>
+                                                    
+                                                  
+                                                    <li><a href="{% url 'index' %}">Institutions</a>
+                                                        <!-- Mega Menu -->
+                                                        <div class="mega-menu mm-5-column">
+                                                            <div class="col-8 pull-left pl-20">
+                                                                <h3>Public Institutions</h3>
+                                                                <a href="#">Fourah Bay College (USL)</a>
+                                                                <a href="#">Institute of Public Administration and Management (IPAM-USL)</a>
+                                                                <a href="{% url 'login' %}">Njala University</a>
+                                                                <a href="#">College of Medicine and Allied Health Sciences (COMAHS)</a>
+                                                                <a href="#">Milton Magai Technical University</a>
+                                                                <a href="#">Estern Technical University</a>
+                                                                <a href="#">Kono University of Science of Science and Technology</a>
+                                                            </div>
+                                                            <div class="col-4 pull-left">
+                                                                <h3>Private Institutions</h3>
+                                                                <a href="{% url 'login' %}">Central University - SL</a>
+                                                                <a href="#">University  of Makeni</a>
+                                                                <a href="#">Ernest Bai Koroma University</a>
+                                                                <a href="#">University of Lunsar</a>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li><a href="{%url 'contact' %}">Contact</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    <!-- Mobile Menu Area start -->
+                    <div class="mobile-menu-area">
+                        <div class="container clearfix">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="mobile-menu">
+                                        <nav id="dropdown">
+                                            <ul>
+                                                <li><a href="{% url 'index' %}">HOME</a></li>
+                                                <li><a href="{% url 'about' %}">About Us</a></li>
+                                                <li><a href="{% url 'index' %}">Institutions</a>
+                                                    <!-- Mega Menu -->
+                                                    <div class="mega-menu mm-5-column">
+                                                        <div class="col-8 pull-left pl-20">
+                                                            <h3>Public Institutions</h3>
+                                                            <a href="#">Fourah Bay College (USL)</a>
+                                                            <a href="#">Institute of Public Administration and Management (IPAM-USL)</a>
+                                                            <a href="{% url 'login' %}">Njala University</a>
+                                                            <a href="#">College of Medicine and Allied Health Sciences (COMAHS)</a>
+                                                            <a href="#">Milton Magai Technical University</a>
+                                                            <a href="#">Estern Technical University</a>
+                                                            <a href="#">Kono University of Science of Science and Technology</a>
+                                                        </div>
+                                                        <div class="col-4 pull-left">
+                                                            <h3>Private Institutions</h3>
+                                                            <a href="{% url 'login' %}">Central University - SL</a>
+                                                            <a href="#">University  of Makeni</a>
+                                                            <a href="#">Ernest Bai Koroma University</a>
+                                                            <a href="#">University of Lunsar</a>
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </li>
+                                               
+                                                <li><a href="{% url 'contact' %}">Contact us</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>					
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-
-                  <div class="carousel-item ">
-                    <div class="top-top">
-
-                      <h2>Our Users Speak for Us</h2>
-                      <p style="font-size: 18px;">Our University is at the zenith of Academic Excellence. With the Results Management System, students will be proud of saying we are the best. 
-                        Your result is your work, you deserve to know your academic status either weak or strong ability. stay motivated and hope for more</p>
-                      <h3>Hassan Sesay<span style="font-size: 15px;">Project Director</span></h4>
-
+                    <!-- Mobile Menu Area end -->    
+                </header>
+                <!--End of Header Area-->
+                <!--Slider Area Start-->
+                <div class="slider-area">
+                    <div class="preview-2">
+                        <div id="nivoslider" class="slides">	
+                            <img src="{% static 'assets/img/slider/graduates.jpg' %}" alt="" title="#slider-1-caption1"/>
+                            <img src="{% static 'assets/img/slider/2.jpg' %}" alt="" title="#slider-1-caption2"/>
+                        </div> 
+                        <div id="slider-1-caption1" class="nivo-html-caption nivo-caption">
+                            <div class="banner-content slider-1">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="text-content-wrapper">
+                                                <div class="text-content">
+                                                    <h1 class="title1 wow fadeInUp" data-wow-duration="2000ms" data-wow-delay="0s">Education Needs<br>
+                                                    Complete Solution</h1>
+                                                    <p class="sub-title wow fadeInUp d-none d-lg-block" data-wow-duration="2900ms" data-wow-delay=".5s"> For better and efficient management of exams grades, students education involvement,<br>
+                                                    the result system can diversify the scope of university result management at all regions<br>
+                                                    in Sierra Leone with the involvement of Technology.</p>
+                                                    <div class="banner-readmore wow fadeInUp" data-wow-duration="3600ms" data-wow-delay=".6s">
+                                                        <a class="button-default" href="{% url 'about' %}">Know More</a>	                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>	
+                        <div id="slider-1-caption2" class="nivo-html-caption nivo-caption">
+                            <div class="banner-content slider-2">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="text-content-wrapper">
+                                                <div class="text-content slide-2">
+                                                    <h1 class="title1 wow rotateInDownLeft" data-wow-duration="1000ms" data-wow-delay="0s">Education Needs<br>
+                                                    Complete Solution</h1>
+                                                    <p class="sub-title wow fadeInUp d-none d-lg-block" data-wow-duration="2900ms" data-wow-delay=".5s"> For better and efficient management of exams grades, students education involvement,<br>
+                                                        the result system can diversify the scope of university result management at all regions<br>
+                                                        in Sierra Leone with the involvement of Technology.</p>
+                                                    <div class="banner-readmore wow rotateInDownLeft" data-wow-duration="1800ms" data-wow-delay="0s">
+                                                        <a class="button-default" href="about.html">Know More</a>	                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>	 
                     </div>
-                  </div>
-
                 </div>
-
-                <div class="btm-btm">
-
-                  <ul class="list-unstyled carousel-indicators">
-                    <li data-bs-target="#carousel-example-generic" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carousel-example-generic" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carousel-example-generic" data-bs-slide-to="2"></li>
-                  </ul>
-
+                <!--End of Slider Area-->
+                <!--About Area Start--> 
+                <div class="about-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12">
+                                <div class="about-container">
+                                    <h3>WHY OUR PORTAL ?</h3>
+                                    <p>Imagine the potential and unique quality of your result status, having the best of result in the exams process is one of the happiest moment in the whole of you semester careere.
+                                         Quality result make a student to be bold in stating the fact that i belong to this university class..</p>
+                                    <a class="button-default" href="about.html">Why this Portal</a>	      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!--End of About Area-->
+                <!--Course Area Start-->
+                <div class="course-area section-padding bg-white">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-title-wrapper">
+                                    <div class="section-title">
+                                        <h3>SOME POPULAR INSTITUTIONS</h3>
+                                        <p>There are many variations of Institutions in our Portal</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-item">
+                                    <div class="single-item-image overlay-effect">
+                                        <a href="#"><img style="width: 230px;" src="{% static 'assets/img/course/central.png'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-item-text">
+                                        <h4><a href="#">CENTRAL UNIVERSITY-SL</a></h4>
+                                        <p> We are happy to announce a significant partnership between Central University in Mile 91 and Trent University in Ontario, Canada. This historic collaboration was commemorated during a signing ceremony at Trent University,
+                                            marking the beginning of an exciting relationship between our two esteemed institutions.</p>
 
-              </div>
+
+                                            
+                                        <div class="single-item-content">
+                                           <div class="single-item-comment-view">
+                                               <span><i class="zmdi zmdi-eye"></i>Established in 2014</span>
+                                               
+                                           </div>
+                                           <div class="single-item-rating">
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star-half"></i>
+                                           </div>
+                                        </div>   
+                                    </div>
+                                    <div class="button-bottom">
+                                        <a href="https://central.edu.sl/web/" class="button-default">Learn Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-item">
+                                    <div class="single-item-image overlay-effect">
+                                        <a href="#"><img src="{% static 'assets/img/course/njala.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-item-text">
+                                        <h4><a href="#">NJALA UNIVERSITY-SL</a></h4>
+                                        
+                                        <p>Imagine the potential and unique quality of your result status, having the best of result in the exams process is one of the happiest moment in the whole of you semester careere.
+                                            Quality result make a student to be bold in stating the fact that i belong to this university class. </p>
+                                        <div class="single-item-content">
+                                           <div class="single-item-comment-view">
+                                            <span><i class="zmdi zmdi-eye"></i>Established in 1964</span>
+                                               
+                                           </div>
+                                           <div class="single-item-rating">
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star-half"></i>
+                                           </div>
+                                        </div>   
+                                    </div>
+                                    <div class="button-bottom">
+                                        <a href="https://njala.edu.sl/" class="button-default">Learn Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-item">
+                                    <div class="single-item-image overlay-effect">
+                                        <a href="#"><img style="width: 180px;" src="{% static 'assets/img/course/fbc.png'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-item-text">
+                                        <h4><a href="#">FOURAH BAY COLLEGE USL</a></h4>
+                                        <p>Student housing is now available. Book your place now. Spaces are limited so get your information into student services to make sure that you get the spot you want.
+                                            Central University offers state-of-art facilities where students can comfortably and safely reside. Separate, newly-built structures for male and female students.</p>
+                                        <div class="single-item-content">
+                                            <div class="single-item-comment-view">
+                                                <span><i class="zmdi zmdi-eye"></i>Established in 1827</span>
+                                               </div>
+                                           <div class="single-item-rating">
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star-half"></i>
+                                           </div>
+                                        </div>   
+                                    </div>
+                                    <div class="button-bottom">
+                                        <a href="https://fourahbaycollege.net/" class="button-default">Learn Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            
+                        </div>
+
+                        <div class="row" style="margin-top: 100px;">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-item">
+                                    <div class="single-item-image overlay-effect">
+                                        <a href="#"><img style="width: 180px;" src="{% static 'assets/img/course/unimark.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-item-text">
+                                        <h4><a href="#">UNIVERSITY OF MAKENI-SL</a></h4>
+                                        <p>One of the greatest things our students have come to love about Central University is the Digital Library which connects them to high-speed internet and provides access to  first-class online library.
+                                            . </p>
+                                        <div class="single-item-content">
+                                           <div class="single-item-comment-view">
+                                            <span><i class="zmdi zmdi-eye"></i>Established in 2005</span>
+                                           </div>
+                                           <div class="single-item-rating">
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star-half"></i>
+                                           </div>
+                                        </div>   
+                                    </div>
+                                    <div class="button-bottom">
+                                        <a href="https://unimak.edu.sl/" class="button-default">Learn Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-item">
+                                    <div class="single-item-image overlay-effect">
+                                        <a href="#"><img src="{% static 'assets/img/course/comas.jpg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-item-text">
+                                        <h4><a href="#">COLLEGE OF MEDICINE AND ALLIED HEALTH SCIENCES-USL</a></h4>
+                                        <p>Counselling – Our discreet, professional counselling services can help students with a
+                                             wide range of issues from academic concerns to career advice. </p>
+                                        <div class="single-item-content">
+                                           <div class="single-item-comment-view">
+                                            <span><i class="zmdi zmdi-eye"></i>Established in 1988</span>
+                                           </div>
+                                           <div class="single-item-rating">
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star-half"></i>
+                                           </div>
+                                        </div>   
+                                    </div>
+                                    <div class="button-bottom">
+                                        <a href="http://usl.edu.sl/comahs-page/" class="button-default">Learn Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="single-item">
+                                    <div class="single-item-image overlay-effect">
+                                        <a href="#"><img style="width: 250px;" src="{% static 'assets/img/course/ipam.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-item-text">
+                                        <h4><a href="#">INSTITUTE OF PUBLIC ADMINISTRATION AND MANAGEMENT-USL</a></h4>
+                                        <p>We are looking for talented, diverse professionals in all fields eager to work in a tertiary education
+                                             setting in Sierra Leone, West Africa.</p>
+                                        <div class="single-item-content">
+                                           <div class="single-item-comment-view">
+                                            <span><i class="zmdi zmdi-eye"></i>Established in 1980</span>
+                                           </div>
+                                           <div class="single-item-rating">
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star"></i>
+                                               <i class="zmdi zmdi-star-half"></i>
+                                           </div>
+                                        </div>   
+                                    </div>
+                                    <div class="button-bottom">
+                                        <a href="http://usl.edu.sl/ipam-page/" class="button-default">Learn Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <!--End of Course Area-->
+                <!--Fun Factor Area Start-->
+                <div class="fun-factor-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-title-wrapper white">
+                                    <div class="section-title">
+                                        <h3>IMPORTANT FACTS</h3>
+                                        <p>One can be able to believe that our country possesses:</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <div class="single-fun-factor">
+                                    <h4>Lecturers</h4>
+                                    <h2><span class="counter">200</span>+</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <div class="single-fun-factor">
+                                    <h4>Students</h4>
+                                    <h2><span class="counter">50,000</span>+</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <div class="single-fun-factor">
+                                    <h4>courses</h4>
+                                    <h2><span class="counter">500</span>+</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <div class="single-fun-factor">
+                                    <h4>Departments</h4>
+                                    <h2><span class="counter">250</span>+</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End of Fun Factor Area-->   
+                <!--Latest News Area Start--> 
+                <div class="latest-area section-padding bg-white">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-title-wrapper">
+                                    <div class="section-title">
+                                        <h3>CHECK FOR LATEST NEWS</h3>
+                                        <p>check our latest news on our noble insititutions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="single-latest-item">
+                                    <div class="single-latest-image">
+                                        <a href="#"><img src="{% static 'assets/img/course/fbc-house.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-latest-text">
+                                        <h3><a href="#">Fourah Bay College News</a></h3>
+                                        <div class="single-item-comment-view">
+                                           <p class="text-success">Established on 18 February 1827.</p>
+                                       </div>
+                                       <p>The Original Fourah Bay College building is located in the east end of Freetown.</p>
+                                       <a href="https://fourahbaycollege.net/" target="_blank" class="button-default">LEARN Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="single-latest-item">
+                                    <div class="single-latest-image">
+                                        <a href="#"><img src="{% static 'assets/img/course/central-house.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-latest-text">
+                                        <h3><a href="#">Central University News</a></h3>
+                                        <div class="single-item-comment-view">
+                                            <p class="text-success">Established in 2014</p>
+                                       </div>
+                                       <p>to offer a comprehensive range of career-oriented education and training opportunities. </p>
+                                       <a href="https://central.edu.sl/web/" target="_blank" class="button-default">LEARN Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="single-latest-item">
+                                    <div class="single-latest-image">
+                                        <a href="#"><img src="{% static 'assets/img/course/cohmas-house.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-latest-text">
+                                        <h3><a href="#">COHMAS news</a></h3>
+                                        <div class="single-item-comment-view">
+                                            <p class="text-success">Established in 1988</p>
+                                       </div>
+                                       <p>The College of Medicine and Allied Health
+                                        Sciences (COMAHS) was founded on 12th April
+                                        1988.</p>
+                                       <a href="http://usl.edu.sl/comahs-page/" target="_blank" class="button-default">LEARN Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="single-latest-item">
+                                    <div class="single-latest-image">
+                                        <a href="#"><img style="height: 200px;" src="{% static 'assets/img/course/unimark-house.jpg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-latest-text">
+                                        <h3><a href="#">Latest news at UNIMARK</a></h3>
+                                        <div class="single-item-comment-view">
+                                            <p class="text-success">Established in 8th October 2005</p>
+                                       </div>
+                                       <p>University of Makeni (formerly known as the Fatima Institute and often known as UNIMAK) is the first private, Catholic, university...</p>
+                                       <a href="https://unimak.edu.sl/" target="_blank" class="button-default">LEARN Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="single-latest-item">
+                                    <div class="single-latest-image">
+                                        <a href="#"><img style="height: 200px;" src="{% static 'assets/img/course/ipam-house.jpg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-latest-text">
+                                        <h3><a href="#">IPAM'S Latest News</a></h3>
+                                        <div class="single-item-comment-view">
+                                            <p class="text-success">Established in 1980</p>
+                                       </div>
+                                       <p>There are many variaons of passages of Lorem Ipsuable, amrn in some by injected humour, </p>
+                                       <a href="http://usl.edu.sl/ipam-page/" target="_blank" class="button-default">LEARN Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <div class="single-latest-item">
+                                    <div class="single-latest-image">
+                                        <a href="#"><img style="height: 200px;" src="{% static 'assets/img/course/njala-house.jpeg'%}" alt=""></a>
+                                    </div>
+                                    <div class="single-latest-text">
+                                        <h3><a href="#">Njala University News</a></h3>
+                                        <div class="single-item-comment-view">
+                                            <p class="text-success">Established in 1964</p>
+                                       </div>
+                                       <p>Njala University, a rural comprehensive public research university in Sierra Leone</p>
+                                       <a href="https://njala.edu.sl/" target="_blank" class="button-default">LEARN Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End of Latest News Area--> 
+                <!--Online Product Area Start-->
+               
+                
+               
+                <!--Newsletter Area Start-->
+                <div class="newsletter-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5">
+                                <div class="newsletter-content">
+                                    <h3>SUBSCRIBE</h3>
+                                    <h2>TO OUR NEWSLETTER</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7">
+                                <div class="newsletter-form angle">
+                                    <form action="#" id="mc-form" class="mc-form footer-newsletter fix">
+                                        <div class="subscribe-form">
+                                            <input id="mc-email" type="email" name="email" placeholder="Enter your email address...">
+                                            <button id="mc-submit" type="submit">SUBSCRIBE</button>
+                                        </div>    
+                                    </form>
+                                    <!-- mailchimp-alerts Start -->
+                                    <div class="mailchimp-alerts text-centre fix pull-right">
+                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                                    </div>
+                                    <!-- mailchimp-alerts end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End of Newsletter Area-->
+                <!--Footer Widget Area Start-->
+                <div class="footer-widget-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer-widget">
+                                    <div class="footer-logo">
+                                        <a href="index.html"><img src="{% static 'assets/img/logo/footer.png'%}" alt=""></a>
+                                    </div>
+                                    <p>The EDUCAT University Results Portal is to be a dynamic efficient and effective coordinating and regulatory body acting as a catalyst for sustainable national development and better management of the higher education system in Sierra Leone. </p>
+                                    <div class="social-icons">
+                                        <a href="#"><i class="zmdi zmdi-facebook"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-rss"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-google-plus"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-pinterest"></i></a>
+                                        <a href="#"><i class="zmdi zmdi-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer-widget">
+                                    <h3>GET IN TOUCH</h3>
+                                    <a href="tel:0123-456-789"><i class="fa fa-phone"></i>+(232) 76 122-444 / +(232) 77 122-444</a>
+                                    <span><i class="fa fa-envelope"></i>educat@finalproject.com</span>
+                                    <span><i class="fa fa-globe"></i>www.educat.com.com</span>
+                                    <span><i class="fa fa-map-marker"></i>1 Silicon Hills Mile-91</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-footer-widget">
+                                    <h3>Useful Links</h3>
+                                    <ul class="footer-list">
+                                        <li><a href="#">Teachers &amp; College of Medicine-USL</a></li>
+                                        <li><a href="#">Central University-SL</a></li>
+                                        <li><a href="#">IPAM-USL</a></li>
+                                        <li><a href="#">UNIMARK-SL</a></li>
+                                        <li><a href="#">Njala University-SL</a></li>
+                                        <li><a href="#">Fourah Bay College-USL</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!--End of Footer Widget Area-->
+                <!--Footer Area Start-->
+                <footer class="footer-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-7 col-12">
+                                <span>©  2021 Educat University Results Portal Made with ❤️ by  <a href="https://central.edu.sl/web/" target="_blank">CENTRAL UNIVERSITY</a></span>
+                            </div>
+                            <div class="col-lg-6 col-md-5 col-12">
+                                <div class="column-right">
+                                    <span>Privacy Policy , Terms &amp; Conditions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!--End of Footer Area-->
+            </div>   
+            <!--End of Bg White--> 
+        </div>    
+        <!--End of Main Wrapper Area--> 
+        
+        <!-- Color Switcher -->
+        <div class="ec-colorswitcher">
+            <a class="ec-handle" href="#"><i class="zmdi zmdi-settings"></i></a>
+            <h3>Style Switcher</h3>
+            <div class="ec-switcherarea">
+                <h6>Select Layout</h6>
+                <div class="layout-btn">
+                    <a href="#" class="ec-boxed"><span>Boxed</span></a>
+                    <a href="#" class="ec-wide"><span>Wide</span></a>
+                </div>
+                <h6>Chose Color</h6>
+                <ul class="ec-switcher">
+                    <li><a href="#" class="cs-color-1 styleswitch" data-rel="color-one"></a></li>
+                    <li><a href="#" class="cs-color-2 styleswitch" data-rel="color-two"></a></li>
+                    <li><a href="#" class="cs-color-3 styleswitch" data-rel="color-three"></a></li>
+                    <li><a href="#" class="cs-color-4 styleswitch" data-rel="color-four"></a></li>
+                    <li><a href="#" class="cs-color-5 styleswitch" data-rel="color-five"></a></li>
+                    <li><a href="#" class="cs-color-6 styleswitch" data-rel="color-six"></a></li>
+                    <li><a href="#" class="cs-color-7 styleswitch" data-rel="color-seven"></a></li>
+                    <li><a href="#" class="cs-color-8 styleswitch" data-rel="color-eight"></a></li>
+                    <li><a href="#" class="cs-color-9 styleswitch" data-rel="color-nine"></a></li>
+                    <li><a href="#" class="cs-color-10 styleswitch" data-rel="color-ten"></a></li>
+                </ul>
+                <div class="ec-pattren">
+                    <h6>Chose Pattren</h6>
+                    <div class="pattren-wrap">
+                        <a href="#" data-rel="pattren1" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren1.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="pattren2" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren2.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="pattren3" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren3.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="pattren4" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren4.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="pattren5" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren5.jpg'%}" alt=""></a>
+                    </div>
+                </div>
+                <div class="ec-background">
+                    <h6>Chose Background</h6>
+                    <div class="background-wrap">
+                        <a href="#" data-rel="background1" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren1.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="background2" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren2.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="background3" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren3.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="background4" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren4.jpg'%}" alt=""></a>
+                        <a href="#" data-rel="background5" class="styleswitch"><img src="{% static 'assets/img/ec-pattren/pattren5.jpg'%}" alt=""></a>
+                    </div>
+                </div>
             </div>
-          </div>
-
         </div>
-      </div>
-    </section><!-- End Testimonials Section -->
+        <!-- Color Switcher end -->	
+        
+        
+		<!-- jquery
+		============================================ -->		
+        <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js'%}"></script>
+        
+		<!-- popper JS
+		============================================ -->		
+        <script src="{% static 'assets/js/popper.min.js'%}"></script>
+        
+		<!-- bootstrap JS
+		============================================ -->		
+        <script src="{% static 'assets/js/bootstrap.min.js'%}"></script>
+        
+		<!-- AJax Mail JS
+		============================================ -->		
+        <script src="{% static 'assets/js/ajax-mail.js'%}"></script>
+        
+		<!-- plugins JS
+		============================================ -->		
+        <script src="{% static 'assets/js/plugins.js'%}"></script>
+        
+		<!-- StyleSwitch JS
+		============================================ -->	
+        <script src="{% static 'assets/js/styleswitch.js'%}"></script>
+        
+		<!-- main JS
+		============================================ -->		
+        <script src="{% static 'assets/js/main1.js'%}"></script>
+    </body>
 
- 
-
-  
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="padd-section">
-
-      <div class="container" data-aos="fade-up">
-        <div class="section-title text-center">
-          <h2>Contact</h2>
-          <p style="font-size: 17px;" class="separator">If You like to know more about the system, make sure you contact us</p>
-        </div>
-
-        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-lg-3 col-md-4">
-
-            <div class="info">
-              <div>
-                <i class="bi bi-geo-alt"></i>
-                <p style="font-size: 17px;">1 Silicon Hills Mile 91<br>Tonkolili Sierra Leone.</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <p style="font-size: 17px;">info@central.edu.sl</p>
-              </div>
-
-              <div>
-                <i class="bi bi-phone"></i>
-                <p style="font-size: 17px;">+232 76-978 720</p>
-              </div>
-            </div>
-
-            <div class="social-links">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-
-          </div>
-
-          <div class="col-lg-5 col-md-8">
-            <div class="form">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                </div>
-                <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-12 col-lg-4">
-          <div class="footer-logo">
-
-            <a style="font-size: 18px;" class="navbar-brand" href="#">cusl-Exams</a>
-            <p style="font-size: 17px;">For you credible and most reliable checking platform, do contact us today. You will not regret making partners with our university</p>
-
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3 col-lg-2">
-          <div class="list-menu">
-
-            <h4>Abou Us</h4>
-
-            <ul class="list-unstyled">
-              <li><a style="font-size: 17px;" href="#">About us</a></li>
-              <li><a style="font-size: 17px;" href="#">Features item</a></li>
-              <li><a style="font-size: 17px;" href="#">Live chart</a></li>
-              <li><a style="font-size: 17px;" href="#">Privacy Policy</a></li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3 col-lg-2">
-          <div class="list-menu">
-
-            <h4>Partners</h4>
-
-            <ul class="list-unstyled">
-              <li><a style="font-size: 17px;" href="#">Informed Partners</a></li>
-              <li><a style="font-size: 17px;" href="#">Features </a></li>
-              <li><a style="font-size: 17px;" href="#"> streaming</a></li>
-              <li><a style="font-size: 17px;" href="#">Privacy </a></li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3 col-lg-2">
-          <div class="list-menu">
-
-            <h4>Support</h4>
-
-            <ul class="list-unstyled">
-              <li><a style="font-size: 17px;" href="#">faq</a></li>
-              <li><a style="font-size: 17px;" href="#">Editor help</a></li>
-              <li><a style="font-size: 17px;" href="#">Contact us</a></li>
-              <li><a style="font-size: 17px;" href="#">Exams</a></li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3 col-lg-2">
-          <div class="list-menu">
-
-            <h4>Education</h4>
-
-            <ul class="list-unstyled">
-              <li><a style="font-size: 17px;" href="#">Certification</li>
-              <li><a style="font-size: 17px;" href="#">Hostel and Housing</a></li>
-              <li><a style="font-size: 17px;" href="#">Technical Opportunity</a></li>
-              <li><a style="font-size: 17px;" href="#">support us</a></li>
-            </ul>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="copyrights">
-      <div class="container">
-        <p style="font-size: 18px;">&copy; Copyrights cusl-Exams. All rights reserved.</p>
-        <div class="credits">
-         
-        Designed by <a href="https://ccmtsl.com/web/">Central University</a>
-        </div>
-      </div>
-    </div>
-
-  </footer><!-- End  Footer -->
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="{% static 'assets/vendor1/aos/aos.js' %}"></script>
-  <script src="{% static 'assets/vendor1/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor1/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor1/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor1/php-email-form/validate.js' %}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets/js1/main.js' %}"></script>
-
-</body>
 
 </html>

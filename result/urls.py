@@ -9,7 +9,30 @@ urlpatterns = [
     #*****************************************
     path('', views.index, name='index'),
 
+    # ***************************************
+                 # ABOUT PAGE
+    #*****************************************
+    path('about/', views.about, name='about'),
 
+               # CONTACT PAGE
+    #*****************************************
+    path('contact/', views.contact, name='contact'),
+
+              # LOGIN-REGISTER PAGE
+    #***************************************
+    path('login_register/', views.login_register, name='login_register'),
+
+
+
+    # CUSL HOME PAGE
+    #***************************************
+    path('cusl_home/', views.cusl_home, name='cusl_home'),
+
+  
+
+    # CUSL HOME PAGE
+    #***************************************
+    path('njala_home/', views.njala_home, name='njala_home'),
 
     # # ***************************************
     #              # ADMIN1

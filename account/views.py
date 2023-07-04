@@ -42,14 +42,15 @@ def login_view(request):
     else:
         form=UserLoginForm()
         context['login_form'] = form
-    return render(request, "result/login.html", context)
+    return render(request, "result/login_register.html", context)
 
 
 # LOGOUT
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('login_register')
+
 
 
 # STUDENT-HOME
@@ -58,10 +59,7 @@ def student_home(request):
     return render(request, 'result/student_home.html', {})
 
 
-# user profile
 
-def profile(request):
-    return render(request, 'result/profile.html')
 
 
 

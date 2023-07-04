@@ -240,22 +240,337 @@
 
 
 
-  <div class="card" style="margin-top: 80px; margin-left: 600px; margin-right: 400px;">
+  <div class="card" style="margin-top: 80px; margin-left: 320px; margin-right: 400px; width: 1190px;">
     <h4 class="text-center mt-5 h2"><small><i class="fas fa-pen"></i></small> Edit Student Result</h4>
-    <div class="card-body">
-        <div class="mb-3">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form }}
+    <div class="modal-body">
+      <div class="card">
+        <h1 style="text-align: center; margin-top: 40px;">Student Progress Report Entry</h1>
+        <form method="post">
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6 offset-md-3">
 
-                <br><br>
+              {% csrf_token %}
+              {{ form.student.label }}
+              {{ form.student }}
+              {{ form.department.label }}
+              {{ form.department }}
+              
+            </div>
+          </div>
+          <div class="row">
+            <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
+              <div class="col-md-12">
+                <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">1st Year Result</span>
+                <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">2nd Year Result</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col md-12">
+                <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
+                <span style="margin-left: 150px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
+                <span style="margin-left: 200px;  margin-bottom: 150px; font-size: large;">First Semester</span>
+                <span style="margin-left: 170px;  margin-bottom: 300px; font-size: large;">Second Semester</span>
                 
-                    <a href="{% url 'result' %}" type="button" class="btn btn-info"><i class="fas fa-times">&nbsp;</i>Cancel</a>
-                    <button type="submit"  class="btn btn-secondary"><i class="fas fa-database"></i>&nbsp; Update Result</button>
-            </form>
+              </div>
+            </div>
+            
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear.label }}
+              {{ form.academicYear }}
+              {{ form.level.label }}
+              {{ form.level }}
+              {{ form.semester.label }}
+              {{ form.semester }}
+              {{ form.module1.label }}
+              {{ form.module1 }}
+              {{ form.module_grade1.label }}
+              {{ form.module_grade1 }}
+              {{ form.module2.label }}
+              {{ form.module2 }}
+              {{ form.module_grade2.label }}
+              {{ form.module_grade2 }}
+              {{ form.module3.label }}
+              {{ form.module3 }}
+              {{ form.module_grade3.label }}
+              {{ form.module_grade3 }}
+              {{ form.module4.label }}
+              {{ form.module4 }}
+              {{ form.module_grade4.label }}
+              {{ form.module_grade4 }}
+              {{ form.module5.label }}
+              {{ form.module5 }}
+              {{ form.module_grade5.label }}
+              {{ form.module_grade5 }}
+              {{ form.module6.label }}
+              {{ form.module6 }}
+              {{ form.module_grade6.label }}
+              {{ form.module_grade6 }}
+            </div>
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear.label }}
+              {{ form.academicYear }}
+              {{ form.level.label }}
+              {{ form.level }}
+              {{ form.semester2.label }}
+              {{ form.semester2 }}
+              {{ form.semester2_module1.label }}
+              {{ form.semester2_module1 }}
+              {{ form.semester2_module_grade1.label }}
+              {{ form.semester2_module_grade1 }}
+              {{ form.semester2_module2.label }}
+              {{ form.semester2_module2 }}
+              {{ form.semester2_module_grade2.label }}
+              {{ form.semester2_module_grade2 }}
+              {{ form.semester2_module3.label }}
+              {{ form.semester2_module3 }}
+              {{ form.semester2_module_grade3.label }}
+              {{ form.semester2_module_grade3 }}
+              {{ form.semester2_module4.label }}
+              {{ form.semester2_module4 }}
+              {{ form.semester2_module_grade4.label }}
+              {{ form.semester2_module_grade4 }}
+              {{ form.semester2_module5.label }}
+              {{ form.semester2_module5 }}
+              {{ form.semester2_module_grade5.label }}
+              {{ form.semester2_module_grade5 }}
+              {{ form.semester2_module6.label }}
+              {{ form.semester2_module6 }}
+              {{ form.semester2_module_grade6.label }}
+              {{ form.semester2_module_grade6 }}
+            </div>
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear2.label }}
+              {{ form.academicYear2 }}
+              {{ form.level2.label }}
+              {{ form.level2 }}
+              {{ form.semester3.label }}
+              {{ form.semester }}
+              {{ form.semester3_module1.label }}
+              {{ form.semester3_module1 }}
+              {{ form.semester3_module_grade1.label }}
+              {{ form.semester3_module_grade1 }}
+              {{ form.semester3_module2.label }}
+              {{ form.semester3_module2 }}
+              {{ form.semester3_module_grade2.label }}
+              {{ form.semester3_module_grade2 }}
+              {{ form.semester3_module3.label }}
+              {{ form.semester3_module3 }}
+              {{ form.semester3_module_grade3.label }}
+              {{ form.semester3_module_grade3 }}
+              {{ form.semester3_module4.label }}
+              {{ form.semester3_module4 }}
+              {{ form.semester3_module_grade4.label }}
+              {{ form.semester3_module_grade4 }}
+              {{ form.semester3_module5.label }}
+              {{ form.semester3_module5 }}
+              {{ form.semester3_module_grade5.label }}
+              {{ form.semester3_module_grade5 }}
+              {{ form.semester3_module6.label }}
+              {{ form.semester3_module6 }}
+              {{ form.semester3_module_grade6.label }}
+              {{ form.semester3_module_grade6 }}
+            </div>
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear2.label }}
+              {{ form.academicYear2 }}
+              {{ form.level2.label }}
+              {{ form.level2 }}
+              {{ form.semester4.label }}
+              {{ form.semester4 }}
+              {{ form.semester4_module1.label }}
+              {{ form.semester4_module1 }}
+              {{ form.semester4_module_grade1.label }}
+              {{ form.semester4_module_grade1 }}
+              {{ form.semester4_module2.label }}
+              {{ form.semester4_module2 }}
+              {{ form.semester4_module_grade2.label }}
+              {{ form.semester4_module_grade2 }}
+              {{ form.semester4_module3.label }}
+              {{ form.semester4_module3 }}
+              {{ form.semester4_module_grade3.label }}
+              {{ form.semester4_module_grade3 }}
+              {{ form.semester4_module4.label }}
+              {{ form.semester4_module4 }}
+              {{ form.semester4_module_grade4.label }}
+              {{ form.semester4_module_grade4 }}
+              {{ form.semester4_module5.label }}
+              {{ form.semester4_module5 }}
+              {{ form.semester4_module_grade5.label }}
+              {{ form.semester4_module_grade5 }}
+              {{ form.semester4_module6.label }}
+              {{ form.semester4_module6 }}
+              {{ form.semester4_module_grade6.label }}
+              {{ form.semester4_module_grade6 }}
+            </div>
           </div>
           
-    </div>
+          
+
+          <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
+            <div class="row">
+              <div class="col-md-12">
+                <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">3rd Year Result</span>
+                <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">Final Year Result</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col md-12">
+                <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
+                <span style="margin-left: 120px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
+                <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">First Semester</span>
+                <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">Second Semester</span>
+                
+              </div>
+            </div>
+            
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear3.label }}
+              {{ form.academicYear3 }}
+              {{ form.level3.label }}
+              {{ form.level3 }}
+              {{ form.semester5.label }}
+              {{ form.semester5 }}
+              {{ form.semester5_module1.label }}
+              {{ form.semester5_module1 }}
+              {{ form.semester5_module_grade1.label }}
+              {{ form.semester5_module_grade1 }}
+              {{ form.semester5_module2.label }}
+              {{ form.semester5_module2 }}
+              {{ form.semester5_module_grade2.label }}
+              {{ form.semester5_module_grade2 }}
+              {{ form.semester5_module3.label }}
+              {{ form.semester5_module3 }}
+              {{ form.semester5_module_grade3.label }}
+              {{ form.semester5_module_grade3 }}
+              {{ form.semester5_module4.label }}
+              {{ form.semester5_module4 }}
+              {{ form.semester5_module_grade4.label }}
+              {{ form.semester5_module_grade4 }}
+              {{ form.semester5_module5.label }}
+              {{ form.semester5_module5 }}
+              {{ form.semester5_module_grade5.label }}
+              {{ form.semester5_module_grade5 }}
+              {{ form.semester5_module6.label }}
+              {{ form.semester5_module6 }}
+              {{ form.semester5_module_grade6.label }}
+              {{ form.semester5_module_grade6 }}
+              
+            </div>
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear3.label }}
+              {{ form.academicYear3 }}
+              {{ form.level3.label }}
+              {{ form.level3 }}
+              {{ form.semester6.label }}
+              {{ form.semester6 }}
+              {{ form.semester6_module1.label }}
+              {{ form.semester6_module1 }}
+              {{ form.semester6_module_grade1.label }}
+              {{ form.semester6_module_grade1 }}
+              {{ form.semester6_module2.label }}
+              {{ form.semester6_module2 }}
+              {{ form.semester6_module_grade2.label }}
+              {{ form.semester6_module_grade2 }}
+              {{ form.semester6_module3.label }}
+              {{ form.semester6_module3 }}
+              {{ form.semester6_module_grade3.label }}
+              {{ form.semester6_module_grade3 }}
+              {{ form.semester6_module4.label }}
+              {{ form.semester6_module4 }}
+              {{ form.semester6_module_grade4.label }}
+              {{ form.semester6_module_grade4 }}
+              {{ form.semester6_module5.label }}
+              {{ form.semester6_module5 }}
+              {{ form.semester6_module_grade5.label }}
+              {{ form.semester6_module_grade5 }}
+              {{ form.semester6_module6.label }}
+              {{ form.semester6_module6 }}
+              {{ form.semester6_module_grade6.label }}
+              {{ form.semester6_module_grade6 }}
+            </div>
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear4.label }}
+              {{ form.academicYear4 }}
+              {{ form.level4.label }}
+              {{ form.level4 }}
+              {{ form.semester7.label }}
+              {{ form.semester7 }}
+              {{ form.semester7_module1.label }}
+              {{ form.semester7_module1 }}
+              {{ form.semester7_module_grade1.label }}
+              {{ form.semester7_module_grade1 }}
+              {{ form.semester7_module2.label }}
+              {{ form.semester7_module2 }}
+              {{ form.semester7_module_grade2.label }}
+              {{ form.semester7_module_grade2 }}
+              {{ form.semester7_module3.label }}
+              {{ form.semester7_module3 }}
+              {{ form.semester7_module_grade3.label }}
+              {{ form.semester7_module_grade3 }}
+              {{ form.semester7_module4.label }}
+              {{ form.semester7_module4 }}
+              {{ form.semester7_module_grade4.label }}
+              {{ form.semester7_module_grade4 }}
+              {{ form.semester7_module5.label }}
+              {{ form.semester7_module5 }}
+              {{ form.semester7_module_grade5.label }}
+              {{ form.semester7_module_grade5 }}
+              {{ form.semester7_module6.label }}
+              {{ form.semester7_module6 }}
+              {{ form.semester7_module_grade6.label }}
+              {{ form.semester7_module_grade6 }}
+            </div>
+            <div class="col-md-3">
+              {% csrf_token %}
+              {{ form.academicYear4.label }}
+              {{ form.academicYear4 }}
+              {{ form.level4.label }}
+              {{ form.level4 }}
+              {{ form.semester8.label }}
+              {{ form.semester8 }}
+              {{ form.semester8_module1.label }}
+              {{ form.semester8_module1 }}
+              {{ form.semester8_module_grade1.label }}
+              {{ form.semester8_module_grade1 }}
+              {{ form.semester8_module2.label }}
+              {{ form.semester8_module2 }}
+              {{ form.semester8_module_grade2.label }}
+              {{ form.semester8_module_grade2 }}
+              {{ form.semester8_module3.label }}
+              {{ form.semester8_module3 }}
+              {{ form.semester8_module_grade3.label }}
+              {{ form.semester8_module_grade3 }}
+              {{ form.semester8_module4.label }}
+              {{ form.semester8_module4 }}
+              {{ form.semester8_module_grade4.label }}
+              {{ form.semester8_module_grade4 }}
+              {{ form.semester8_module5.label }}
+              {{ form.semester8_module5 }}
+              {{ form.semester8_module_grade5.label }}
+              {{ form.semester8_module_grade5 }}
+              {{ form.semester8_module6.label }}
+              {{ form.semester8_module6 }}
+              {{ form.semester8_module_grade6.label }}
+              {{ form.semester8_module_grade6 }}
+            </div>
+          </div>
+          
+          <div style="margin-top: 80px; margin-left: 350px; margin-bottom: 40px;">
+            <a style="padding-left: 60px; padding-right: 60px; font-size: 20px;" href="{% url 'result' %}" type="button" class="btn btn-info"><i class="fas fa-times" >&nbsp;</i>Cancel</a>
+            <button style="padding-left: 60px; padding-right: 60px; font-size: 20px;" type="submit"  class="btn btn-secondary"><i class="fas fa-database"></i>&nbsp; Update Result</button>
+          </div>
+          
+        </form>
+        </div>
+      </div>
+     
   </div>
 
 

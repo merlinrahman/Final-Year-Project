@@ -15,11 +15,30 @@ from django.db.models import Count
 
 
 
-# **************INDEX LOGIN***********************.
+# **************INDEX PAGE***********************.
 def index(request):
     return render(request, 'result/index.html',{})
 
+# **************ABOUT PAGE***********************.
+def about(request):
+    return render(request, 'result/about.html',{})
 
+# **************CONTACT PAGE***********************.
+def contact(request):
+    return render(request, 'result/contact.html',{})
+
+# **************CONTACT PAGE***********************.
+def login_register(request):
+    return render(request, 'result/login_register.html',{})
+
+
+# **************CUSL HOME PAGE***********************.
+def cusl_home(request):
+    return render(request, 'result/cusl_home.html',{})
+
+# **************CUSL HOME PAGE***********************.
+def njala_home(request):
+    return render(request, 'result/njala_home.html',{})
 
 # **************ADMIN LOGIN***********************.
 @login_required(login_url='login')
@@ -616,21 +635,21 @@ def student_login(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('student_home')
+            return redirect('cusl_home')
         else:
             messages.info(request, 'Invalid Email or Password')
             return redirect('login')
     else:
-        return render(request, 'result/student_home.html',{})
+        return render(request, 'result/cusl_home.html',{})
     
-
+@login_required(login_url='login')
 def student_home(request):
-    return render(request, 'result/student_home.html')
+    return render(request, 'result/cusl_home.html')
 
 
 def student_logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('login_registered')
 
 
 
