@@ -71,7 +71,6 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{% static 'assets/img1/central.jpg' %}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Exams Officer</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -258,10 +257,10 @@
                             <tr>
                                 <th  class="text-center">I.D Number</th>
                                 <th  class="text-center">Full Name</th>
+                                <th  class="text-center">Email</th>
                                 <th  class="text-center">Gender</th>
                                 <th  class="text-center">Department</th>
                                 <th  class="text-center">Program</th>
-                                <th  class="text-center">Level</th>
                                 <th  class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -270,10 +269,10 @@
                             <tr>
                                 <td>{{ obj.student_id }}</td>
                                 <td>{{ obj.fullname }}</td>
+                                <td>{{ obj.email }}</td>
                                 <td>{{ obj.gender }}</td>
                                 <td>{{ obj.department }}</td>
                                 <td>{{ obj.program }}</td>
-                                <td>{{ obj.level }}</td>
                                     <td>
                                         <a href="{% url 'edit_student' obj.id %}" class="btn btn-info" title="Edit Patient">
                                             <i class="fas fa-pen"></i>

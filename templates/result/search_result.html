@@ -207,6 +207,12 @@
                                                 <button type="submit" class="button-default">Search Result</button>
                                             </div>
                                         </form>
+
+                                        {% if result %}
+                                        <p>Result: {{ result.result }}</p>
+                                    {% else %}
+                                        <p>No result found.</p>
+                                    {% endif %}
                                     </div>
                                 </div>
                             </div>

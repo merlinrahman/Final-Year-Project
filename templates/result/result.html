@@ -48,13 +48,8 @@
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.5.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  {{ form.media }}
+
+
  
 </head>
 
@@ -81,7 +76,6 @@
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="{% static 'assets/img1/central.jpg' %}" alt="Profile" class="rounded-circle">
           <span class="d-none d-md-block dropdown-toggle ps-2">Exams Officer</span>
         </a><!-- End Profile Iamge Icon -->
 
@@ -265,7 +259,7 @@
                             <th  class="text-center">No</th>
                             <th  class="text-center">Student ID</th>
                             <th  class="text-center">Student Name</th>
-                            <th  class="text-center">Faculty</th>
+                            <th  class="text-center">Email</th>
                             <th  class="text-center">Department</th>
                             <th  class="text-center">Actions</th>
                         </tr>
@@ -273,14 +267,14 @@
                     <tbody  class="text-center h5">
                       {% for prog in results_entry %}
                         <tr>
-                            <td>{{ prog.student_id }}</td>
+                            <td>{{ prog.id }}</td>
                             <td>{{ prog.student.student_id }}</td>
                             <td>{{ prog.student }}</td>
-                            <td>{{ prog.faculty }}</td>
+                            <td>{{ prog.student.email }}</td>
                             <td>{{ prog.department }}</td>
                                
                             <td>
-                              <a href="{% url 'edit_result' prog.student_id %}" class="btn btn-info" title="Edit Patient">
+                              <a href="{% url 'edit_result' prog.id %}" class="btn btn-info"  title="Edit Patient">
                                   <i class="fas fa-pen"></i>
                               </a>
                               <a href="{% url 'delete_result' prog.id %}"  class="btn btn-danger" title="Edit Patient">
@@ -563,7 +557,7 @@
                         {{ form.semester6_module_grade6.label }}
                         {{ form.semester6_module_grade6 }}
                       </div>
-                      <!-- <div class="col-md-3">
+                      <div class="col-md-3">
                         {% csrf_token %}
                         {{ form.academicYear4.label }}
                         {{ form.academicYear4 }}
@@ -571,30 +565,30 @@
                         {{ form.level4 }}
                         {{ form.semester7.label }}
                         {{ form.semester7 }}
-                        {{ form.module1.label }}
-                        {{ form.module1 }}
-                        {{ form.module_grade1.label }}
-                        {{ form.module_grade1 }}
-                        {{ form.module2.label }}
-                        {{ form.module2 }}
-                        {{ form.module_grade2.label }}
-                        {{ form.module_grade2 }}
-                        {{ form.module3.label }}
-                        {{ form.module3 }}
-                        {{ form.module_grade3.label }}
-                        {{ form.module_grade3 }}
-                        {{ form.module4.label }}
-                        {{ form.module4 }}
-                        {{ form.module_grade4.label }}
-                        {{ form.module_grade4 }}
-                        {{ form.module5.label }}
-                        {{ form.module5 }}
-                        {{ form.module_grade5.label }}
-                        {{ form.module_grade5 }}
-                        {{ form.module6.label }}
-                        {{ form.module6 }}
-                        {{ form.module_grade6.label }}
-                        {{ form.module_grade6 }}
+                        {{ form.semester7_module1.label }}
+                        {{ form.semester7_module1 }}
+                        {{ form.semester7_module_grade1.label }}
+                        {{ form.semester7_module_grade1 }}
+                        {{ form.semester7_module2.label }}
+                        {{ form.semester7_module2 }}
+                        {{ form.semester7_module_grade2.label }}
+                        {{ form.semester7_module_grade2 }}
+                        {{ form.semester7_module3.label }}
+                        {{ form.semester7_module3 }}
+                        {{ form.semester7_module_grade3.label }}
+                        {{ form.semester7_module_grade3 }}
+                        {{ form.semester7_module4.label }}
+                        {{ form.semester7_module4 }}
+                        {{ form.semester7_module_grade4.label }}
+                        {{ form.semester7_module_grade4 }}
+                        {{ form.semester7_module5.label }}
+                        {{ form.semester7_module5 }}
+                        {{ form.semester7_module_grade5.label }}
+                        {{ form.semester7_module_grade5 }}
+                        {{ form.semester7_module6.label }}
+                        {{ form.semester7_module6 }}
+                        {{ form.semester7_module_grade6.label }}
+                        {{ form.semester7_module_grade6 }}
                       </div>
                       <div class="col-md-3">
                         {% csrf_token %}
@@ -604,31 +598,31 @@
                         {{ form.level4 }}
                         {{ form.semester8.label }}
                         {{ form.semester8 }}
-                        {{ form.module1.label }}
-                        {{ form.module1 }}
-                        {{ form.module_grade1.label }}
-                        {{ form.module_grade1 }}
-                        {{ form.module2.label }}
-                        {{ form.module2 }}
-                        {{ form.module_grade2.label }}
-                        {{ form.module_grade2 }}
-                        {{ form.module3.label }}
-                        {{ form.module3 }}
-                        {{ form.module_grade3.label }}
-                        {{ form.module_grade3 }}
-                        {{ form.module4.label }}
-                        {{ form.module4 }}
-                        {{ form.module_grade4.label }}
-                        {{ form.module_grade4 }}
-                        {{ form.module5.label }}
-                        {{ form.module5 }}
-                        {{ form.module_grade5.label }}
-                        {{ form.module_grade5 }}
-                        {{ form.module6.label }}
-                        {{ form.module6 }}
-                        {{ form.module_grade6.label }}
-                        {{ form.module_grade6 }}
-                      </div> -->
+                        {{ form.semester8_module1.label }}
+                        {{ form.semester8_module1 }}
+                        {{ form.semester8_module_grade1.label }}
+                        {{ form.semester8_module_grade1 }}
+                        {{ form.semester8_module2.label }}
+                        {{ form.semester8_module2 }}
+                        {{ form.semester8_module_grade2.label }}
+                        {{ form.semester8_module_grade2 }}
+                        {{ form.semester8_module3.label }}
+                        {{ form.semester8_module3 }}
+                        {{ form.semester8_module_grade3.label }}
+                        {{ form.semester8_module_grade3 }}
+                        {{ form.semester8_module4.label }}
+                        {{ form.semester8_module4 }}
+                        {{ form.semester8_module_grade4.label }}
+                        {{ form.semester8_module_grade4 }}
+                        {{ form.semester8_module5.label }}
+                        {{ form.semester8_module5 }}
+                        {{ form.semester8_module_grade5.label }}
+                        {{ form.semester8_module_grade5 }}
+                        {{ form.semester8_module6.label }}
+                        {{ form.semester8_module6 }}
+                        {{ form.semester8_module_grade6.label }}
+                        {{ form.semester8_module_grade6 }}
+                      </div> 
                     </div> 
                     
                     <button type="submit" class="btn btn-lg btn-secondary mt-3" style="margin-left: 250px; padding-left: 200px; padding-right: 200px; margin-top: 30px;"><i class="fas fa-database"></i>

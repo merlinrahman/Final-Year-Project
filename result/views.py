@@ -717,6 +717,7 @@ def result(request):
 
 
 
+
 # **************EDIT Result***********
 def edit_result(request, pk):
     editres = Result.objects.get(id=pk)
@@ -748,3 +749,47 @@ def delete_result(request, pk):
 def view_result(request, pk):
     viewresult = Result.objects.get(id=pk)
     return render(request, 'result/view_result.html', {'viewresult': viewresult})
+
+
+
+
+
+# ****************************************************
+
+#***********SEARCHING FOR THE RESULT*************
+
+# ****************************************************
+def search_result(request):
+    email = request.GET.get('email')
+    id_number = request.GET.get('id_number')
+    result = None
+
+    if email and id_number:
+        try:
+            result = Result.objects.get(student__email=email, student__student_id=id_number)
+        except Result.DoesNotExist:
+            result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result/view_student_result.html', context)
+
+
+
+# ****************************************************
+
+#***********DISPLAYING THE RESULT*************
+
+# ****************************************************
+
+def view_student_result(request, email, id_number):
+    try:
+        result = Result.objects.get(student__email=email, student__student_id=id_number)
+    except Result.DoesNotExist:
+        result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result_display.html', context)

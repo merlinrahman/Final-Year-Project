@@ -93,9 +93,11 @@ class CourseForm(ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['fullname','gender','department','program','dob']
+        fields = ['fullname','email','contact','gender','department','program','dob']
         widgets = {
             'fullname': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'email': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'contact': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
             'gender': forms.Select(attrs={'class': 'form-control shadow-none'}),
             'department': forms.Select(attrs={'class': 'form-control shadow-none'}),
             'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
@@ -138,6 +140,14 @@ class ResultForm(forms.ModelForm):
                   'academicYear3','level3','semester6','semester6_module1','semester6_module_grade1','semester6_module2', 'semester6_module_grade2','semester6_module3', 
                   'semester6_module_grade3','semester6_module4', 'semester6_module_grade4','semester6_module5',
                   'semester6_module_grade5','semester6_module6', 'semester6_module_grade6',
+
+                  'academicYear4','level4','semester7','semester7_module1','semester7_module_grade1','semester7_module2', 'semester7_module_grade2','semester7_module3', 
+                  'semester7_module_grade3','semester7_module4', 'semester7_module_grade4','semester7_module5',
+                  'semester7_module_grade5','semester7_module6', 'semester7_module_grade6',
+
+                  'academicYear4','level4','semester8','semester8_module1','semester8_module_grade1','semester8_module2', 'semester8_module_grade2','semester8_module3', 
+                  'semester8_module_grade3','semester8_module4', 'semester8_module_grade4','semester8_module5',
+                  'semester8_module_grade5','semester8_module6', 'semester8_module_grade6',
 
                     ]
         widgets = {
@@ -238,7 +248,41 @@ class ResultForm(forms.ModelForm):
             'semester6_module5': forms.Select(attrs={'class': 'form-control shadow-none'}),
             'semester6_module_grade5': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
             'semester6_module6': forms.Select(attrs={'class': 'form-control shadow-none'}),
-            'semester6_module_grade6': forms.TextInput(attrs={'class': 'form-control shadow-none'}), 
+            'semester6_module_grade6': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+
+
+            'academicYear4': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level4': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module1': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module_grade1': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module2': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module_grade2': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester7_module3': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module_grade3': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester7_module4': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module_grade4': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester7_module5': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module_grade5': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester7_module6': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester7_module_grade6': forms.TextInput(attrs={'class': 'form-control shadow-none'}), 
+
+
+            'academicYear4': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level4': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module1': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module_grade1': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module2': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module_grade2': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester8_module3': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module_grade3': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester8_module4': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module_grade4': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester8_module5': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module_grade5': forms.TextInput(attrs={'class': 'form-control shadow-none'}),  
+            'semester8_module6': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester8_module_grade6': forms.TextInput(attrs={'class': 'form-control shadow-none'}), 
         }
 
     

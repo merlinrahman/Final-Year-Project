@@ -110,6 +110,14 @@ SEMESTER6 = (
         ('First Semester','First Semester'),
         ('Second Semester','Second Semester'),
 )
+SEMESTER7 = (
+        ('First Semester','First Semester'),
+        ('Second Semester','Second Semester'),
+)
+SEMESTER8 = (
+        ('First Semester','First Semester'),
+        ('Second Semester','Second Semester'),
+)
 
 
 
@@ -182,8 +190,6 @@ YEAR3_ACADEMIC_YEAR = (
 )
 
 YEAR4_ACADEMIC_YEAR = (
-    
-        
         ('2013/2014','2013/2014'),
         ('2014/2015','2014/2015'),
         ('2015/2016','2015/2016'),
@@ -203,6 +209,7 @@ YEAR4_ACADEMIC_YEAR = (
     
 class ExamsYear(models.Model):
     academicyear= models.CharField(max_length=20, choices=ACADEMIC_YEAR)
+    
     
         
 
@@ -251,6 +258,8 @@ class Courses(models.Model):
 class Student(models.Model):
         student_id = models.CharField(max_length=50, unique=True)
         fullname = models.CharField(max_length=100)
+        email = models.EmailField(max_length=20)
+        contact = models.TextField(max_length=15)
         gender = models.TextField(max_length=20, choices=GENDER)
         department = models.ForeignKey(Department, on_delete=models.CASCADE)
         program = models.ForeignKey(Program, on_delete=models.CASCADE)
@@ -292,6 +301,8 @@ class Result(models.Model):
     semester4 = models.TextField(max_length=50, choices=SEMESTER4, null=True)
     semester5 = models.TextField(max_length=50, choices=SEMESTER5, null=True)
     semester6 = models.TextField(max_length=50, choices=SEMESTER6, null=True)
+    semester7 = models.TextField(max_length=50, choices=SEMESTER7, null=True)
+    semester8 = models.TextField(max_length=50, choices=SEMESTER8, null=True)
     
 
     # =====================YEAR ONE=========================================#
@@ -385,23 +396,23 @@ class Result(models.Model):
     semester3_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module4_results',null=True, blank=True)
     semester3_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module5_results',null=True, blank=True)
     semester3_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module6_results',null=True, blank=True)
-    semester3_module_grade1 = models.IntegerField(null=True, default=0)
-    semester3_module_grade2 = models.IntegerField(null=True, default=0)
-    semester3_module_grade3 = models.IntegerField(null=True, default=0)
-    semester3_module_grade4 = models.IntegerField(null=True, default=0)
-    semester3_module_grade5 = models.IntegerField(null=True, default=0)
-    semester3_module_grade6 = models.IntegerField(null=True, default=0)
+    semester3_module_grade1 = models.IntegerField(null=True)
+    semester3_module_grade2 = models.IntegerField(null=True)
+    semester3_module_grade3 = models.IntegerField(null=True)
+    semester3_module_grade4 = models.IntegerField(null=True)
+    semester3_module_grade5 = models.IntegerField(null=True)
+    semester3_module_grade6 = models.IntegerField(null=True)
     semester3_gradepoint1 = models.TextField(max_length=2,null=True, blank=True)
     semester3_gradepoint2 = models.TextField(max_length=2,null=True, blank=True)
     semester3_gradepoint3 = models.TextField(max_length=2,null=True, blank=True)
     semester3_gradepoint4 = models.TextField(max_length=2,null=True, blank=True)
     semester3_gradepoint5 = models.TextField(max_length=2,null=True, blank=True)
     semester3_gradepoint6 = models.TextField(max_length=2,null=True, blank=True)
-    semester3_equivalent1 = models.IntegerField(null=True, default=0, blank=True)
-    semester3_equivalent2 = models.IntegerField(null=True, default=0, blank=True)
-    semester3_equivalent3 = models.IntegerField(null=True, default=0, blank=True)
-    semester3_equivalent4 = models.IntegerField(null=True, default=0, blank=True)
-    semester3_equivalent5 = models.IntegerField(null=True, default=0, blank=True)
+    semester3_equivalent1 = models.IntegerField(null=True, blank=True)
+    semester3_equivalent2 = models.IntegerField(null=True, blank=True)
+    semester3_equivalent3 = models.IntegerField(null=True, blank=True)
+    semester3_equivalent4 = models.IntegerField(null=True, blank=True)
+    semester3_equivalent5 = models.IntegerField(null=True, blank=True)
     semester3_equivalent6 = models.IntegerField(null=True, default=0)
     semester3_grade1 = models.CharField(max_length=1, blank=True, null=True)
     semester3_grade2 = models.CharField(max_length=1, blank=True, null=True)
@@ -442,12 +453,12 @@ class Result(models.Model):
     semester4_gradepoint4 = models.TextField(max_length=2,null=True, blank=True)
     semester4_gradepoint5 = models.TextField(max_length=2,null=True, blank=True)
     semester4_gradepoint6 = models.TextField(max_length=2,null=True, blank=True)
-    semester4_equivalent1 = models.IntegerField(null=True, default=0, blank=True)
-    semester4_equivalent2 = models.IntegerField(null=True, default=0, blank=True)
-    semester4_equivalent3 = models.IntegerField(null=True, default=0, blank=True)
-    semester4_equivalent4 = models.IntegerField(null=True, default=0, blank=True)
-    semester4_equivalent5 = models.IntegerField(null=True, default=0, blank=True)
-    semester4_equivalent6 = models.IntegerField(null=True, default=0, blank=True)
+    semester4_equivalent1 = models.IntegerField(null=True, blank=True)
+    semester4_equivalent2 = models.IntegerField(null=True, blank=True)
+    semester4_equivalent3 = models.IntegerField(null=True, blank=True)
+    semester4_equivalent4 = models.IntegerField(null=True, blank=True)
+    semester4_equivalent5 = models.IntegerField(null=True, blank=True)
+    semester4_equivalent6 = models.IntegerField(null=True, blank=True)
     semester4_grade1 = models.CharField(max_length=1, blank=True, null=True)
     semester4_grade2 = models.CharField(max_length=1, blank=True, null=True)
     semester4_grade3 = models.CharField(max_length=1, blank=True, null=True)
@@ -480,24 +491,24 @@ class Result(models.Model):
     semester5_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module4_results',null=True, blank=True)
     semester5_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module5_results',null=True, blank=True)
     semester5_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module6_results',null=True, blank=True)
-    semester5_module_grade1 = models.IntegerField(null=True, default=0)
-    semester5_module_grade2 = models.IntegerField(null=True, default=0)
-    semester5_module_grade3 = models.IntegerField(null=True, default=0)
-    semester5_module_grade4 = models.IntegerField(null=True, default=0)
-    semester5_module_grade5 = models.IntegerField(null=True, default=0)
-    semester5_module_grade6 = models.IntegerField(null=True, default=0)
+    semester5_module_grade1 = models.IntegerField(null=True)
+    semester5_module_grade2 = models.IntegerField(null=True)
+    semester5_module_grade3 = models.IntegerField(null=True)
+    semester5_module_grade4 = models.IntegerField(null=True)
+    semester5_module_grade5 = models.IntegerField(null=True)
+    semester5_module_grade6 = models.IntegerField(null=True)
     semester5_gradepoint1 = models.TextField(max_length=2,null=True, blank=True)
     semester5_gradepoint2 = models.TextField(max_length=2,null=True, blank=True)
     semester5_gradepoint3 = models.TextField(max_length=2,null=True, blank=True)
     semester5_gradepoint4 = models.TextField(max_length=2,null=True, blank=True)
     semester5_gradepoint5 = models.TextField(max_length=2,null=True, blank=True)
     semester5_gradepoint6 = models.TextField(max_length=2,null=True, blank=True)
-    semester5_equivalent1 = models.IntegerField(null=True, default=0, blank=True)
-    semester5_equivalent2 = models.IntegerField(null=True, default=0, blank=True)
-    semester5_equivalent3 = models.IntegerField(null=True, default=0, blank=True)
-    semester5_equivalent4 = models.IntegerField(null=True, default=0, blank=True)
-    semester5_equivalent5 = models.IntegerField(null=True, default=0, blank=True)
-    semester5_equivalent6 = models.IntegerField(null=True, default=0)
+    semester5_equivalent1 = models.IntegerField(null=True,blank=True)
+    semester5_equivalent2 = models.IntegerField(null=True,blank=True)
+    semester5_equivalent3 = models.IntegerField(null=True,blank=True)
+    semester5_equivalent4 = models.IntegerField(null=True,blank=True)
+    semester5_equivalent5 = models.IntegerField(null=True,blank=True)
+    semester5_equivalent6 = models.IntegerField(null=True,)
     semester5_grade1 = models.CharField(max_length=1, blank=True, null=True)
     semester5_grade2 = models.CharField(max_length=1, blank=True, null=True)
     semester5_grade3 = models.CharField(max_length=1, blank=True, null=True)
@@ -524,24 +535,24 @@ class Result(models.Model):
     semester6_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module4_results',null=True, blank=True)
     semester6_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module5_results',null=True, blank=True)
     semester6_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module6_results',null=True, blank=True)
-    semester6_module_grade1 = models.IntegerField(null=True, default=0)
-    semester6_module_grade2 = models.IntegerField(null=True, default=0)
-    semester6_module_grade3 = models.IntegerField(null=True, default=0)
-    semester6_module_grade4 = models.IntegerField(null=True, default=0)
-    semester6_module_grade5 = models.IntegerField(null=True, default=0)
-    semester6_module_grade6 = models.IntegerField(null=True, default=0)
+    semester6_module_grade1 = models.IntegerField(null=True)
+    semester6_module_grade2 = models.IntegerField(null=True)
+    semester6_module_grade3 = models.IntegerField(null=True)
+    semester6_module_grade4 = models.IntegerField(null=True)
+    semester6_module_grade5 = models.IntegerField(null=True)
+    semester6_module_grade6 = models.IntegerField(null=True)
     semester6_gradepoint1 = models.TextField(max_length=2,null=True, blank=True)
     semester6_gradepoint2 = models.TextField(max_length=2,null=True, blank=True)
     semester6_gradepoint3 = models.TextField(max_length=2,null=True, blank=True)
     semester6_gradepoint4 = models.TextField(max_length=2,null=True, blank=True)
     semester6_gradepoint5 = models.TextField(max_length=2,null=True, blank=True)
     semester6_gradepoint6 = models.TextField(max_length=2,null=True, blank=True)
-    semester6_equivalent1 = models.IntegerField(null=True, default=0, blank=True)
-    semester6_equivalent2 = models.IntegerField(null=True, default=0, blank=True)
-    semester6_equivalent3 = models.IntegerField(null=True, default=0, blank=True)
-    semester6_equivalent4 = models.IntegerField(null=True, default=0, blank=True)
-    semester6_equivalent5 = models.IntegerField(null=True, default=0, blank=True)
-    semester6_equivalent6 = models.IntegerField(null=True, default=0)
+    semester6_equivalent1 = models.IntegerField(null=True, blank=True)
+    semester6_equivalent2 = models.IntegerField(null=True, blank=True)
+    semester6_equivalent3 = models.IntegerField(null=True, blank=True)
+    semester6_equivalent4 = models.IntegerField(null=True, blank=True)
+    semester6_equivalent5 = models.IntegerField(null=True, blank=True)
+    semester6_equivalent6 = models.IntegerField(null=True)
     semester6_grade1 = models.CharField(max_length=1, blank=True, null=True)
     semester6_grade2 = models.CharField(max_length=1, blank=True, null=True)
     semester6_grade3 = models.CharField(max_length=1, blank=True, null=True)
@@ -564,6 +575,99 @@ class Result(models.Model):
     year3_cgp = models.IntegerField(null=True, default=0 )
     year3_cgpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
+
+
+     # ****************SEMESTER SEVEN************************
+    semester7_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module1_results',null=True, blank=True)
+    semester7_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module2_results',null=True, blank=True)
+    semester7_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module3_results',null=True, blank=True)
+    semester7_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module4_results',null=True, blank=True)
+    semester7_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module5_results',null=True, blank=True)
+    semester7_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module6_results',null=True, blank=True)
+    semester7_module_grade1 = models.IntegerField(null=True)
+    semester7_module_grade2 = models.IntegerField(null=True)
+    semester7_module_grade3 = models.IntegerField(null=True)
+    semester7_module_grade4 = models.IntegerField(null=True)
+    semester7_module_grade5 = models.IntegerField(null=True)
+    semester7_module_grade6 = models.IntegerField(null=True)
+    semester7_gradepoint1 = models.TextField(max_length=2,null=True, blank=True)
+    semester7_gradepoint2 = models.TextField(max_length=2,null=True, blank=True)
+    semester7_gradepoint3 = models.TextField(max_length=2,null=True, blank=True)
+    semester7_gradepoint4 = models.TextField(max_length=2,null=True, blank=True)
+    semester7_gradepoint5 = models.TextField(max_length=2,null=True, blank=True)
+    semester7_gradepoint6 = models.TextField(max_length=2,null=True, blank=True)
+    semester7_equivalent1 = models.IntegerField(null=True,blank=True)
+    semester7_equivalent2 = models.IntegerField(null=True,blank=True)
+    semester7_equivalent3 = models.IntegerField(null=True,blank=True)
+    semester7_equivalent4 = models.IntegerField(null=True,blank=True)
+    semester7_equivalent5 = models.IntegerField(null=True,blank=True)
+    semester7_equivalent6 = models.IntegerField(null=True)
+    semester7_grade1 = models.CharField(max_length=1, blank=True, null=True)
+    semester7_grade2 = models.CharField(max_length=1, blank=True, null=True)
+    semester7_grade3 = models.CharField(max_length=1, blank=True, null=True)
+    semester7_grade4 = models.CharField(max_length=1, blank=True, null=True)
+    semester7_grade5 = models.CharField(max_length=1, blank=True, null=True)
+    semester7_grade6 = models.CharField(max_length=1, blank=True, null=True)
+    semester7_total_marks = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_gpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_sgp = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_sgpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_sch = models.IntegerField(null=True, default=3)
+    semester7_totalsch = models.IntegerField(null=True, default=0)
+    semester7_total_marks = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_gpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_sgp = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_sgpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester7_sch = models.IntegerField(null=True, default=3)
+    semester7_totalsch = models.IntegerField(null=True, default=0)
+
+
+     # ****************SEMESTER EIGHT************************
+    semester8_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module1_results',null=True, blank=True)
+    semester8_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module2_results',null=True, blank=True)
+    semester8_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module3_results',null=True, blank=True)
+    semester8_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module4_results',null=True, blank=True)
+    semester8_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module5_results',null=True, blank=True)
+    semester8_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module6_results',null=True, blank=True)
+    semester8_module_grade1 = models.IntegerField(null=True)
+    semester8_module_grade2 = models.IntegerField(null=True)
+    semester8_module_grade3 = models.IntegerField(null=True)
+    semester8_module_grade4 = models.IntegerField(null=True)
+    semester8_module_grade5 = models.IntegerField(null=True)
+    semester8_module_grade6 = models.IntegerField(null=True)
+    semester8_gradepoint1 = models.TextField(max_length=2,null=True, blank=True)
+    semester8_gradepoint2 = models.TextField(max_length=2,null=True, blank=True)
+    semester8_gradepoint3 = models.TextField(max_length=2,null=True, blank=True)
+    semester8_gradepoint4 = models.TextField(max_length=2,null=True, blank=True)
+    semester8_gradepoint5 = models.TextField(max_length=2,null=True, blank=True)
+    semester8_gradepoint6 = models.TextField(max_length=2,null=True, blank=True)
+    semester8_equivalent1 = models.IntegerField(null=True,blank=True)
+    semester8_equivalent2 = models.IntegerField(null=True,blank=True)
+    semester8_equivalent3 = models.IntegerField(null=True,blank=True)
+    semester8_equivalent4 = models.IntegerField(null=True,blank=True)
+    semester8_equivalent5 = models.IntegerField(null=True,blank=True)
+    semester8_equivalent6 = models.IntegerField(null=True)
+    semester8_grade1 = models.CharField(max_length=1, blank=True, null=True)
+    semester8_grade2 = models.CharField(max_length=1, blank=True, null=True)
+    semester8_grade3 = models.CharField(max_length=1, blank=True, null=True)
+    semester8_grade4 = models.CharField(max_length=1, blank=True, null=True)
+    semester8_grade5 = models.CharField(max_length=1, blank=True, null=True)
+    semester8_grade6 = models.CharField(max_length=1, blank=True, null=True)
+    semester8_total_marks = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_gpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_sgp = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_sgpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_sch = models.IntegerField(null=True, default=3)
+    semester8_totalsch = models.IntegerField(null=True, default=0)
+    semester8_total_marks = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_gpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_sgp = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_sgpa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    semester8_sch = models.IntegerField(null=True, default=3)
+    semester8_totalsch = models.IntegerField(null=True, default=0)
+    year4_tot_cred_hours = models.IntegerField(null=True, default=0)
+    year4_cgp = models.IntegerField(null=True, default=0 )
+    year4_cgpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
     def save(self, *args, **kwargs):
         # **********SEMESTER ONE************************
@@ -1369,6 +1473,277 @@ class Result(models.Model):
         self.semester6_gradepoint6 = self.semester6_equivalent6 * 3
 
 
+    # *************SEMESTER SEVEN************************
+        if self.semester7_module_grade1 >= 75:
+            self.semester7_equivalent1 = 5
+            self.semester7_grade1 = 'A'
+        elif self.semester7_module_grade1 >= 65:
+            self.semester7_equivalent1 = 4
+            self.semester7_grade1 = 'B'
+        elif self.semester7_module_grade1 >= 50:
+            self.semester7_equivalent1 = 3
+            self.semester7_grade1 = 'C'
+        elif self.semester7_module_grade1 >= 35:
+            self.semester7_equivalent1 = 2
+            self.semester7_grade1 = 'D'
+        elif self.semester7_module_grade1 >= 20:
+            self.semester7_equivalent1 = 1
+            self.semester7_grade1 = 'E'
+        else:
+            self.semester7_equivalent1 = 0
+            self.semester7_grade1 = 'F'
+        self.semester7_gradepoint1 = self.semester7_equivalent1 * 3
+            
+         
+
+        if self.semester7_module_grade2 >= 75:
+            self.semester7_equivalent2 = 5
+            self.semester7_grade2 = 'A'
+        elif self.semester7_module_grade2 >= 65:
+            self.semester7_equivalent2 = 4
+            self.semester7_grade2 = 'B'
+        elif self.semester7_module_grade2 >= 50:
+            self.semester7_equivalent2 = 3
+            self.semester7_grade2 = 'C'
+        elif self.semester7_module_grade2 >= 35:
+            self.semester7_equivalent2 = 2
+            self.semester7_grade2 = 'D'
+        elif self.semester7_module_grade2 >= 20:
+            self.semester7_equivalent2 = 1
+            self.semester7_grade2 = 'E'
+        else:
+            self.semester7_equivalent2 = 0
+            self.semester7_grade2 = 'F'
+        self.semester7_gradepoint2 = self.semester7_equivalent2 * 3
+
+
+
+
+        if self.semester7_module_grade3 >= 75:
+            self.semester7_equivalent3 = 5
+            self.semester7_grade3 = 'A'
+        elif self.semester7_module_grade3 >= 65:
+            self.semester7_equivalent3 = 4
+            self.semester7_grade3 = 'B'
+        elif self.semester7_module_grade3 >= 50:
+            self.semester7_equivalent3 = 3
+            self.semester7_grade3 = 'C'
+        elif self.semester7_module_grade3 >= 35:
+            self.semester7_equivalent3 = 2
+            self.semester7_grade3 = 'D'
+        elif self.semester7_module_grade3 >= 20:
+            self.semester7_equivalent3 = 1
+            self.semester7_grade3 = 'E'
+        else:
+            self.semester7_equivalent3 = 0
+            self.semester7_grade3 = 'F'
+        self.semester7_gradepoint3 = self.semester7_equivalent3 * 3
+
+
+
+        if self.semester7_module_grade4 >= 75:
+            self.semester7_equivalent4 = 5
+            self.semester7_grade4 = 'A'
+        elif self.semester7_module_grade4 >= 65:
+            self.semester7_equivalent4 = 4
+            self.semester7_grade4 = 'B'
+        elif self.semester7_module_grade4 >= 50:
+            self.semester7_equivalent4 = 3
+            self.semester7_grade4 = 'C'
+        elif self.semester7_module_grade4 >= 35:
+            self.semester7_equivalent4 = 2
+            self.semester7_grade4 = 'D'
+        elif self.semester7_module_grade4 >= 20:
+            self.semester7_equivalent4 = 1
+            self.semester7_grade4 = 'E'
+        else:
+            self.semester7_equivalent4 = 0
+            self.semester7_grade4 = 'F'
+        self.semester7_gradepoint4 = self.semester7_equivalent4 * 3
+
+
+
+        if self.semester7_module_grade5 >= 75:
+            self.semester7_equivalent5 = 5
+            self.semester7_grade5 = 'A'
+        elif self.semester7_module_grade5 >= 65:
+            self.semester7_equivalent5 = 4
+            self.semester7_grade5 = 'B'
+        elif self.semester7_module_grade5 >= 50:
+            self.semester7_equivalent5 = 3
+            self.semester7_grade5 = 'C'
+        elif self.semester7_module_grade5 >= 35:
+            self.semester7_equivalent5 = 2
+            self.semester7_grade5 = 'D'
+        elif self.semester7_module_grade5 >= 20:
+            self.semester7_equivalent5 = 1
+            self.semester7_grade5 = 'E'
+        else:
+            self.semester7_equivalent5 = 0
+            self.semester7_grade5 = 'F'
+        self.semester7_gradepoint5 = self.semester7_equivalent5 * 3
+
+
+
+        if self.semester7_module_grade6 >= 75:
+            self.semester7_equivalent6 = 5
+            self.semester7_grade6 = 'A'
+        elif self.semester7_module_grade6 >= 65:
+            self.semester7_equivalent6 = 4
+            self.semester7_grade6 = 'B'
+        elif self.semester7_module_grade6 >= 50:
+            self.semester7_equivalent6 = 3
+            self.semester7_grade6 = 'C'
+        elif self.semester7_module_grade6 >= 35:
+            self.semester7_equivalent6 = 2
+            self.semester7_grade6 = 'D'
+        elif self.semester7_module_grade6 >= 20:
+            self.semester7_equivalent6 = 1
+            self.semester7_grade6 = 'E'
+        else:
+            self.semester7_equivalent6 = 0
+            self.semester7_grade6 = 'F'
+        self.semester7_gradepoint6 = self.semester7_equivalent6 * 3
+
+
+
+         # *************SEMESTER EIGHT************************
+        if self.semester8_module_grade1 >= 75:
+            self.semester8_equivalent1 = 5
+            self.semester8_grade1 = 'A'
+        elif self.semester8_module_grade1 >= 65:
+            self.semester8_equivalent1 = 4
+            self.semester8_grade1 = 'B'
+        elif self.semester8_module_grade1 >= 50:
+            self.semester8_equivalent1 = 3
+            self.semester8_grade1 = 'C'
+        elif self.semester8_module_grade1 >= 35:
+            self.semester8_equivalent1 = 2
+            self.semester8_grade1 = 'D'
+        elif self.semester8_module_grade1 >= 20:
+            self.semester8_equivalent1 = 1
+            self.semester8_grade1 = 'E'
+        else:
+            self.semester8_equivalent1 = 0
+            self.semester8_grade1 = 'F'
+        self.semester8_gradepoint1 = self.semester8_equivalent1 * 3
+            
+         
+
+        if self.semester8_module_grade2 >= 75:
+            self.semester8_equivalent2 = 5
+            self.semester8_grade2 = 'A'
+        elif self.semester8_module_grade2 >= 65:
+            self.semester8_equivalent2 = 4
+            self.semester8_grade2 = 'B'
+        elif self.semester8_module_grade2 >= 50:
+            self.semester8_equivalent2 = 3
+            self.semester8_grade2 = 'C'
+        elif self.semester8_module_grade2 >= 35:
+            self.semester8_equivalent2 = 2
+            self.semester8_grade2 = 'D'
+        elif self.semester8_module_grade2 >= 20:
+            self.semester8_equivalent2 = 1
+            self.semester8_grade2 = 'E'
+        else:
+            self.semester8_equivalent2 = 0
+            self.semester8_grade2 = 'F'
+        self.semester8_gradepoint2 = self.semester8_equivalent2 * 3
+
+
+
+
+        if self.semester8_module_grade3 >= 75:
+            self.semester8_equivalent3 = 5
+            self.semester8_grade3 = 'A'
+        elif self.semester8_module_grade3 >= 65:
+            self.semester8_equivalent3 = 4
+            self.semester8_grade3 = 'B'
+        elif self.semester8_module_grade3 >= 50:
+            self.semester8_equivalent3 = 3
+            self.semester8_grade3 = 'C'
+        elif self.semester8_module_grade3 >= 35:
+            self.semester8_equivalent3 = 2
+            self.semester8_grade3 = 'D'
+        elif self.semester8_module_grade3 >= 20:
+            self.semester8_equivalent3 = 1
+            self.semester8_grade3 = 'E'
+        else:
+            self.semester8_equivalent3 = 0
+            self.semester8_grade3 = 'F'
+        self.semester8_gradepoint3 = self.semester8_equivalent3 * 3
+
+
+
+        if self.semester8_module_grade4 >= 75:
+            self.semester8_equivalent4 = 5
+            self.semester8_grade4 = 'A'
+        elif self.semester8_module_grade4 >= 65:
+            self.semester8_equivalent4 = 4
+            self.semester8_grade4 = 'B'
+        elif self.semester8_module_grade4 >= 50:
+            self.semester8_equivalent4 = 3
+            self.semester8_grade4 = 'C'
+        elif self.semester8_module_grade4 >= 35:
+            self.semester8_equivalent4 = 2
+            self.semester8_grade4 = 'D'
+        elif self.semester8_module_grade4 >= 20:
+            self.semester8_equivalent4 = 1
+            self.semester8_grade4 = 'E'
+        else:
+            self.semester8_equivalent4 = 0
+            self.semester8_grade4 = 'F'
+        self.semester8_gradepoint4 = self.semester8_equivalent4 * 3
+
+
+
+        if self.semester8_module_grade5 >= 75:
+            self.semester8_equivalent5 = 5
+            self.semester8_grade5 = 'A'
+        elif self.semester8_module_grade5 >= 65:
+            self.semester8_equivalent5 = 4
+            self.semester8_grade5 = 'B'
+        elif self.semester8_module_grade5 >= 50:
+            self.semester8_equivalent5 = 3
+            self.semester8_grade5 = 'C'
+        elif self.semester8_module_grade5 >= 35:
+            self.semester8_equivalent5 = 2
+            self.semester8_grade5 = 'D'
+        elif self.semester8_module_grade5 >= 20:
+            self.semester8_equivalent5 = 1
+            self.semester8_grade5 = 'E'
+        else:
+            self.semester8_equivalent5 = 0
+            self.semester8_grade5 = 'F'
+        self.semester8_gradepoint5 = self.semester8_equivalent5 * 3
+
+
+
+        if self.semester8_module_grade6 >= 75:
+            self.semester8_equivalent6 = 5
+            self.semester8_grade6 = 'A'
+        elif self.semester8_module_grade6 >= 65:
+            self.semester8_equivalent6 = 4
+            self.semester8_grade6 = 'B'
+        elif self.semester8_module_grade6 >= 50:
+            self.semester8_equivalent6 = 3
+            self.semester8_grade6 = 'C'
+        elif self.semester8_module_grade6 >= 35:
+            self.semester8_equivalent6 = 2
+            self.semester8_grade6 = 'D'
+        elif self.semester8_module_grade6 >= 20:
+            self.semester8_equivalent6 = 1
+            self.semester8_grade6 = 'E'
+        else:
+            self.semester8_equivalent6 = 0
+            self.semester8_grade6 = 'F'
+        self.semester8_gradepoint6 = self.semester8_equivalent6 * 3
+
+
+
+
+
+
 
         # ======================FIRST YEAR======================================#
         # ******************semester one****************
@@ -1424,6 +1799,23 @@ class Result(models.Model):
         self.year3_cgp = self.semester5_sgp + self.semester6_sgp
         self.year3_cgpa = self.year3_cgp / self.year3_tot_cred_hours
 
+
+
+         # ======================FINAL YEAR======================================#
+        # ******************semester one****************
+        self.semester7_totalsch = self.semester7_sch + self.semester7_sch + self.semester7_sch + self.semester7_sch  + self.semester7_sch  + self.semester7_sch
+        self.semester7_sgp = int(self.semester7_gradepoint1) + int(self.semester7_gradepoint2) + int(self.semester7_gradepoint3) + int(self.semester7_gradepoint4) + int(self.semester7_gradepoint5) + int(self.semester7_gradepoint6) 
+        self.semester7_sgpa = self.semester7_sgp / self.semester7_totalsch
+
+        # *****************semester two*****************
+        self.semester8_totalsch = self.semester8_sch + self.semester8_sch + self.semester8_sch + self.semester8_sch  + self.semester8_sch  + self.semester8_sch
+        self.semester8_sgp = int(self.semester8_gradepoint1) + int(self.semester8_gradepoint2) + int(self.semester8_gradepoint3) + int(self.semester8_gradepoint4) + int(self.semester8_gradepoint5) + int(self.semester8_gradepoint6) 
+        self.semester8_sgpa = self.semester8_sgp / self.semester8_totalsch
+
+         # *******YEARLY CALCULATIONS****
+        self.year4_tot_cred_hours = self.semester5_totalsch + self.semester6_totalsch
+        self.year4_cgp = self.semester7_sgp + self.semester8_sgp
+        self.year4_cgpa = self.year4_cgp / self.year4_tot_cred_hours
 
         # Save the result
         super(Result, self).save(*args, **kwargs)

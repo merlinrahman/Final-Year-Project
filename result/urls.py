@@ -145,4 +145,16 @@ urlpatterns = [
     path('delete_result/<int:pk>/', views.delete_result, name='delete_result'), 
     path('view_result/<int:pk>/', views.view_result, name='view_result'),
     # path('upload_level/', views.upload_level, name='upload_level'),
+
+
+
+
+
+
+     # ***************************************
+                 #  Searching for result
+    #*****************************************
+    path('search_result/', views.search_result, name='search_result'),
+    path('view_student_result/<str:email>/<str:id_number>/', views.view_student_result, name='view_student_result'),
+    
 ]

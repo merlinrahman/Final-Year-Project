@@ -42,12 +42,6 @@
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.5.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 
  
 </head>
@@ -76,7 +70,6 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{% static 'assets/img1/central.jpg' %}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Exams Officer</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -268,7 +261,7 @@
               <div class="col md-12">
                 <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
                 <span style="margin-left: 150px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
-                <span style="margin-left: 200px;  margin-bottom: 150px; font-size: large;">First Semester</span>
+                <span style="margin-left: 100px;  margin-bottom: 150px; font-size: large;">First Semester</span>
                 <span style="margin-left: 170px;  margin-bottom: 300px; font-size: large;">Second Semester</span>
                 
               </div>
@@ -347,7 +340,7 @@
               {{ form.level2.label }}
               {{ form.level2 }}
               {{ form.semester3.label }}
-              {{ form.semester }}
+              {{ form.semester3 }}
               {{ form.semester3_module1.label }}
               {{ form.semester3_module1 }}
               {{ form.semester3_module_grade1.label }}
@@ -410,7 +403,7 @@
           
           
 
-          <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
+           <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
             <div class="row">
               <div class="col-md-12">
                 <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">3rd Year Result</span>
@@ -459,7 +452,6 @@
               {{ form.semester5_module6 }}
               {{ form.semester5_module_grade6.label }}
               {{ form.semester5_module_grade6 }}
-              
             </div>
             <div class="col-md-3">
               {% csrf_token %}
@@ -559,14 +551,12 @@
               {{ form.semester8_module6 }}
               {{ form.semester8_module_grade6.label }}
               {{ form.semester8_module_grade6 }}
-            </div>
-          </div>
+            </div> 
+          </div> 
           
-          <div style="margin-top: 80px; margin-left: 350px; margin-bottom: 40px;">
-            <a style="padding-left: 60px; padding-right: 60px; font-size: 20px;" href="{% url 'result' %}" type="button" class="btn btn-info"><i class="fas fa-times" >&nbsp;</i>Cancel</a>
-            <button style="padding-left: 60px; padding-right: 60px; font-size: 20px;" type="submit"  class="btn btn-secondary"><i class="fas fa-database"></i>&nbsp; Update Result</button>
-          </div>
-          
+          <a class="btn btn-lg btn-success text-white" style="margin-left: 200px;  margin-bottom: 20px; padding-left: 100px; padding-right: 100px;" href="{% url 'result' %}" type="button" class="btn btn-info"><i class="fas fa-home">&nbsp;&nbsp;</i>Back to Result</a>
+          <button type="submit" class="btn btn-lg btn-secondary " style="margin-left: 30px; padding-left: 100px; padding-right: 100px; margin-top: 30px; margin-bottom: 50px;"><i class="fas fa-database"></i>
+          Update Result</button>
         </form>
         </div>
       </div>
