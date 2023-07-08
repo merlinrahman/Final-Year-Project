@@ -187,8 +187,29 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{% url 'course' %}">
-              <i class="bi bi-circle"></i><span>Manage Courses</span>
+            <a href="{% url 'year1_first_semester' %}">
+              <i class="bi bi-circle"></i><span>First Year Semester One</span>
+            </a>
+            <a href="{% url 'year1_second_semester' %}">
+              <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+            </a>
+            <a href="{% url 'year2_first_semester' %}">
+              <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+            </a>
+            <a href="{% url 'year2_second_semester' %}">
+              <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+            </a>
+            <a href="{% url 'year3_first_semester' %}">
+              <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+            </a>
+            <a href="{% url 'year3_second_semester' %}">
+              <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+            </a>
+            <a href="{% url 'year4_first_semester' %}">
+              <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+            </a>
+            <a href="{% url 'year4_second_semester' %}">
+              <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
             </a>
           </li>
         </ul>
@@ -266,7 +287,6 @@
                         <thead class="table-dark text-center text-light">
                             <tr>
                                 <th  class="text-center">No</th>
-                                <th  class="text-center">University</th>
                                 <th  class="text-center">Faculty</th>
                                 <th  class="text-center">Actions</th>
                             </tr>
@@ -275,7 +295,6 @@
                           {% for obj in facult %}
                             <tr>
                                 <td>{{ obj.id }}</td>
-                                <td>{{ obj.university }}</td>
                                 <td>{{ obj.faculty }}</td>
                                     <td>
                                         <a href="{% url 'edit_faculty' obj.id %}" class="btn btn-info" title="Edit Patient">

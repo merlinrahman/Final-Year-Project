@@ -173,7 +173,7 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>All Programs</span>
+              <i class="bi bi-circle"></i><span>Manage Programs</span>
             </a>
           </li>
         </ul>
@@ -186,8 +186,29 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>All Courses</span>
+            <a href="{% url 'year1_first_semester' %}">
+              <i class="bi bi-circle"></i><span>First Year Semester One</span>
+            </a>
+            <a href="{% url 'year1_second_semester' %}">
+              <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+            </a>
+            <a href="{% url 'year2_first_semester' %}">
+              <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+            </a>
+            <a href="{% url 'year2_second_semester' %}">
+              <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+            </a>
+            <a href="{% url 'year3_first_semester' %}">
+              <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+            </a>
+            <a href="{% url 'year3_second_semester' %}">
+              <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+            </a>
+            <a href="{% url 'year4_first_semester' %}">
+              <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+            </a>
+            <a href="{% url 'year4_second_semester' %}">
+              <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
             </a>
           </li>
         </ul>

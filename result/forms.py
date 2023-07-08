@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Faculty, Department, Program, Courses, Student,Result
+from .models import Faculty, Department, Program, Student,Result,year1_semester1,year1_semester2,year2_semester1,year2_semester2,year3_semester1,year3_semester2,year4_semester1,year4_semester2
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -24,14 +24,18 @@ class UploadFileForm(forms.Form):
 class CourseFileForm(forms.Form):
     file = forms.FileField()
 
+class CourseFileForm(forms.Form):
+    file = forms.FileField()
+
 
 class FacultyFileForm(forms.Form):
     file = forms.FileField()
 
 
-
-
 class ProgramFileForm(forms.Form):
+    file = forms.FileField()
+
+class StudentFileForm(forms.Form):
     file = forms.FileField()
 
 
@@ -74,17 +78,110 @@ class ProgramForm(ModelForm):
 
 
 
+
+
 # ********Modules Form**************
-class CourseForm(ModelForm):
+class CourseForm1(ModelForm):
     class Meta:
-        model = Courses
-        fields = ['code','course']
+        model = year1_semester1
+        fields = ['code','program','level','semester','course']
         widgets = {
             'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
             'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
         }
 
+# ********Modules Form**************
+class CourseForm2(ModelForm):
+    class Meta:
+        model = year1_semester2
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
+# ********Modules Form**************
+class CourseForm3(ModelForm):
+    class Meta:
+        model = year2_semester1
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
 
+# ********Modules Form**************
+class CourseForm4(ModelForm):
+    class Meta:
+        model = year2_semester2
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
+
+# ********Modules Form**************
+class CourseForm5(ModelForm):
+    class Meta:
+        model = year3_semester1
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
+
+# ********Modules Form**************
+class CourseForm6(ModelForm):
+    class Meta:
+        model = year3_semester2
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
+
+# ********Modules Form**************
+class CourseForm7(ModelForm):
+    class Meta:
+        model = year4_semester1
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
+
+# ********Modules Form**************
+class CourseForm8(ModelForm):
+    class Meta:
+        model = year4_semester2
+        fields = ['code','program','level','semester','course']
+        widgets = {
+            'code': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+            'program': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'level': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'semester': forms.Select(attrs={'class': 'form-control shadow-none'}),
+            'course': forms.TextInput(attrs={'class': 'form-control shadow-none'}),
+        }
 
 
 

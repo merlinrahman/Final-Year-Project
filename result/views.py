@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Faculty, Department, Program,Courses,Student,Result
+from .models import Faculty, Department, Program,Student,Result,year1_semester1,year1_semester2,year2_semester1,year2_semester2,year3_semester1,year3_semester2,year4_semester1,year4_semester2
 from django.contrib.auth.decorators import login_required
-from .forms import FacultyForm, DepartmentForm,UploadFileForm, ProgramForm,CourseForm,FacultyFileForm,CourseFileForm,ProgramFileForm,StudentForm,ResultForm
+from .forms import FacultyForm, DepartmentForm,UploadFileForm,StudentFileForm,ProgramForm,FacultyFileForm,CourseFileForm,ProgramFileForm,StudentForm,ResultForm,CourseForm1,CourseForm2,CourseForm3,CourseForm4,CourseForm5,CourseForm6,CourseForm7,CourseForm8
 from django.contrib import messages
 from openpyxl import load_workbook
 import pandas as pd
@@ -9,7 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,auth
 from django.db.models import Count
-
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
 
 
 
@@ -70,79 +71,6 @@ def admin_login(request):
 def admin_redirect(request):
     return redirect('admin:index')
 
-
-
-
-# # ***************************************
-#                  # UNIVERSITIES
-# #*****************************************
-# # *********ADD UNIVERSITY***********
-# def university(request):
-#     university = University.objects.all()
-#     if request.method == 'POST':
-#         form =UniversityForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "University added Successfully")
-#             return redirect('university')
-#     else:
-#         form = UniversityForm()
-#     return render(request, 'result/university.html',{'university':university,'form':form})
-
-
-
-# # *********DELETE UNIVERSITY***********
-# def delete_university(request, pk):
-#     university = University.objects.get(id=pk)
-#     if request.method == 'POST':
-#         university.delete()
-#         messages.success(request, "University has been removed!")
-#         return redirect('university')
-#     return render(request, 'result/delete_university.html',{})
-
-# # *********EDIT UNIVERSITY***********
-
-# def edit_university(request, pk):
-#     edituni = University.objects.get(id=pk)
-#     if request.method == 'POST':
-#         form = UniversityForm(request.POST, instance = edituni)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "University has been updated successfully!")
-#             return redirect('university')
-#     else:
-#         form = UniversityForm(instance = edituni)
-
-#     return render(request, 'result/edit_university.html',{'form':form})
-
-
-# # ****************VIEW UNIVERSITY******************
-
-# def view_university(request, pk):
-#     univer = University.objects.get(id=pk)
-#     return render(request, 'result/view_university.html', {'univer': univer})
-
-
-
-# # ****************UPLOAD UNIVERSITY******************
-# def upload_university(request):
-#     if request.method == 'POST':
-#         form = UniversityFileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             file = request.FILES['file']
-#             data = pd.read_excel(file)
-#             for index, row in data.iterrows():
-#                 university = row.get('university', '')  # set name to empty string if not present in row
-#                 uni_number = row.get('uni_number', '')  # set code to empty string if not present in row
-#                 university = University(university=university,uni_number=uni_number)
-#                 university.save()
-#             messages.success(request, "University uploaded successfully!")
-#             return redirect('university')
-#         else:
-#             messages.error(request, "Invalid form submission!")
-#     else:
-#         form = UniversityFileForm()
-#     return render(request, 'result/uploadUniversity.html', {'form': form})
 
 
 
@@ -283,29 +211,34 @@ def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # read the excel file
+            # Read the excel file
             excel_file = request.FILES['file']
             df = pd.read_excel(excel_file)
-            # create a new instance of Department for each row of data and save it to the database
+            
+            # Iterate over each row and save departments to the database
             for index, row in df.iterrows():
                 faculty_name = row['faculty']
                 try:
                     faculty = Faculty.objects.get(faculty=faculty_name)
                 except Faculty.DoesNotExist:
-                    # handle the case where the Faculty doesn't exist
+                    # Handle the case where the Faculty doesn't exist
                     messages.error(request, f"Faculty {faculty_name} does not exist.")
                     return redirect('department')
                 except Faculty.MultipleObjectsReturned:
-                    # handle the case where multiple Faculties with the same name exist
+                    # Handle the case where multiple Faculties with the same name exist
                     messages.warning(request, f"Multiple Faculties with the name {faculty_name} exist. Using the first one found.")
-                    faculty = Faculty.objects.filter(name=faculty_name).first()
-                department = Department(faculty=faculty, department=row['department'])
+                    faculty = Faculty.objects.filter(faculty=faculty_name).first()
+                    
+                department_name = row['department']
+                department = Department(faculty=faculty, department=department_name)
                 department.save()
-            # redirect to a success page
+            
+            # Redirect to a success page
             messages.success(request, "Departments have been added successfully!")
             return redirect('department')
     else:
         form = UploadFileForm()
+    
     return render(request, 'result/uploadDepartment.html', {'form': form})
 
 
@@ -376,75 +309,55 @@ def view_program(request, pk):
 
 
 # ****************PROGRAM UPLOAD FILE******************
-# def upload_programs(request):
-#     if request.method == 'POST':
-#         form = ProgramFileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             # read the excel file
-#             excel_file = request.FILES['file']
-#             df = pd.read_excel(excel_file)
-#             # create a new instance of Department for each row of data and save it to the database
-#             for index, row in df.iterrows():
-#                 department_name = row['department']
-#                 try:
-#                     department = Department.objects.get(name=department_name)
-#                 except Department.DoesNotExist:
-#                     # handle the case where the Faculty doesn't exist
-#                     messages.error(request, f"Department {department_name} does not exist.")
-#                     return redirect('programs')
-#                 except Department.MultipleObjectsReturned:
-#                     # handle the case where multiple Faculties with the same name exist
-#                     messages.warning(request, f"Multiple Department with the name {department_name} exist. Using the first one found.")
-#                     department= Department.objects.filter(name=department_name).first()
-#                 program = Program(department=department, name=row['name'])
-#                 program.save()
-#             # redirect to a success page
-#             messages.success(request, "Position have been added successfully!")
-#             return redirect('program')
-#     else:
-#         form = ProgramFileForm()
-#     return render(request, 'result/uploadDepartment.html', {'form': form})
-
-
 def upload_programs(request):
     if request.method == 'POST':
         form = ProgramFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # read the excel file
             excel_file = request.FILES['file']
-            df = pd.read_excel(excel_file)
+            try:
+                df = pd.read_excel(excel_file)
+            except Exception as e:
+                messages.error(request, "An error occurred while reading the Excel file.")
+                return redirect('programs')
 
-            # create a new instance of Program for each row of data and save it to the database
-            for index, row in df.iterrows():
+            programs_added = 0
+            programs_skipped = 0
+
+            for _, row in df.iterrows():
+                program_name = row['program']
                 department_name = row['department']
+
                 try:
-                    department = Department.objects.get(name=department_name)
+                    faculty = Faculty.objects.first()  # Replace with the appropriate logic to get the faculty
+                    department, _ = Department.objects.get_or_create(department=department_name, faculty=faculty)
                 except Department.DoesNotExist:
-                    # handle the case where the Department doesn't exist
-                    messages.error(request, f"Department {department_name} does not exist.")
+                    messages.error(request, f"Department '{department_name}' does not exist.")
                     return redirect('programs')
                 except Department.MultipleObjectsReturned:
-                    # handle the case where multiple Departments with the same name exist
-                    messages.warning(request, f"Multiple Departments with the name {department_name} exist. Using the first one found.")
-                    department = Department.objects.filter(name=department_name).first()
+                    messages.warning(request, f"Multiple Departments with the name '{department_name}' exist. Using the first one found.")
+                    department = Department.objects.filter(department=department_name, faculty=faculty).first()
 
-                program_name = row['name']
-                if Program.objects.filter(name=program_name).exists():
-                    # handle the case where a program with the same name already exists
-                    messages.warning(request, f"Program with the name {program_name} already exists. Skipping this program.")
+                if Program.objects.filter(program=program_name, department=department).exists():
+                    messages.warning(request, f"Program '{program_name}' in Department '{department_name}' already exists. Skipping this program.")
+                    programs_skipped += 1
                     continue
 
-                program = Program(department=department, name=program_name)
+                program = Program(program=program_name, department=department)
                 program.save()
+                programs_added += 1
 
-            # redirect to a success page
-            messages.success(request, "Programs have been added successfully!")
+            if programs_added > 0:
+                messages.success(request, f"{programs_added} program(s) have been added successfully!")
+            if programs_skipped > 0:
+                messages.warning(request, f"{programs_skipped} program(s) already exist and were skipped.")
+
             return redirect('programs')
         else:
             messages.error(request, "Invalid form submission. Please check the form fields.")
             return redirect('programs')
     else:
         form = ProgramFileForm()
+
     return render(request, 'result/uploadPrograms.html', {'form': form})
 
 
@@ -469,53 +382,53 @@ def upload_programs(request):
                  # COURSE/MODULE
 #*****************************************
 
-# *********ADD SEMESTER***********
-def course(request):
-    cos = Courses.objects.all()
+# *********ADD year1_first_semester***********
+def year1_first_semester(request):
+    yr1_sem1 = year1_semester1.objects.all()
     if request.method == 'POST':
-        form =CourseForm(request.POST)
+        form =CourseForm1(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Course added Successfully!")
-            return redirect('course')
+            return redirect('year1_first_semester')
     else:
-        form = CourseForm()
-    return render(request, 'result/course.html',{'cos':cos,'form':form})
+        form = CourseForm1()
+    return render(request, 'result/year1_first_semester.html',{'yr1_sem1':yr1_sem1,'form':form})
 
 
 
-# *********EDIT COURSE***********
-def edit_course(request, pk):
-    editcos = Courses.objects.get(id=pk)
+# *********EDIT year1_first_semester***********
+def edit_year1_first_semester(request, pk):
+    edit_yr1_sem1 = year1_semester1.objects.get(id=pk)
     if request.method == 'POST':
-        form = CourseForm(request.POST, instance = editcos)
+        form = CourseForm1(request.POST, instance = edit_yr1_sem1)
         if form.is_valid():
             form.save()
             messages.success(request, "Course updated successfully!")
-            return redirect('course')
+            return redirect('year1_first_semester')
     else:
-        form = CourseForm(instance = editcos)
+        form = CourseForm1(instance = edit_yr1_sem1)
 
-    return render(request, 'result/edit_course.html',{'form':form})
+    return render(request, 'result/edit_year1_first_semester.html',{'form':form})
 
 
-# *********DELETE SEMESTER***********
-def delete_course(request, pk):
-    del_cos = Courses.objects.get(id=pk)
+# *************DELETE year1_first_semester*****************
+def delete_year1_first_semester(request, pk):
+    del_yr1_sem1 = year1_semester1.objects.get(id=pk)
     if request.method == 'POST':
-        del_cos.delete()
+        del_yr1_sem1.delete()
         messages.success(request, "Course removed successfully! ")
-        return redirect('course')
-    return render(request, 'result/delete_course.html',{})
+        return redirect('year1_first_semester')
+    return render(request, 'result/delete_year1_first_semester.html',{})
 
 
-# ****************VIEW COURSE******************
-def view_course(request, pk):
-    cos = Courses.objects.get(id=pk)
-    return render(request, 'result/view_course.html', {'cos': cos})
 
+# ****************VIEW year1_first_semester******************
+def view_year1_first_semester(request, pk):
+    view_yr1_sem1 = year1_semester1.objects.get(id=pk)
+    return render(request, 'result/view_year1_first_semester.html', {'view_yr1_sem1': view_yr1_sem1})
 
-# ****************UPLOAD COURSE******************
+# ****************year1_semester1 UPLOAD FILE******************
 def upload_course(request):
     if request.method == 'POST':
         form = CourseFileForm(request.POST, request.FILES)
@@ -523,17 +436,736 @@ def upload_course(request):
             file = request.FILES['file']
             data = pd.read_excel(file)
             for index, row in data.iterrows():
-                code = row.get('code', '')  # set code to empty string if not present in row
-                course = row.get('course', '')  # set name to empty string if not present in row
-                course = Courses(code=code, course=course)
-                course.save()
-            messages.success(request, "Course uploaded successfully!")
-            return redirect('course')
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year1_semester1.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year1_semester1.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year1_first_semester')
         else:
             messages.error(request, "Invalid form submission!")
     else:
         form = CourseFileForm()
-    return render(request, 'result/uploadCourses.html', {'form': form})
+    return render(request, 'result/upload_year1_first_semester.html', {'form': form})
+
+
+
+
+
+# *********ADD year1_second_semester***********
+def year1_second_semester(request):
+    yr1_sem2 = year1_semester2.objects.all()
+    if request.method == 'POST':
+        form =CourseForm2(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year1_second_semester')
+    else:
+        form = CourseForm2()
+    return render(request, 'result/year1_second_semester.html',{'yr1_sem2':yr1_sem2,'form':form})
+
+
+
+# *********EDIT year1_second_semester***********
+def edit_year1_second_semester(request, pk):
+    edit_yr1_sem2 = year1_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm2(request.POST, instance = edit_yr1_sem2)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year1_second_semester')
+    else:
+        form = CourseForm2(instance = edit_yr1_sem2)
+
+    return render(request, 'result/edit_year1_second_semester.html',{'form':form})
+
+
+# *************DELETE year1_second_semester*****************
+def delete_year1_second_semester(request, pk):
+    del_yr1_sem2 = year1_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr1_sem2.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year1_second_semester')
+    return render(request, 'result/delete_year1_second_semester.html',{})
+
+
+
+# ****************VIEW year1_first_semester******************
+def view_year1_second_semester(request, pk):
+    view_yr1_sem2 = year1_semester2.objects.get(id=pk)
+    return render(request, 'result/view_year1_first_semester.html', {'view_yr1_sem2': view_yr1_sem2})
+
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course2(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year1_semester2.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year1_semester2.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year1_second_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year1_second_semester.html', {'form': form})
+
+
+
+
+
+
+
+
+# *********ADD year2_first_semester***********
+def year2_first_semester(request):
+    yr2_sem1 = year2_semester1.objects.all()
+    if request.method == 'POST':
+        form =CourseForm3(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year2_first_semester')
+    else:
+        form = CourseForm3()
+    return render(request, 'result/year2_first_semester.html',{'yr2_sem1':yr2_sem1,'form':form})
+
+
+
+# *********EDIT year2_first_semester***********
+def edit_year2_first_semester(request, pk):
+    edit_yr2_sem1 = year2_semester1.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm3(request.POST, instance = edit_yr2_sem1)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year2_first_semester')
+    else:
+        form = CourseForm3(instance = edit_yr2_sem1)
+
+    return render(request, 'result/edit_year2_first_semester.html',{'form':form})
+
+
+# *************DELETE year2_first_semester*****************
+def delete_year2_first_semester(request, pk):
+    del_yr2_sem1 = year2_semester1.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr2_sem1.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year2_first_semester')
+    return render(request, 'result/delete_year2_first_semester.html',{})
+
+
+
+# ****************VIEW year2_first_semester******************
+def view_year2_first_semester(request, pk):
+    view_yr2_sem1 = year2_semester1.objects.get(id=pk)
+    return render(request, 'result/view_year2_first_semester.html', {'view_yr2_sem2': view_yr2_sem1})
+
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course3(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year2_semester1.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year2_semester1.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year2_first_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year2_first_semester.html', {'form': form})
+
+
+
+
+
+
+
+
+# *********ADD year2_second_semester***********
+def year2_second_semester(request):
+    yr2_sem2 = year2_semester2.objects.all()
+    if request.method == 'POST':
+        form =CourseForm4(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year2_second_semester')
+    else:
+        form = CourseForm4()
+    return render(request, 'result/year2_second_semester.html',{'yr2_sem2':yr2_sem2,'form':form})
+
+
+
+# *********EDIT year2_second_semester***********
+def edit_year2_second_semester(request, pk):
+    edit_yr2_sem2 = year2_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm4(request.POST, instance = edit_yr2_sem2)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year2_second_semester')
+    else:
+        form = CourseForm4(instance = edit_yr2_sem2)
+
+    return render(request, 'result/edit_year2_second_semester.html',{'form':form})
+
+
+# *************DELETE year2_second_semester*****************
+def delete_year2_second_semester(request, pk):
+    del_yr2_sem2 = year2_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr2_sem2.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year2_second_semester')
+    return render(request, 'result/delete_year2_second_semester.html',{})
+
+
+# ****************VIEW year2_second_semester******************
+def view_year2_second_semester(request, pk):
+    view_yr2_sem2 = year2_semester2.objects.get(id=pk)
+    return render(request, 'result/view_year2_second_semester.html', {'view_yr2_sem2': view_yr2_sem2})
+
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course4(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year2_semester2.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year2_semester2.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year2_second_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year2_second_semester.html', {'form': form})
+
+
+
+# *********ADD year3_first_semester***********
+def year3_first_semester(request):
+    yr3_sem1 = year3_semester1.objects.all()
+    if request.method == 'POST':
+        form =CourseForm5(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year3_first_semester')
+    else:
+        form = CourseForm5()
+    return render(request, 'result/year3_first_semester.html',{'yr3_sem1':yr3_sem1,'form':form})
+
+
+
+# *********EDIT year3_first_semester***********
+def edit_year3_first_semester(request, pk):
+    edit_yr3_sem1 = year3_semester1.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm5(request.POST, instance = edit_yr3_sem1)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year3_first_semester')
+    else:
+        form = CourseForm5(instance = edit_yr3_sem1)
+
+    return render(request, 'result/edit_year3_first_semester.html',{'form':form})
+
+
+# *************DELETE year3_first_semester*****************
+def delete_year3_first_semester(request, pk):
+    del_yr3_sem1 = year3_semester1.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr3_sem1.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year3_first_semester.html')
+    return render(request, 'result/delete_year3_first_semester.html',{})
+
+
+
+# ****************VIEW year3_first_semester******************
+def view_year3_first_semester(request, pk):
+    view_yr3_sem1 = year3_semester1.objects.get(id=pk)
+    return render(request, 'result/view_year3_first_semester.html', {'view_yr3_sem2': view_yr3_sem1})
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course5(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year3_semester1.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year3_semester1.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year3_first_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year3_first_semester.html', {'form': form})
+
+
+
+
+
+
+# *********ADD year3_second_semester***********
+def year3_second_semester(request):
+    yr3_sem2 = year3_semester2.objects.all()
+    if request.method == 'POST':
+        form =CourseForm6(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year3_second_semester')
+    else:
+        form = CourseForm6()
+    return render(request, 'result/year3_second_semester.html',{'yr3_sem2':yr3_sem2,'form':form})
+
+
+
+# *********EDIT year3_second_semester***********
+def edit_year3_second_semester(request, pk):
+    edit_yr3_sem2 = year3_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm6(request.POST, instance = edit_yr3_sem2)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year3_second_semester')
+    else:
+        form = CourseForm6(instance = edit_yr3_sem2)
+
+    return render(request, 'result/edit_year3_second_semester.html',{'form':form})
+
+
+# *************DELETE year3_second_semester*****************
+def delete_year3_second_semester(request, pk):
+    del_yr3_sem2 = year3_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr3_sem2.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year3_second_semester')
+    return render(request, 'result/delete_year3_second_semester.html',{})
+
+
+
+# ****************VIEW year3_second_semester******************
+def view_year3_second_semester(request, pk):
+    view_yr3_sem2 = year3_semester2.objects.get(id=pk)
+    return render(request, 'result/view_year3_second_semester.html', {'view_yr3_sem2': view_yr3_sem2})
+
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course6(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year3_semester2.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year3_semester2.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year3_second_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year3_second_semester.html', {'form': form})
+
+
+
+
+
+
+# *********EDIT year4_first_semester***********
+def edit_year4_first_semester(request, pk):
+    edit_yr4_sem1 = year4_semester1.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm7(request.POST, instance = edit_yr4_sem1)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year4_first_semester')
+    else:
+        form = CourseForm7(instance = edit_yr4_sem1)
+
+    return render(request, 'result/edit_year4_first_semester.html',{'form':form})
+
+
+# *************DELETE year4_first_semester*****************
+def delete_year4_first_semester(request, pk):
+    del_yr4_sem1 = year4_semester1.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr4_sem1.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year4_first_semester')
+    return render(request, 'result/delete_year4_first_semester.html',{})
+
+
+
+# ****************VIEW year4_first_semester******************
+def view_year4_first_semester(request, pk):
+    view_yr4_sem1 = year4_semester1.objects.get(id=pk)
+    return render(request, 'result/view_year4_first_semester.html', {'view_yr4_sem2': view_yr4_sem1})
+
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course7(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year4_semester1.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year4_semester1.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year4_first_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year4_first_semester.html', {'form': form})
+
+
+
+# *********ADD year4_first_semester***********
+def year4_first_semester(request):
+    yr4_sem1 = year4_semester1.objects.all()
+    if request.method == 'POST':
+        form =CourseForm7(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year4_first_semester')
+    else:
+        form = CourseForm7()
+    return render(request, 'result/year4_first_semester.html',{'yr4_sem1':yr4_sem1,'form':form})
+
+
+
+
+
+# *********ADD year4_second_semester***********
+def year4_second_semester(request):
+    yr4_sem2 = year4_semester2.objects.all()
+    if request.method == 'POST':
+        form =CourseForm8(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year4_second_semester')
+    else:
+        form = CourseForm8()
+    return render(request, 'result/year4_second_semester.html',{'yr4_sem2':yr4_sem2,'form':form})
+
+
+
+# *********EDIT year4_second_semester***********
+def edit_year4_second_semester(request, pk):
+    edit_yr4_sem2 = year4_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseForm8(request.POST, instance = edit_yr4_sem2)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course updated successfully!")
+            return redirect('year4_second_semester')
+    else:
+        form = CourseForm8(instance = edit_yr4_sem2)
+
+    return render(request, 'result/edit_year4_second_semester.html',{'form':form})
+
+
+# *************DELETE year4_second_semester*****************
+def delete_year4_second_semester(request, pk):
+    del_yr4_sem2 = year4_semester2.objects.get(id=pk)
+    if request.method == 'POST':
+        del_yr4_sem2.delete()
+        messages.success(request, "Course removed successfully! ")
+        return redirect('year4_second_semester')
+    return render(request, 'result/delete_year4_second_semester.html',{})
+
+
+
+# ****************VIEW year4_second_semester******************
+def view_year4_second_semester(request, pk):
+    view_yr4_sem2 = year4_semester1.objects.get(id=pk)
+    return render(request, 'result/view_year4_second_semester.html', {'view_yr4_sem2': view_yr4_sem2})
+
+# ****************year1_semester1 UPLOAD FILE******************
+def upload_course8(request):
+    if request.method == 'POST':
+        form = CourseFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_excel(file)
+            for index, row in data.iterrows():
+                code = row.get('code', '')
+                course = row.get('course', '')
+                program_name = row.get('program', '')  # Retrieve the program name from the row
+                level = row.get('level', '')
+                semester = row.get('semester', '')
+
+                try:
+                    # Create the new course instance
+                    program, created = Program.objects.get_or_create(program=program_name)
+                    course_instance = year4_semester2.objects.create(
+                        code=code,
+                        course=course,
+                        program=program,
+                        level=level,
+                        semester=semester
+                    )
+                except IntegrityError:
+                    # Handle duplicate code values here
+                    existing_course = year4_semester2.objects.get(code=code)
+                    # Update the existing course with the new values
+                    existing_course.course = course
+                    existing_course.program = program
+                    existing_course.level = level
+                    existing_course.semester = semester
+                    existing_course.save()
+
+            messages.success(request, "Courses uploaded successfully!")
+            return redirect('year4_second_semester')
+        else:
+            messages.error(request, "Invalid form submission!")
+    else:
+        form = CourseFileForm()
+    return render(request, 'result/upload_year4_second_semester.html', {'form': form})
+
+
+
+# *********ADD year4_first_semester***********
+def year4_first_semester(request):
+    yr4_sem1 = year4_semester1.objects.all()
+    if request.method == 'POST':
+        form =CourseForm7(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course added Successfully!")
+            return redirect('year4_first_semester')
+    else:
+        form = CourseForm7()
+    return render(request, 'result/year4_first_semester.html',{'yr4_sem1':yr4_sem1,'form':form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -568,8 +1200,6 @@ def student(request):
     return render(request, 'result/student.html', {'stu': stu, 'form': form})
 
 
-
-
 # **************EDIT STUDENT***********
 def edit_student(request, pk):
     editstu = Student.objects.get(id=pk)
@@ -599,6 +1229,91 @@ def delete_student(request, pk):
 def view_student(request, pk):
     viewstu = Student.objects.get(id=pk)
     return render(request, 'result/view_student.html', {'viewstu': viewstu})
+
+
+# ***********************UPLOAD STUDENTS*****************************
+def upload_students(request):
+    if request.method == 'POST':
+        form = StudentFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            excel_file = request.FILES['file']
+            try:
+                df = pd.read_excel(excel_file)
+            except Exception as e:
+                messages.error(request, "An error occurred while reading the Excel file.")
+                return redirect('student')
+
+            students_added = 0
+            students_skipped = 0
+            errors = []
+
+            for _, row in df.iterrows():
+                fullname = row['fullname']
+                email = row['email']
+                contact = row['contact']
+                gender = row['gender']
+                department_name = row['department']
+                program_name = row['program']
+                dob = row['dob']
+
+                department, _ = Department.objects.get_or_create(department=department_name)
+                program, _ = Program.objects.get_or_create(program=program_name, department=department)
+
+                student = Student(
+                    fullname=fullname,
+                    email=email,
+                    contact=contact,
+                    gender=gender,
+                    department=department,
+                    program=program,
+                    dob=dob
+                )
+
+                try:
+                    student.save()
+                    students_added += 1
+                except Exception as e:
+                    errors.append(f"Error creating student '{fullname}': {str(e)}")
+
+            if students_added > 0:
+                messages.success(request, f"{students_added} student(s) have been added successfully!")
+            if students_skipped > 0:
+                messages.warning(request, f"{students_skipped} student(s) already exist and were skipped.")
+            if errors:
+                messages.error(request, "Some errors occurred while saving students. Please check the error messages.")
+                for error in errors:
+                    messages.error(request, error)
+
+            return redirect('student')
+        else:
+            messages.error(request, "Invalid form submission. Please check the form fields.")
+            return redirect('student')
+    else:
+        form = StudentFileForm()
+
+    return render(request, 'result/uploadStudent.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

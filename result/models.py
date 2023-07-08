@@ -2,85 +2,63 @@ import datetime
 from django.db import models
 import uuid
 
+
 GENDER = (
         ('Male','Male'),
         ('Female','Female'),
 )
 
-DATE = (
-        
-        ('2010','2010'),
-        ('2011','2011'),
-        ('2012','2012'),
-        ('2013','2013'),
-        ('2014','2014'),
-        ('2015','2015'),
-        ('2016','2016'),
-        ('2017','2017'),
-        ('2018','2018'),
-        ('2019','2019'),
-        ('2020','2020'),
-        ('2021','2021'),
-        ('2022','2022'),
-        ('2023','2023'),
-        ('2024','2024'),
-        ('2025','2025'),
-        ('2026','2026'),
-        ('2027','2027'),
-        ('2028','2028'),
-        ('2029','2029'),
-        ('2030','2030'),
+
+
+
+YEAR1_SEMESTER1 = (
+    ('First Semester','First Semester'),
 )
 
-BATCH = (
-        
-        ('2010','2010'),
-        ('2011','2011'),
-        ('2012','2012'),
-        ('2013','2013'),
-        ('2014','2014'),
-        ('2015','2015'),
-        ('2016','2016'),
-        ('2017','2017'),
-        ('2018','2018'),
-        ('2019','2019'),
-        ('2020','2020'),
-        ('2021','2021'),
-        ('2022','2022'),
-        ('2023','2023'),
-        ('2024','2024'),
-        ('2025','2025'),
-        ('2026','2026'),
-        ('2027','2027'),
-        ('2028','2028'),
-        ('2029','2029'),
-        ('2030','2030'),
+YEAR1_SEMESTER2 = (
+    ('Second Semester','Second Semester'),
 )
 
-QUALIFICATION = (
-        ('Bachelor of Science (BSc)','Bachelor of Science (BSc)'),
-        ('Bachelor of Arts (BA)','Bachelor of Arts (BA)'),
-        ('Bachelor of Business Administration (BBA)','Bachelor of Business Administration (BBA)'),
-        ('Bachelor of Engineering (BEng)','Bachelor of Engineering (BEng)'),
-        ('Bachelor of Education (BEd)','Bachelor of Education (BEd)'),
-        ('Master of Science (MSc)','Master of Science (MSc)'),
-        ('Master of Arts (MA)','Master of Arts (MA)'),
-        ('Master of Business Administration (MBA)','Master of Business Administration (MBA)'),
-        ('Master of Engineering (MEng)','Master of Engineering (MEng)'),
-        ('Master of Education (MEd)','Master of Education (MEd)'),
-        ('Diploma in Computer Science','Diploma in Computer Science'),
-        ('Diploma in Graphics Design','Diploma in Graphics Design'),
-        ('Diploma in Accounting','Diploma in Accounting'),
-        ('Diploma in Banking and Finance','Diploma in Banking and Finance'),
-        ('HND in Journalism','HND in Journalism'),
-        ('HND in Business Administration','HND in Business Administration'),
-        ('HND in Radio Broadcasting','HND in Radio Broadcasting'),
-        ('HND in Radio English Language','HND in Radio English Language'),
-        ('Certificate in Computer Studies','Certificate in Computer Studies'),
-        ('Certificate in Project Management','Certificate in Project Management'),
-        ('Certificate in Web Development ','Certificate in Web Development '),
-
+YEAR2_SEMESTER1 = (
+    ('First Semester','First Semester'),
 )
+
+YEAR2_SEMESTER2 = (
+    ('Second Semester','Second Semester'),
+)
+
+YEAR3_SEMESTER1 = (
+    ('First Semester','First Semester'),
+)
+
+YEAR3_SEMESTER2 = (
+    ('Second Semester','Second Semester'),
+)
+
+YEAR4_SEMESTER1 = (
+    ('First Semester','First Semester'),
+)
+
+YEAR4_SEMESTER2 = (
+    ('Second Semester','Second Semester'),
+)
+
+
+
+YEAR1_LEVEL1 =(
+    ('First Year','First Year'),
+)
+YEAR2_LEVEL2 =(
+    ('Second Year','Second Year'),
+)
+YEAR3_LEVEL3 =(
+    ('Third Year','Third Year'),
+)
+YEAR4_LEVEL4 =(
+    ('Final Year','Final Year'),
+)
+
+
 
 SEMESTER = (
         
@@ -201,20 +179,10 @@ YEAR4_ACADEMIC_YEAR = (
         ('2021/2022','2021/2022'),
         ('2022/2023','2022/2023'),  
 )
-# class University(models.Model):
-#     university = models.CharField(max_length=100)
-#     uni_number = models.CharField(max_length=20)
-#     def __str__(self):
-#         return self.university
+
     
 class ExamsYear(models.Model):
     academicyear= models.CharField(max_length=20, choices=ACADEMIC_YEAR)
-    
-    
-        
-
-class Qualification(models.Model):
-    qualification = models.CharField(max_length=100, choices=QUALIFICATION)
     
 
     # ****FACULTY******
@@ -241,20 +209,93 @@ class Program(models.Model):
     
 
 
-     # ****COURSES/MODULES******
-class Courses(models.Model):
-    code = models.CharField(max_length=50, unique=True, default='')
-    course = models.CharField(max_length=50)
 
+
+
+# ***************YEAR ONE FIRST SEMESTER***********
+class year1_semester1(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR1_LEVEL1 )
+    semester = models.CharField(max_length=20,choices=YEAR1_SEMESTER1)
+    course = models.CharField(max_length=50)
     def __str__(self):
         return self.course
     
 
+# ***************YEAR ONE SECOND SEMESTER***********
+class year1_semester2(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR1_LEVEL1)
+    semester = models.CharField(max_length=20,choices=YEAR1_SEMESTER2)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+
+
+# ***************YEAR TWO FIRST SEMESTER***********
+class year2_semester1(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR2_LEVEL2)
+    semester = models.CharField(max_length=20,choices=YEAR2_SEMESTER1)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+# ***************YEAR TWO SECOND SEMESTER***********
+class year2_semester2(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR2_LEVEL2)
+    semester = models.CharField(max_length=20,choices=YEAR2_SEMESTER2)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+    
+# ***************YEAR THREE FIRST SEMESTER***********
+class year3_semester1(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR3_LEVEL3)
+    semester = models.CharField(max_length=20,choices=YEAR3_SEMESTER1)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+    
+# ***************YEAR THREE SECOND SEMESTER***********
+class year3_semester2(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR3_LEVEL3)
+    semester = models.CharField(max_length=20,choices=YEAR3_SEMESTER2)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+    
+# ***************YEAR FOUR FIRST SEMESTER***********
+class year4_semester1(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR4_LEVEL4)
+    semester = models.CharField(max_length=20,choices=YEAR4_SEMESTER1)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+
+# ***************YEAR FOUR SECOND SEMESTER***********
+class year4_semester2(models.Model):
+    code = models.CharField(max_length=50, unique=True, default='')
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    level = models.CharField(max_length=20, choices=YEAR4_LEVEL4)
+    semester = models.CharField(max_length=20,choices=YEAR4_SEMESTER2)
+    course = models.CharField(max_length=50)
+    def __str__(self):
+        return self.course
+
 
 
      # ********STUDENTS******
-
-
 class Student(models.Model):
         student_id = models.CharField(max_length=50, unique=True)
         fullname = models.CharField(max_length=100)
@@ -291,28 +332,28 @@ class Result(models.Model):
     academicYear4 = models.TextField(max_length=20, choices=YEAR4_ACADEMIC_YEAR, null=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
-    level = models.TextField(max_length=50, choices=LEVEL)
-    level2 = models.TextField(max_length=50, choices=LEVEL2)
-    level3 = models.TextField(max_length=50, choices=LEVEL3)
-    level4 = models.TextField(max_length=50, choices=LEVEL4)
-    semester = models.TextField(max_length=50, choices=SEMESTER, null=True)
-    semester2 = models.TextField(max_length=50, choices=SEMESTER2, null=True)
-    semester3 = models.TextField(max_length=50, choices=SEMESTER3, null=True)
-    semester4 = models.TextField(max_length=50, choices=SEMESTER4, null=True)
-    semester5 = models.TextField(max_length=50, choices=SEMESTER5, null=True)
-    semester6 = models.TextField(max_length=50, choices=SEMESTER6, null=True)
-    semester7 = models.TextField(max_length=50, choices=SEMESTER7, null=True)
-    semester8 = models.TextField(max_length=50, choices=SEMESTER8, null=True)
+    level = models.TextField(max_length=50, choices=YEAR1_LEVEL1)
+    level2 = models.TextField(max_length=50, choices=YEAR2_LEVEL2)
+    level3 = models.TextField(max_length=50, choices=YEAR3_LEVEL3)
+    level4 = models.TextField(max_length=50, choices=YEAR4_LEVEL4)
+    semester = models.TextField(max_length=50, choices=YEAR1_SEMESTER1, null=True)
+    semester2 = models.TextField(max_length=50, choices=YEAR2_SEMESTER2, null=True)
+    semester3 = models.TextField(max_length=50, choices=YEAR1_SEMESTER1, null=True)
+    semester4 = models.TextField(max_length=50, choices=YEAR2_SEMESTER2, null=True)
+    semester5 = models.TextField(max_length=50, choices=YEAR1_SEMESTER1, null=True)
+    semester6 = models.TextField(max_length=50, choices=YEAR2_SEMESTER2, null=True)
+    semester7 = models.TextField(max_length=50, choices=YEAR1_SEMESTER1, null=True)
+    semester8 = models.TextField(max_length=50, choices=YEAR2_SEMESTER2, null=True)
     
 
     # =====================YEAR ONE=========================================#
     # ****************SEMESTER ONE************************
-    module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='module1_results',null=True, blank=True)
-    module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='module2_results',null=True, blank=True)
-    module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='module3_results',null=True, blank=True)
-    module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='module4_results',null=True, blank=True)
-    module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='module5_results',null=True, blank=True)
-    module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='module6_results',null=True, blank=True)
+    module1 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module1_results',null=True, blank=True)
+    module2 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module2_results',null=True, blank=True)
+    module3 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module3_results',null=True, blank=True)
+    module4 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module4_results',null=True, blank=True)
+    module5 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module5_results',null=True, blank=True)
+    module6 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module6_results',null=True, blank=True)
     module_grade1 = models.IntegerField(null=True, blank=True)
     module_grade2 = models.IntegerField(null=True, blank=True)
     module_grade3 = models.IntegerField(null=True, blank=True)
@@ -340,12 +381,12 @@ class Result(models.Model):
     
 
     # ****************SEMESTER TWO************************
-    semester2_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester2_module1_results',null=True, blank=True)
-    semester2_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester2_module2_results',null=True, blank=True)
-    semester2_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester2_module3_results',null=True, blank=True)
-    semester2_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester2_module4_results',null=True, blank=True)
-    semester2_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester2_module5_results',null=True, blank=True)
-    semester2_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester2_module6_results',null=True, blank=True)
+    semester2_module1 = models.ForeignKey(year1_semester2, on_delete=models.CASCADE, related_name='semester2_module1_results',null=True, blank=True)
+    semester2_module2 = models.ForeignKey(year1_semester2, on_delete=models.CASCADE, related_name='semester2_module2_results',null=True, blank=True)
+    semester2_module3 = models.ForeignKey(year1_semester2, on_delete=models.CASCADE, related_name='semester2_module3_results',null=True, blank=True)
+    semester2_module4 = models.ForeignKey(year1_semester2, on_delete=models.CASCADE, related_name='semester2_module4_results',null=True, blank=True)
+    semester2_module5 = models.ForeignKey(year1_semester2, on_delete=models.CASCADE, related_name='semester2_module5_results',null=True, blank=True)
+    semester2_module6 = models.ForeignKey(year1_semester2, on_delete=models.CASCADE, related_name='semester2_module6_results',null=True, blank=True)
     semester2_module_grade1 = models.IntegerField(null=True, blank=True)
     semester2_module_grade2 = models.IntegerField(null=True, blank=True)
     semester2_module_grade3 = models.IntegerField(null=True, blank=True)
@@ -390,12 +431,12 @@ class Result(models.Model):
 
     # =========================SECOND YEAR=================================================#
     # ****************SEMESTER THREE************************
-    semester3_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module1_results',null=True, blank=True)
-    semester3_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module2_results',null=True, blank=True)
-    semester3_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module3_results',null=True, blank=True)
-    semester3_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module4_results',null=True, blank=True)
-    semester3_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module5_results',null=True, blank=True)
-    semester3_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester3_module6_results',null=True, blank=True)
+    semester3_module1 = models.ForeignKey(year2_semester1, on_delete=models.CASCADE, related_name='semester3_module1_results',null=True, blank=True)
+    semester3_module2 = models.ForeignKey(year2_semester1, on_delete=models.CASCADE, related_name='semester3_module2_results',null=True, blank=True)
+    semester3_module3 = models.ForeignKey(year2_semester1, on_delete=models.CASCADE, related_name='semester3_module3_results',null=True, blank=True)
+    semester3_module4 = models.ForeignKey(year2_semester1, on_delete=models.CASCADE, related_name='semester3_module4_results',null=True, blank=True)
+    semester3_module5 = models.ForeignKey(year2_semester1, on_delete=models.CASCADE, related_name='semester3_module5_results',null=True, blank=True)
+    semester3_module6 = models.ForeignKey(year2_semester1, on_delete=models.CASCADE, related_name='semester3_module6_results',null=True, blank=True)
     semester3_module_grade1 = models.IntegerField(null=True)
     semester3_module_grade2 = models.IntegerField(null=True)
     semester3_module_grade3 = models.IntegerField(null=True)
@@ -435,12 +476,12 @@ class Result(models.Model):
 
 
      # ****************SEMESTER FOUR************************
-    semester4_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester4_module1_results',null=True, blank=True)
-    semester4_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester4_module2_results',null=True, blank=True)
-    semester4_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester4_module3_results',null=True, blank=True)
-    semester4_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester4_module4_results',null=True, blank=True)
-    semester4_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester4_module5_results',null=True, blank=True)
-    semester4_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester4_module6_results',null=True, blank=True)
+    semester4_module1 = models.ForeignKey(year2_semester2, on_delete=models.CASCADE, related_name='semester4_module1_results',null=True, blank=True)
+    semester4_module2 = models.ForeignKey(year2_semester2, on_delete=models.CASCADE, related_name='semester4_module2_results',null=True, blank=True)
+    semester4_module3 = models.ForeignKey(year2_semester2, on_delete=models.CASCADE, related_name='semester4_module3_results',null=True, blank=True)
+    semester4_module4 = models.ForeignKey(year2_semester2, on_delete=models.CASCADE, related_name='semester4_module4_results',null=True, blank=True)
+    semester4_module5 = models.ForeignKey(year2_semester2, on_delete=models.CASCADE, related_name='semester4_module5_results',null=True, blank=True)
+    semester4_module6 = models.ForeignKey(year2_semester2, on_delete=models.CASCADE, related_name='semester4_module6_results',null=True, blank=True)
     semester4_module_grade1 = models.IntegerField(null=True, blank=True)
     semester4_module_grade2 = models.IntegerField(null=True, blank=True)
     semester4_module_grade3 = models.IntegerField(null=True, blank=True)
@@ -485,12 +526,12 @@ class Result(models.Model):
 
      # =========================THIRD YEAR=================================================#
     # ****************SEMESTER FIVE************************
-    semester5_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module1_results',null=True, blank=True)
-    semester5_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module2_results',null=True, blank=True)
-    semester5_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module3_results',null=True, blank=True)
-    semester5_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module4_results',null=True, blank=True)
-    semester5_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module5_results',null=True, blank=True)
-    semester5_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester5_module6_results',null=True, blank=True)
+    semester5_module1 = models.ForeignKey(year3_semester1, on_delete=models.CASCADE, related_name='semester5_module1_results',null=True, blank=True)
+    semester5_module2 = models.ForeignKey(year3_semester1, on_delete=models.CASCADE, related_name='semester5_module2_results',null=True, blank=True)
+    semester5_module3 = models.ForeignKey(year3_semester1, on_delete=models.CASCADE, related_name='semester5_module3_results',null=True, blank=True)
+    semester5_module4 = models.ForeignKey(year3_semester1, on_delete=models.CASCADE, related_name='semester5_module4_results',null=True, blank=True)
+    semester5_module5 = models.ForeignKey(year3_semester1, on_delete=models.CASCADE, related_name='semester5_module5_results',null=True, blank=True)
+    semester5_module6 = models.ForeignKey(year3_semester1, on_delete=models.CASCADE, related_name='semester5_module6_results',null=True, blank=True)
     semester5_module_grade1 = models.IntegerField(null=True)
     semester5_module_grade2 = models.IntegerField(null=True)
     semester5_module_grade3 = models.IntegerField(null=True)
@@ -529,12 +570,12 @@ class Result(models.Model):
     semester5_totalsch = models.IntegerField(null=True, default=0)
 
      # ****************SEMESTER SIX************************
-    semester6_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module1_results',null=True, blank=True)
-    semester6_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module2_results',null=True, blank=True)
-    semester6_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module3_results',null=True, blank=True)
-    semester6_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module4_results',null=True, blank=True)
-    semester6_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module5_results',null=True, blank=True)
-    semester6_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester6_module6_results',null=True, blank=True)
+    semester6_module1 = models.ForeignKey(year3_semester2, on_delete=models.CASCADE, related_name='semester6_module1_results',null=True, blank=True)
+    semester6_module2 = models.ForeignKey(year3_semester2, on_delete=models.CASCADE, related_name='semester6_module2_results',null=True, blank=True)
+    semester6_module3 = models.ForeignKey(year3_semester2, on_delete=models.CASCADE, related_name='semester6_module3_results',null=True, blank=True)
+    semester6_module4 = models.ForeignKey(year3_semester2, on_delete=models.CASCADE, related_name='semester6_module4_results',null=True, blank=True)
+    semester6_module5 = models.ForeignKey(year3_semester2, on_delete=models.CASCADE, related_name='semester6_module5_results',null=True, blank=True)
+    semester6_module6 = models.ForeignKey(year3_semester2, on_delete=models.CASCADE, related_name='semester6_module6_results',null=True, blank=True)
     semester6_module_grade1 = models.IntegerField(null=True)
     semester6_module_grade2 = models.IntegerField(null=True)
     semester6_module_grade3 = models.IntegerField(null=True)
@@ -578,12 +619,12 @@ class Result(models.Model):
 
 
      # ****************SEMESTER SEVEN************************
-    semester7_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module1_results',null=True, blank=True)
-    semester7_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module2_results',null=True, blank=True)
-    semester7_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module3_results',null=True, blank=True)
-    semester7_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module4_results',null=True, blank=True)
-    semester7_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module5_results',null=True, blank=True)
-    semester7_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester7_module6_results',null=True, blank=True)
+    semester7_module1 = models.ForeignKey(year4_semester1, on_delete=models.CASCADE, related_name='semester7_module1_results',null=True, blank=True)
+    semester7_module2 = models.ForeignKey(year4_semester1, on_delete=models.CASCADE, related_name='semester7_module2_results',null=True, blank=True)
+    semester7_module3 = models.ForeignKey(year4_semester1, on_delete=models.CASCADE, related_name='semester7_module3_results',null=True, blank=True)
+    semester7_module4 = models.ForeignKey(year4_semester1, on_delete=models.CASCADE, related_name='semester7_module4_results',null=True, blank=True)
+    semester7_module5 = models.ForeignKey(year4_semester1, on_delete=models.CASCADE, related_name='semester7_module5_results',null=True, blank=True)
+    semester7_module6 = models.ForeignKey(year4_semester1, on_delete=models.CASCADE, related_name='semester7_module6_results',null=True, blank=True)
     semester7_module_grade1 = models.IntegerField(null=True)
     semester7_module_grade2 = models.IntegerField(null=True)
     semester7_module_grade3 = models.IntegerField(null=True)
@@ -623,12 +664,12 @@ class Result(models.Model):
 
 
      # ****************SEMESTER EIGHT************************
-    semester8_module1 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module1_results',null=True, blank=True)
-    semester8_module2 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module2_results',null=True, blank=True)
-    semester8_module3 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module3_results',null=True, blank=True)
-    semester8_module4 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module4_results',null=True, blank=True)
-    semester8_module5 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module5_results',null=True, blank=True)
-    semester8_module6 = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='semester8_module6_results',null=True, blank=True)
+    semester8_module1 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module1_results',null=True, blank=True)
+    semester8_module2 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module2_results',null=True, blank=True)
+    semester8_module3 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module3_results',null=True, blank=True)
+    semester8_module4 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module4_results',null=True, blank=True)
+    semester8_module5 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module5_results',null=True, blank=True)
+    semester8_module6 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module6_results',null=True, blank=True)
     semester8_module_grade1 = models.IntegerField(null=True)
     semester8_module_grade2 = models.IntegerField(null=True)
     semester8_module_grade3 = models.IntegerField(null=True)

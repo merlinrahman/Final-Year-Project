@@ -116,13 +116,86 @@ urlpatterns = [
     # ***************************************
                  # MODULES/COURSES
     #*****************************************
-    path('course/', views.course, name='course'),
-    path('edit_course/<int:pk>/', views.edit_course, name='edit_course'),
-    path('delete_course/<int:pk>/', views.delete_course, name='delete_course'), 
-    path('view_course/<int:pk>/', views.view_course, name='view_course'),
+    
+    # path('upload_course/', views.upload_course, name='upload_course'),
+
+
+    
+    # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year1_first_semester/', views.year1_first_semester, name='year1_first_semester'),
+    path('edit_year1_first_semester/<int:pk>/', views.edit_year1_first_semester, name='edit_year1_first_semester'),
+    path('delete_year1_first_semester/<int:pk>/', views.delete_year1_first_semester, name='delete_year1_first_semester'), 
+    path('view_year1_first_semester/<int:pk>/', views.view_year1_first_semester, name='view_year1_first_semester'),
     path('upload_course/', views.upload_course, name='upload_course'),
 
 
+    # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year1_second_semester/', views.year1_second_semester, name='year1_second_semester'),
+    path('edit_year1_second_semester/<int:pk>/', views.edit_year1_second_semester, name='edit_year1_second_semester'),
+    path('delete_year1_second_semester/<int:pk>/', views.delete_year1_second_semester, name='delete_year1_second_semester'), 
+    path('view_year1_second_semester/<int:pk>/', views.view_year1_second_semester, name='view_year1_second_semester'),
+    path('upload_course2/', views.upload_course2, name='upload_course2'),
+
+
+    # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year2_first_semester/', views.year2_first_semester, name='year2_first_semester'),
+    path('edit_year2_first_semester/<int:pk>/', views.edit_year2_first_semester, name='edit_year2_first_semester'),
+    path('delete_year2_first_semester/<int:pk>/', views.delete_year2_first_semester, name='delete_year2_first_semester'), 
+    path('view_year2_first_semester/<int:pk>/', views.view_year2_first_semester, name='view_year2_first_semester'),
+    path('upload_course3/', views.upload_course3, name='upload_course3'),
+
+     # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year2_second_semester/', views.year2_second_semester, name='year2_second_semester'),
+    path('edit_year2_second_semester/<int:pk>/', views.edit_year2_second_semester, name='edit_year2_second_semester'),
+    path('delete_year2_second_semester/<int:pk>/', views.delete_year2_second_semester, name='delete_year2_second_semester'), 
+    path('view_year2_second_semester/<int:pk>/', views.view_year2_second_semester, name='view_year2_second_semester'),
+    path('upload_course4/', views.upload_course4, name='upload_course4'),
+
+
+    # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year3_first_semester/', views.year3_first_semester, name='year3_first_semester'),
+    path('edit_year3_first_semester/<int:pk>/', views.edit_year3_first_semester, name='edit_year3_first_semester'),
+    path('delete_year3_first_semester/<int:pk>/', views.delete_year3_first_semester, name='delete_year3_first_semester'), 
+    path('view_year3_first_semester/<int:pk>/', views.view_year3_first_semester, name='view_year3_first_semester'),
+    path('upload_course5/', views.upload_course5, name='upload_course5'),
+
+    # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year3_second_semester/', views.year3_second_semester, name='year3_second_semester'),
+    path('edit_year3_second_semester/<int:pk>/', views.edit_year3_second_semester, name='edit_year3_second_semester'),
+    path('delete_year3_second_semester/<int:pk>/', views.delete_year3_second_semester, name='delete_year3_second_semester'), 
+    path('view_year3_second_semester/<int:pk>/', views.view_year3_second_semester, name='view_year3_second_semester'),
+    path('upload_course6/', views.upload_course6, name='upload_course6'),
+
+     # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year4_first_semester/', views.year4_first_semester, name='year4_first_semester'),
+    path('edit_year4_first_semester/<int:pk>/', views.edit_year4_first_semester, name='edit_year4_first_semester'),
+    path('delete_year4_first_semester/<int:pk>/', views.delete_year4_first_semester, name='delete_year4_first_semester'), 
+    path('view_year4_first_semester/<int:pk>/', views.view_year4_first_semester, name='view_year4_first_semester'),
+    path('upload_course7/', views.upload_course7, name='upload_course7'),
+
+
+     # ***************************************
+                 # MODULES/COURSES
+    #*****************************************
+    path('year4_second_semester/', views.year4_second_semester, name='year4_second_semester'),
+    path('edit_year4_second_semester/<int:pk>/', views.edit_year4_second_semester, name='edit_year4_second_semester'),
+    path('delete_year4_second_semester/<int:pk>/', views.delete_year4_second_semester, name='delete_year4_second_semester'), 
+    path('view_year4_second_semester/<int:pk>/', views.view_year4_second_semester, name='view_year4_second_semester'),
+    path('upload_course8/', views.upload_course8, name='upload_course8'),
 
 
     # ***************************************
@@ -132,7 +205,7 @@ urlpatterns = [
     path('edit_student/<int:pk>/', views.edit_student, name='edit_student'),
     path('delete_student/<int:pk>/', views.delete_student, name='delete_student'), 
     path('view_student/<int:pk>/', views.view_student, name='view_student'),
-    # path('upload_level/', views.upload_level, name='upload_level'),
+    path('upload_students/', views.upload_students, name='upload_students'),
 
 
 

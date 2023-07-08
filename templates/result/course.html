@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>cusl-results management system</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -184,8 +183,29 @@
       </a>
       <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="{% url 'course' %}">
-            <i class="bi bi-circle"></i><span>Manage Courses</span>
+          <a href="{% url 'year1_first_semester' %}">
+            <i class="bi bi-circle"></i><span>First Year Semester One</span>
+          </a>
+          <a href="{% url 'year1_second_semester' %}">
+            <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+          </a>
+          <a href="{% url 'year2_first_semester' %}">
+            <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+          </a>
+          <a href="{% url 'year2_second_semester' %}">
+            <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+          </a>
+          <a href="{% url 'year3_first_semester' %}">
+            <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+          </a>
+          <a href="{% url 'year3_second_semester' %}">
+            <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+          </a>
+          <a href="{% url 'year4_first_semester' %}">
+            <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+          </a>
+          <a href="{% url 'year4_second_semester' %}">
+            <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
           </a>
         </li>
       </ul>
@@ -248,20 +268,23 @@
                    style="margin-right:20px;" type="submit">
                   <i class="fa fa-upload" aria-hidden="true"></i>Uploads</a>
                   <a href="" class="btn btn-secondary btn mb-2  py-2"  
-                  data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right:230px;">
+                  data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right:70px;">
                   <i class="fas fa-plus">&nbsp;</i>Add Courses</a>
               </div>
           </div>
       </div>
         <div class="row ml-5 pl-5">
             <div class="col-12">
-                <div class="data_table" style="margin-left:370px; margin-right: 200px;">
+                <div class="data_table" style="margin-left:320px; margin-right: 50px;">
                     <table id="example" class="table table-striped table-bordered table-sm" >
                         <thead class="table-dark text-center text-light">
                             <tr>
                                 <th  class="text-center">No</th>
                                 <th  class="text-center">Course ID</th>
-                                <th  class="text-center">Course Title</th>
+                                <th  class="text-center">Program</th>
+                                <th  class="text-center">Level</th>
+                                <th  class="text-center">Semester</th>
+                                <th  class="text-center">Course</th>
                                 <th  class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -270,6 +293,9 @@
                             <tr>
                                 <td>{{ obj.id }}</td>
                                 <td>{{ obj.code }}</td>
+                                <td>{{ obj.program }}</td>
+                                <td>{{ obj.level }}</td>
+                                <td>{{ obj.semester }}</td>
                                 <td>{{ obj.course }}</td>
                                     <td>
                                         <a href="{% url 'edit_course' obj.id %}" class="btn btn-info" title="Edit Patient">
