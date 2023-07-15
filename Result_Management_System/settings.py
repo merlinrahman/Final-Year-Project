@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mainapp",
     "result",
+    "result2",
     "import_export",
     "account",
     'crispy_forms',
@@ -83,23 +85,23 @@ WSGI_APPLICATION = "Result_Management_System.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Result_Management_System',
-#         'USER': 'postgres',
-#         'PASSWORD': 'merlin',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Result_Management_System',
+        'USER': 'postgres',
+        'PASSWORD': 'ardymerlin',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
 
 
@@ -157,26 +159,26 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Central University",
+    "site_title": "University Results Portal",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Central University",
+    "site_header": "University Results Portal",
 
      # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Central University",
+    "site_brand": "RESULTS PORTAL",
 
      # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "assets/img/cusl.jpg",
+    "site_logo": "assets/img/urp.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": "assets/img/cusl.jpg",
+    "login_logo": "assets/img/urp.png",
 
     # Welcome text on the login screen
-    "welcome_sign": "CUSL-Results Management System",
+    "welcome_sign": "UNIVERSITY RESULTS PORTAL",
 
 
      # Copyright on the footer
-    "copyright": "CUSL-Results Management System",
+    "copyright": "UNIVERSITY Results Portal",
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

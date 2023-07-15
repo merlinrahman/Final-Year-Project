@@ -25,7 +25,7 @@ def register(request):
 
 
 
-# LOGIN
+# CENTRAL UNIVERSITY EXAMS OFFICER LOGIN
 def login_view(request):
     context={}
     if request.method=='POST':
@@ -44,6 +44,26 @@ def login_view(request):
         context['login_form'] = form
     return render(request, "result/login_register.html", context)
 
+
+
+# NJALA UNIVERSITY EXAMS OFFICER LOGIN
+def login_view2(request):
+    context={}
+    if request.method=='POST':
+        form=UserLoginForm(request.POST)
+        if form.is_valid():
+            email=request.POST['email']
+            password=request.POST['password']
+            user=authenticate(request,email=email,password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("admin2")
+        else:
+            context['login_form'] = form
+    else:
+        form=UserLoginForm()
+        context['login_form'] = form
+    return render(request, "result/login_register.html", context)
 
 # LOGOUT
 

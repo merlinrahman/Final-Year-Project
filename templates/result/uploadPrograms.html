@@ -121,8 +121,8 @@
 
 </header><!-- End Header -->
 
-<!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
+ <!-- ======= Sidebar ======= -->
+ <aside id="sidebar" class="sidebar">
 
   <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -133,7 +133,7 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
-
+   
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -175,45 +175,325 @@
       </ul>
     </li>
 
-    
-
+   
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-bar-chart"></i><span>Courses/Modules</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="{% url 'year1_first_semester' %}">
-            <i class="bi bi-circle"></i><span>First Year Semester One</span>
-          </a>
-          <a href="{% url 'year1_second_semester' %}">
-            <i class="bi bi-circle"></i><span>First Year Semester Two</span>
-          </a>
-          <a href="{% url 'year2_first_semester' %}">
-            <i class="bi bi-circle"></i><span>Second Year Semester One</span>
-          </a>
-          <a href="{% url 'year2_second_semester' %}">
-            <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
-          </a>
-          <a href="{% url 'year3_first_semester' %}">
-            <i class="bi bi-circle"></i><span>Third Year Semester One</span>
-          </a>
-          <a href="{% url 'year3_second_semester' %}">
-            <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
-          </a>
-          <a href="{% url 'year4_first_semester' %}">
-            <i class="bi bi-circle"></i><span>Final Year Semester One</span>
-          </a>
-          <a href="{% url 'year4_second_semester' %}">
-            <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
-          </a>
-        </li>
-      </ul>
+
+      <!-- ========================COMPUTER SCIENCE MODULES========================== -->
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Computer Science</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year4_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year4_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <!-- ======================END OF COMPUTER SCIENCE MODULES==================== -->
+
+
+        <!-- =======================BUSINESS INFORMATION TECHNOLOGY MODULES====================== -->
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Business Information Tech</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'bit_year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'bit_year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'bit_year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'bit_year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'bit_year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'bit_year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'bit_year4_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'bit_year4_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <!-- =====================END OF BUSINESS INFORMATION MODULES============================ -->
+
+
+        <!-- =======================MASS COMMUNICATION MODULES====================== -->
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Mass Communication</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'masscom_year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'masscom_year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'masscom_year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'masscom_year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'masscom_year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'masscom_year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'masscom_year4_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'masscom_year4_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <!-- ========================END OF MASS COMMUNICATION MODULES========================= -->
+
+
+        <!-- =======================BUSINESS ADMINISTRATION MODULES====================== -->
+        <!-- <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Business Administration</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul> -->
+        <!-- ========================END OF BUSINESS ADMINISTRATION MODULES========================= -->
+
+
+         <!-- ======================ACCOUNTING & FINANCE MODULES====================== -->
+         <!-- <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Acc. & Finance</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul> -->
+        <!-- ========================END OF ACCOUNTING & FINANCE MODULES========================= -->
+
+
+         <!-- ======================NURSING MODULES====================== -->
+         <!-- <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Nursing</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul> -->
+        <!-- ========================END OF NURSING MODULES========================= -->
+
+         <!-- ======================PUBLIC HEALTH MODULES====================== -->
+         <!-- <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Public Health</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+          
+        </ul> -->
+        <!-- ========================END OF PUBLIC HEALTH MODULES========================= -->
+
+        <!-- ======================PUBLIC RENEWABLE ENERGY MODULES====================== -->
+        <!-- <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" class="text-center">Renewable</a>
+            <ul class="dropdown-menu" style="width: 100%;">
+              <li><a href="{% url 'year1_first_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year1_second_semester' %}">
+                <i class="bi bi-circle"></i><span>First Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year2_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year2_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Second Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Third Year Semester Two</span>
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a href="{% url 'year3_first_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester One</span>
+              </a></li>
+              <li><a href="{% url 'year3_second_semester' %}">
+                <i class="bi bi-circle"></i><span>Final Year Semester Two</span>
+              </a></li>
+            </ul>
+          </li>
+        </ul> -->
+        <!-- ========================END OF RENEWABLE ENERGY MODULES========================= -->
     </li>
 
    
 
+ 
    
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icon-nav" data-bs-toggle="collapse" href="#">

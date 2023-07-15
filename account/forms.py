@@ -15,7 +15,7 @@ class UserRegistrationForm(UserCreationForm):
 
         widgets={
             'email':forms.TextInput(attrs={'class':'form-control shadow-none'}),
-            'full_name':forms.TextInput(attrs={'class':'form-control shadow-none'}),
+            'full_name':forms.TextInput(attrs={'class':'form-control shadow-none', 'oninput': "this.value = this.value.replace(/[^a-zA-Z]/g, '')"}),
             
             
         }
