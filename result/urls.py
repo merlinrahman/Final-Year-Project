@@ -102,13 +102,32 @@ urlpatterns = [
 
 
     # ***************************************
-                 #  STUDENTS RESULTS
+                 # COMPUTER SCIENCE STUDENTS RESULTS
     #*****************************************
     path('result/', views.result, name='result'),
     path('edit_result/<int:pk>/', views.edit_result, name='edit_result'),
     path('delete_result/<int:pk>/', views.delete_result, name='delete_result'), 
     path('view_result/<int:pk>/', views.view_result, name='view_result'),
     
+
+     # ***************************************
+                 # BIT  STUDENTS RESULTS
+    #*****************************************
+    path('bit/', views.bit, name='bit'),
+    path('bit_result/', views.bit_result, name='bit_result'),
+    # path('edit_bit_result/<int:pk>/', views.edit_bit_result, name='edit_bit_result'),
+    # path('delete_bit_result/<int:pk>/', views.delete_bit_result, name='delete_bit_result'), 
+    # path('view_bit_result/<int:pk>/', views.view_bit_result, name='view_bit_result'),
+    
+
+
+    # ***************************************
+                 # MASSCOM  STUDENTS RESULTS
+    #*****************************************
+    path('masscom/', views.masscom, name='masscom'),
+    # path('edit_bit_result/<int:pk>/', views.edit_bit_result, name='edit_bit_result'),
+    # path('delete_bit_result/<int:pk>/', views.delete_bit_result, name='delete_bit_result'), 
+    # path('view_bit_result/<int:pk>/', views.view_bit_result, name='view_bit_result'),
 
 
      # ***************************************
@@ -125,7 +144,7 @@ urlpatterns = [
 
 
     #===============================================================================================================
-                                     #COMPUTER SCIENCE MODULES/COURSES
+                                     #COMPUTER SCIENCE courseS/COURSES
     #===============================================================================================================
 
     # ***************************************
@@ -212,7 +231,7 @@ urlpatterns = [
 
 
     #===============================================================================================================
-                                     #B.I.T MODULES/COURSES
+                                     #B.I.T courseS/COURSES
     #===============================================================================================================
       # ***************************************
                  # YEAR 1 SEMESTER 1
@@ -294,7 +313,7 @@ urlpatterns = [
 
 
      #===============================================================================================================
-                                     #MASS COMMUNICATION MODULES/COURSES
+                                     #MASS COMMUNICATION courseS/COURSES
     #===============================================================================================================
       # ***************************************
                  # YEAR 1 SEMESTER 1

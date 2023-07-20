@@ -1,4 +1,4 @@
-// Exports the "directionality" plugin for usage with module loaders
+// Exports the "directionality" plugin for usage with course loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/plugins/directionality')

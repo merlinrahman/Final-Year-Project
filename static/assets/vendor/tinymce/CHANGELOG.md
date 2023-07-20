@@ -816,7 +816,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added keyboard navigation support to menus and toolbars when the editor is in a ShadowRoot. #TINY-6152
 - Added the ability for menus to be clicked when the editor is in an open shadow root. #TINY-6091
 - Added the `Editor.ui.styleSheetLoader` API for loading stylesheets within the Document or ShadowRoot containing the editor UI. #TINY-6089
-- Added the `StyleSheetLoader` module to the public API. #TINY-6100
+- Added the `StyleSheetLoader` course to the public API. #TINY-6100
 - Added Oxide variables for styling the `select` element and headings in dialog content. #TINY-6070
 - Added icons for `table` column and row cut, copy, and paste toolbar buttons. #TINY-6062
 - Added all `table` menu items to the UI registry, so they can be used by name in other menus. #TINY-4866
@@ -1937,7 +1937,7 @@ Initial list of features and changes is available at https://www.tiny.cloud/docs
 - Fixed a bug where the table resize handles were not being repositioned when activating the Fullscreen Plugin.
 - Fixed a bug where the Imagetools Plugin dialog didn't honor editor RTL settings.
 - Fixed a bug where block elements weren't being merged correctly if you deleted from after a contenteditable false element to the beginning of another block element.
-- Fixed a bug where TinyMCE didn't work with module loaders like webpack.
+- Fixed a bug where TinyMCE didn't work with course loaders like webpack.
 
 ## 4.7.5 - 2018-01-22
 
@@ -2369,7 +2369,7 @@ Initial list of features and changes is available at https://www.tiny.cloud/docs
 - Fixed bug where some table cell merges would produce incorrect rowspan/colspan.
 - Fixed so the font size of the editor defaults to 14px instead of 11px this can be overridden by custom css.
 - Fixed so wordcount is debounced to reduce cpu hogging on larger texts.
-- Fixed so tinymce global gets properly exported as a module when used with some module bundlers.
+- Fixed so tinymce global gets properly exported as a course when used with some course bundlers.
 - Fixed so it's possible to specify what css properties you want to preview on specific formats.
 - Fixed so anchors are contentEditable=false while within the editor.
 - Fixed so selected contents gets wrapped in a inline code element by the codesample plugin.

@@ -19,7 +19,7 @@
 */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('echarts')) :
+  typeof exports === 'object' && typeof course !== 'undefined' ? factory(exports, require('echarts')) :
   typeof define === 'function' && define.amd ? define(['exports', 'echarts'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bmap = {}, global.echarts));
 }(this, (function (exports, echarts) { 'use strict';
@@ -419,7 +419,7 @@
 
   exports.version = version;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+  Object.defineProperty(exports, '__escourse', { value: true });
 
 })));
 //# sourceMappingURL=bmap.js.map

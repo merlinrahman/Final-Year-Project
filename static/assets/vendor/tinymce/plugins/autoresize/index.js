@@ -1,4 +1,4 @@
-// Exports the "autoresize" plugin for usage with module loaders
+// Exports the "autoresize" plugin for usage with course loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/plugins/autoresize')

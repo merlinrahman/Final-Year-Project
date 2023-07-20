@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Faculty, Department,bit_year3_semester2,bit_year4_semester2,bit_year4_semester1,bit_year3_semester1, Program,Student,Result,bit_year2_semester2,year1_semester1,bit_year2_semester1,year1_semester2,year2_semester1,year2_semester2,year3_semester1,year3_semester2,year4_semester1,year4_semester2,bit_year1_semester1,bit_year1_semester2
+from .models import Faculty, Department,bit_year3_semester2,bit_year4_semester2,bit_year4_semester1,bit_year3_semester1, Program,Student,Result,bit_year2_semester2,year1_semester1,bit_year2_semester1,year1_semester2,year2_semester1,year2_semester2,year3_semester1,year3_semester2,year4_semester1,year4_semester2,bit_year1_semester1,bit_year1_semester2,BitResult
 from .models import masscom_year1_semester1,masscom_year1_semester2,masscom_year2_semester1,masscom_year2_semester2,masscom_year3_semester1,masscom_year3_semester2,masscom_year4_semester1,masscom_year4_semester2
 from django.contrib.auth.decorators import login_required
 from .forms import FacultyForm, DepartmentForm,CourseFileForm1,BitCourseForm6,BitCourseForm8,BitCourseForm7,UploadFileForm,BitCourseForm4,BitCourseForm5,BitCourseForm3,BitCourseForm1,StudentFileForm,ProgramForm,FacultyFileForm,ProgramFileForm,StudentForm,ResultForm,CourseForm1,CourseForm2,CourseForm3,CourseForm4,CourseForm5,CourseForm6,CourseForm7,CourseForm8,CourseFileForm1,CourseFileForm2,CourseFileForm3,CourseFileForm4,CourseFileForm5,CourseFileForm6,CourseFileForm7,CourseFileForm8,BitCourseForm2
-from .forms import massCourseForm1,massCourseForm2,massCourseForm3,massCourseForm4,massCourseForm5,massCourseForm6,massCourseForm7,massCourseForm8
+from .forms import massCourseForm1,massCourseForm2,massCourseForm3,massCourseForm4,massCourseForm5,massCourseForm6,massCourseForm7,massCourseForm8,BitResultForm
 from django.contrib import messages
 from openpyxl import load_workbook
 import pandas as pd
@@ -339,7 +339,7 @@ def upload_programs(request):
 
 
 #*********************************************************************************************************************************
-                                             # COURSE/MODULE FOR COMPUTER SCIENCE
+                                             # COURSE/course FOR COMPUTER SCIENCE
 #*********************************************************************************************************************************
 # =======================================FIRST YEAR SEMESTER ONE===============================
 # *********ADD year1_first_semester***********
@@ -1123,7 +1123,7 @@ def upload_course8(request):
 
 
 #*********************************************************************************************************************************
-                                             # COURSE/MODULE FOR B.I.T
+                                             # COURSE/course FOR B.I.T
 #*********************************************************************************************************************************
 
 # *********ADD year1_first_semester***********
@@ -1863,7 +1863,7 @@ def upload_bit_course8(request):
 
 
 # *********************************************************************************************************************************
-                                             # COURSE/MODULE FOR MASS COMMUNICATION
+                                             # COURSE/course FOR MASS COMMUNICATION
 #*********************************************************************************************************************************
 
 # *********ADD year1_first_semester***********
@@ -2605,19 +2605,7 @@ def upload_masscom_course8(request):
 
 
 
-# *********************RESULT******************************
-# @login_required(login_url='login')
-# def bit_year1_first_semester(request):
-#     yr1_sem1 = year1_semester1.objects.all()
-#     if request.method == 'POST':
-#         form =CourseForm1(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "Course added Successfully!")
-#             return redirect('bit_year1_first_semester')
-#     else:
-#         form = CourseForm1()
-#     return render(request, 'result/bit_year1_first_semester.html',{'yr1_sem1':yr1_sem1,'form':form})
+
 
 
 
@@ -2723,7 +2711,12 @@ def upload_students(request):
                 program_name = row['program']
                 dob = row['dob']
 
-                department, _ = Department.objects.get_or_create(department=department_name)
+                department_qs = Department.objects.filter(department=department_name)
+                if department_qs.exists():
+                    department = department_qs.first()
+                else:
+                    department = Department.objects.create(department=department_name)
+
                 program, _ = Program.objects.get_or_create(program=program_name, department=department)
 
                 student = Student(
@@ -2759,25 +2752,6 @@ def upload_students(request):
         form = StudentFileForm()
 
     return render(request, 'result/uploadStudent.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2834,8 +2808,31 @@ def student_logout(request):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # # ************************************************************
-#                  # STUDENTS RESULT
+#                  # COMPUTER SCIENCE STUDENTS RESULT
 # #*************************************************************
 @login_required(login_url='login')
 def result(request):
@@ -2868,7 +2865,6 @@ def edit_result(request, pk):
     return render(request, 'result/edit_result.html',{'form':form})
 
 
-
 # *********DELETE STUDENT***********
 def delete_result(request, pk):
     del_result = Result.objects.get(id=pk)
@@ -2879,11 +2875,56 @@ def delete_result(request, pk):
     return render(request, 'result/delete_result.html',{})
 
 
-
 # *********VIEW RESULT***********
 def view_result(request, pk):
     viewresult = Result.objects.get(id=pk)
     return render(request, 'result/view_result.html', {'viewresult': viewresult})
+
+
+
+
+# # ************************************************************
+#                  # BUSINESS INFORMATION TECHNOLOGY
+# #*************************************************************
+
+@login_required(login_url='login')
+def bit(request):
+    return render(request, 'result/bit.html', {})
+
+@login_required(login_url='login')
+def bit_result(request):
+    bit_results_entry = BitResult.objects.all()
+    if request.method == 'POST':
+        form = BitResultForm(request.POST)
+        if form.is_valid():
+            result = form.save(commit=False)
+            result.save()
+            messages.success(request, "Results added successfully!")
+            return redirect('bit')
+        else:
+            messages.error(request, "There was an error adding the results.")
+    else:
+        form = BitResultForm()
+    return render(request, 'result/bit.html', {'bit_results_entry':bit_results_entry,'form': form})
+
+# # ************************************************************
+#                  # MASS COMMUNICATION
+# #*************************************************************
+
+@login_required(login_url='login')
+def masscom(request):
+    return render(request, 'result/masscom.html', {})
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2907,7 +2948,6 @@ def search_result(request):
         'result': result,
     }
     return render(request, 'result/view_student_result.html', context)
-
 
 
 

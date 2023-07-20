@@ -1,4 +1,4 @@
-// Exports the "default" icons for usage with module loaders
+// Exports the "default" icons for usage with course loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/icons/default')

@@ -132,7 +132,7 @@
 
   if (select('.quill-editor-full')) {
     new Quill(".quill-editor-full", {
-      modules: {
+      courses: {
         toolbar: [
           [{
             font: []
