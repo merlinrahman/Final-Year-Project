@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Faculty, Department,bit_year3_semester2,bit_year4_semester2,bit_year4_semester1,bit_year3_semester1, Program,Student,Result,bit_year2_semester2,year1_semester1,bit_year2_semester1,year1_semester2,year2_semester1,year2_semester2,year3_semester1,year3_semester2,year4_semester1,year4_semester2,bit_year1_semester1,bit_year1_semester2,BitResult
-from .models import masscom_year1_semester1,masscom_year1_semester2,masscom_year2_semester1,masscom_year2_semester2,masscom_year3_semester1,masscom_year3_semester2,masscom_year4_semester1,masscom_year4_semester2
+from .models import masscom_year1_semester1,masscom_year1_semester2,masscom_year2_semester1,masscom_year2_semester2,masscom_year3_semester1,masscom_year3_semester2,masscom_year4_semester1,masscom_year4_semester2,MasscomResult
 from django.contrib.auth.decorators import login_required
-from .forms import FacultyForm, DepartmentForm,CourseFileForm1,BitCourseForm6,BitCourseForm8,BitCourseForm7,UploadFileForm,BitCourseForm4,BitCourseForm5,BitCourseForm3,BitCourseForm1,StudentFileForm,ProgramForm,FacultyFileForm,ProgramFileForm,StudentForm,ResultForm,CourseForm1,CourseForm2,CourseForm3,CourseForm4,CourseForm5,CourseForm6,CourseForm7,CourseForm8,CourseFileForm1,CourseFileForm2,CourseFileForm3,CourseFileForm4,CourseFileForm5,CourseFileForm6,CourseFileForm7,CourseFileForm8,BitCourseForm2
+from .forms import FacultyForm, DepartmentForm,CourseFileForm1,BitCourseForm6,BitCourseForm8,BitCourseForm7,UploadFileForm,BitCourseForm4,BitCourseForm5,BitCourseForm3,BitCourseForm1,StudentFileForm,ProgramForm,FacultyFileForm,ProgramFileForm,StudentForm,ResultForm,CourseForm1,CourseForm2,CourseForm3,CourseForm4,CourseForm5,CourseForm6,CourseForm7,CourseForm8,CourseFileForm1,CourseFileForm2,CourseFileForm3,CourseFileForm4,CourseFileForm5,CourseFileForm6,CourseFileForm7,CourseFileForm8,BitCourseForm2,MasscomResultForm
 from .forms import massCourseForm1,massCourseForm2,massCourseForm3,massCourseForm4,massCourseForm5,massCourseForm6,massCourseForm7,massCourseForm8,BitResultForm
 from django.contrib import messages
 from openpyxl import load_workbook
@@ -15,10 +15,26 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 
 
+def uni_home(request):
+    return render(request,'result/uni_home.html',{})
 
+def bit_home_search(request):
+    return render(request,'result/bit_home_search.html',{})
+
+def comsci_home_search(request):
+    return render(request,'result/comsci_home_search.html',{})
+
+def masscom_home_search(request):
+    return render(request,'result/masscom_home_search.html',{})
 
 def login_register(request):
     return render(request, 'result/login_register.html',{})
+
+def request_transcript(request):
+    return render(request, 'result/request_transcript.html',{})
+
+def verify(request):
+    return render(request, 'result/verify.html',{})
 
 # **************CUSL HOME PAGE***********************.
 def cusl_home(request):
@@ -56,6 +72,7 @@ def admin_redirect(request):
 
 
 
+
 # **************************************************************************
                  # FACULTIES
 #**************************************************************************
@@ -63,15 +80,25 @@ def admin_redirect(request):
 @login_required(login_url='login')
 def faculty(request):
     facult = Faculty.objects.all()
+
     if request.method == 'POST':
-        form =FacultyForm(request.POST)
+        form = FacultyForm(request.POST)
         if form.is_valid():
+            faculty = form.cleaned_data['faculty']
+
+            # Check if a faculty with the same name already exists
+            if Faculty.objects.filter(faculty=faculty).exists():
+                messages.error(request, f"'{faculty}' already exists!")
+                return redirect('faculty')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Faculty has been updated !")
+            messages.success(request, "Faculty has been added!")
             return redirect('faculty')
+
     else:
         form = FacultyForm()
-    return render(request, 'result/faculty.html',{'facult':facult,'form':form})
+
+    return render(request, 'result/faculty.html', {'facult': facult, 'form': form})
 
 # *********DELETE FACULTY***********
 def delete_faculty(request, pk):
@@ -132,18 +159,27 @@ def upload_faculty(request):
                  # DEPARTMENTS
 #***************************************************************
 # *********ADD DEPARTMENT***********
-@login_required(login_url='login')
 def department(request):
     all_dept = Department.objects.all()
+
     if request.method == 'POST':
-        form =DepartmentForm(request.POST)
+        form = DepartmentForm(request.POST)
         if form.is_valid():
+            department = form.cleaned_data['department']
+
+            # Check if a faculty with the same name already exists
+            if Department.objects.filter(department=department).exists():
+                messages.error(request, f"'{department}' already exists!")
+                return redirect('department')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Department has been updated !")
+            messages.success(request, "Department has been added!")
             return redirect('department')
+
     else:
         form = DepartmentForm()
-    return render(request, 'result/department.html',{'all_dept':all_dept,'form':form})
+
+    return render(request, 'result/department.html', {'all_dept': all_dept, 'form': form})
 
 # *********DELETE FACULTY***********
 def delete_department(request, pk):
@@ -234,17 +270,25 @@ def upload_file(request):
 @login_required(login_url='login')
 def programs(request):
     all_prog = Program.objects.all()
+
     if request.method == 'POST':
-        form =ProgramForm(request.POST)
+        form = ProgramForm(request.POST)
         if form.is_valid():
+            program = form.cleaned_data['program']
+
+            # Check if a faculty with the same name already exists
+            if Program.objects.filter(program=program).exists():
+                messages.error(request, f"'{program}' already exists!")
+                return redirect('programs')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Program has been updated !")
+            messages.success(request, "Department has been added!")
             return redirect('programs')
+
     else:
         form = ProgramForm()
-    return render(request, 'result/programs.html',{'all_prog':all_prog,'form':form})
 
-
+    return render(request, 'result/programs.html', {'all_prog': all_prog, 'form': form})
 
 # *********EDIT PROGRAM***********
 def edit_program(request, pk):
@@ -269,8 +313,6 @@ def delete_program(request, pk):
         messages.success(request, "program removed successfully! ")
         return redirect('programs')
     return render(request, 'result/delete_programs.html',{})
-
-
 
 # ****************VIEW DEPARTMENT******************
 
@@ -347,14 +389,26 @@ def upload_programs(request):
 def year1_first_semester(request):
     yr1_sem1 = year1_semester1.objects.all()
     if request.method == 'POST':
-        form =CourseForm1(request.POST)
+        form = CourseForm1(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year1_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year1_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year1_first_semester')
+
     else:
         form = CourseForm1()
-    return render(request, 'result/year1_first_semester.html',{'yr1_sem1':yr1_sem1,'form':form})
+
+    return render(request, 'result/year1_first_semester.html', {'yr1_sem1': yr1_sem1, 'form': form})
+
+
+
 
 # *********EDIT year1_first_semester***********
 def edit_year1_first_semester(request, pk):
@@ -442,14 +496,23 @@ def upload_course(request):
 def year1_second_semester(request):
     yr1_sem2 = year1_semester2.objects.all()
     if request.method == 'POST':
-        form =CourseForm2(request.POST)
+        form = CourseForm2(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year1_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year1_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year1_second_semester')
+
     else:
         form = CourseForm2()
-    return render(request, 'result/year1_second_semester.html',{'yr1_sem2':yr1_sem2,'form':form})
+
+    return render(request, 'result/year1_second_semester.html', {'yr1_sem2': yr1_sem2, 'form': form})
 
 
 # *********EDIT year1_second_semester***********
@@ -475,7 +538,6 @@ def delete_year1_second_semester(request, pk):
         messages.success(request, "Course removed successfully! ")
         return redirect('year1_second_semester')
     return render(request, 'result/delete_year1_second_semester.html',{})
-
 
 
 # ****************VIEW year1_first_semester******************
@@ -541,14 +603,24 @@ def upload_course2(request):
 def year2_first_semester(request):
     yr2_sem1 = year2_semester1.objects.all()
     if request.method == 'POST':
-        form =CourseForm3(request.POST)
+        form = CourseForm3(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year2_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year2_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year2_first_semester')
+
     else:
         form = CourseForm3()
-    return render(request, 'result/year2_first_semester.html',{'yr2_sem1':yr2_sem1,'form':form})
+
+    return render(request, 'result/year2_first_semester.html', {'yr2_sem1': yr2_sem1, 'form': form})
+
 
 
 # *********EDIT year2_first_semester***********
@@ -640,14 +712,23 @@ def upload_course3(request):
 def year2_second_semester(request):
     yr2_sem2 = year2_semester2.objects.all()
     if request.method == 'POST':
-        form =CourseForm4(request.POST)
+        form = CourseForm4(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year2_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year2_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year2_second_semester')
+
     else:
         form = CourseForm4()
-    return render(request, 'result/year2_second_semester.html',{'yr2_sem2':yr2_sem2,'form':form})
+
+    return render(request, 'result/year2_second_semester.html', {'yr2_sem2': yr2_sem2, 'form': form})
 
 
 # *********EDIT year2_second_semester***********
@@ -733,19 +814,28 @@ def upload_course4(request):
 
 # =======================================THIRD YEAR SEMESTER ONE===============================
 # *********ADD year3_first_semester***********
+
 @login_required(login_url='login')
 def year3_first_semester(request):
     yr3_sem1 = year3_semester1.objects.all()
     if request.method == 'POST':
-        form =CourseForm5(request.POST)
+        form = CourseForm5(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year3_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year3_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year3_first_semester')
+
     else:
         form = CourseForm5()
-    return render(request, 'result/year3_first_semester.html',{'yr3_sem1':yr3_sem1,'form':form})
 
+    return render(request, 'result/year3_first_semester.html', {'yr3_sem1': yr3_sem1, 'form': form})
 
 # *********EDIT year3_first_semester***********
 def edit_year3_first_semester(request, pk):
@@ -833,15 +923,23 @@ def upload_course5(request):
 def year3_second_semester(request):
     yr3_sem2 = year3_semester2.objects.all()
     if request.method == 'POST':
-        form =CourseForm6(request.POST)
+        form = CourseForm6(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year3_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year3_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year3_second_semester')
+
     else:
         form = CourseForm6()
-    return render(request, 'result/year3_second_semester.html',{'yr3_sem2':yr3_sem2,'form':form})
 
+    return render(request, 'result/year3_second_semester.html', {'yr3_sem2': yr3_sem2, 'form': form})
 
 # *********EDIT year3_second_semester***********
 def edit_year3_second_semester(request, pk):
@@ -930,14 +1028,23 @@ def upload_course6(request):
 def year4_first_semester(request):
     yr4_sem1 = year4_semester1.objects.all()
     if request.method == 'POST':
-        form =CourseForm7(request.POST)
+        form = CourseForm7(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year4_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year4_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year4_first_semester')
+
     else:
         form = CourseForm7()
-    return render(request, 'result/year4_first_semester.html',{'yr4_sem1':yr4_sem1,'form':form})
+
+    return render(request, 'result/year4_first_semester.html', {'yr4_sem1': yr4_sem1, 'form': form})
 
 # *********EDIT year4_first_semester***********
 def edit_year4_first_semester(request, pk):
@@ -1026,14 +1133,24 @@ def upload_course7(request):
 def year4_second_semester(request):
     yr4_sem2 = year4_semester2.objects.all()
     if request.method == 'POST':
-        form =CourseForm8(request.POST)
+        form = CourseForm8(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if year4_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('year4_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('year4_second_semester')
+
     else:
         form = CourseForm8()
-    return render(request, 'result/year4_second_semester.html',{'yr4_sem2':yr4_sem2,'form':form})
+
+    return render(request, 'result/year4_second_semester.html', {'yr4_sem2': yr4_sem2, 'form': form})
+
 
 
 # *********EDIT year4_second_semester***********
@@ -1127,18 +1244,28 @@ def upload_course8(request):
 #*********************************************************************************************************************************
 
 # *********ADD year1_first_semester***********
+
 @login_required(login_url='login')
 def bit_year1_first_semester(request):
     bit_yr1_sem1 = bit_year1_semester1.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm1(request.POST)
+        form = BitCourseForm1(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year1_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year1_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year1_first_semester')
+
     else:
         form = BitCourseForm1()
-    return render(request, 'result/bit_year1_first_semester.html',{'bit_yr1_sem1':bit_yr1_sem1,'form':form})
+
+    return render(request, 'result/bit_year1_first_semester.html', {'bit_yr1_sem1': bit_yr1_sem1, 'form': form})
 
 # *********EDIT year1_first_semester***********
 def edit_bit_year1_first_semester(request, pk):
@@ -1225,15 +1352,23 @@ def upload_bit_course1(request):
 def bit_year1_second_semester(request):
     bit_yr1_sem2 = bit_year1_semester2.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm2(request.POST)
+        form = BitCourseForm2(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year1_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year1_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year1_second_semester')
+
     else:
         form = BitCourseForm2()
-    return render(request, 'result/bit_year1_second_semester.html',{'bit_yr1_sem2':bit_yr1_sem2,'form':form})
 
+    return render(request, 'result/bit_year1_second_semester.html', {'bit_yr1_sem2': bit_yr1_sem2, 'form': form})
 
 # *********EDIT year1_first_semester***********
 def edit_bit_year1_second_semester(request, pk):
@@ -1317,14 +1452,24 @@ def upload_bit_course2(request):
 def bit_year2_first_semester(request):
     bit_yr2_sem1 = bit_year2_semester1.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm3(request.POST)
+        form = BitCourseForm3(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year2_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year2_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year2_first_semester')
+
     else:
         form = BitCourseForm3()
-    return render(request, 'result/bit_year2_first_semester.html',{'bit_yr2_sem1':bit_yr2_sem1,'form':form})
+
+    return render(request, 'result/bit_year2_first_semester.html', {'bit_yr2_sem1': bit_yr2_sem1, 'form': form})
+
 
 # *********EDIT year2_first_semester***********
 def edit_bit_year2_first_semester(request, pk):
@@ -1410,14 +1555,24 @@ def upload_bit_course3(request):
 def bit_year2_second_semester(request):
     bit_yr2_sem2 = bit_year2_semester2.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm4(request.POST)
+        form = BitCourseForm4(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year2_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year2_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year2_second_semester')
+
     else:
         form = BitCourseForm4()
-    return render(request, 'result/bit_year2_second_semester.html',{'bit_yr2_sem2':bit_yr2_sem2,'form':form})
+
+    return render(request, 'result/bit_year2_second_semester.html', {'bit_yr2_sem2': bit_yr2_sem2, 'form': form})
+
 
 # *********EDIT year2_first_semester***********
 def edit_bit_year2_second_semester(request, pk):
@@ -1501,14 +1656,23 @@ def upload_bit_course4(request):
 def bit_year3_first_semester(request):
     bit_yr3_sem1 = bit_year3_semester1.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm5(request.POST)
+        form = BitCourseForm5(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year3_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year3_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year3_first_semester')
+
     else:
         form = BitCourseForm5()
-    return render(request, 'result/bit_year3_first_semester.html',{'bit_yr3_sem1':bit_yr3_sem1,'form':form})
+
+    return render(request, 'result/bit_year3_first_semester.html', {'bit_yr3_sem1': bit_yr3_sem1, 'form': form})
 
 # *********EDIT year3_first_semester***********
 def edit_bit_year3_first_semester(request, pk):
@@ -1593,14 +1757,23 @@ def upload_bit_course5(request):
 def bit_year3_second_semester(request):
     bit_yr3_sem2 = bit_year3_semester2.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm6(request.POST)
+        form = BitCourseForm6(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year3_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year3_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year3_second_semester')
+
     else:
         form = BitCourseForm6()
-    return render(request, 'result/bit_year3_second_semester.html',{'bit_yr3_sem2':bit_yr3_sem2,'form':form})
+
+    return render(request, 'result/bit_year3_second_semester.html', {'bit_yr3_sem2': bit_yr3_sem2, 'form': form})
 
 # *********EDIT year3_first_semester***********
 def edit_bit_year3_second_semester(request, pk):
@@ -1684,14 +1857,24 @@ def upload_bit_course6(request):
 def bit_year4_first_semester(request):
     bit_yr4_sem1 = bit_year4_semester1.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm7(request.POST)
+        form = BitCourseForm7(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year4_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year4_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year4_first_semester')
+
     else:
         form = BitCourseForm7()
-    return render(request, 'result/bit_year4_first_semester.html',{'bit_yr4_sem1':bit_yr4_sem1,'form':form})
+
+    return render(request, 'result/bit_year4_first_semester.html', {'bit_yr4_sem1': bit_yr4_sem1, 'form': form})
+
 
 # *********EDIT year3_first_semester***********
 def edit_bit_year4_first_semester(request, pk):
@@ -1775,14 +1958,24 @@ def upload_bit_course7(request):
 def bit_year4_second_semester(request):
     bit_yr4_sem2 = bit_year4_semester2.objects.all()
     if request.method == 'POST':
-        form =BitCourseForm8(request.POST)
+        form = BitCourseForm8(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if bit_year4_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('bit_year4_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('bit_year4_second_semester')
+
     else:
         form = BitCourseForm8()
-    return render(request, 'result/bit_year4_second_semester.html',{'bit_yr4_sem2':bit_yr4_sem2,'form':form})
+
+    return render(request, 'result/bit_year4_second_semester.html', {'bit_yr4_sem2': bit_yr4_sem2, 'form': form})
+
 
 # *********EDIT year3_first_semester***********
 def edit_bit_year4_second_semester(request, pk):
@@ -1871,14 +2064,23 @@ def upload_bit_course8(request):
 def masscom_year1_first_semester(request):
     masscom_yr1_sem1 = masscom_year1_semester1.objects.all()
     if request.method == 'POST':
-        form =massCourseForm1(request.POST)
+        form = massCourseForm1(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year1_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year1_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year1_first_semester')
+
     else:
         form = massCourseForm1()
-    return render(request, 'result/masscom_year1_first_semester.html',{'masscom_yr1_sem1':masscom_yr1_sem1,'form':form})
+
+    return render(request, 'result/masscom_year1_first_semester.html', {'masscom_yr1_sem1': masscom_yr1_sem1, 'form': form})
 
 # *********EDIT year2_first_semester***********
 def edit_masscom_year1_first_semester(request, pk):
@@ -1963,14 +2165,24 @@ def upload_masscom_course1(request):
 def masscom_year1_second_semester(request):
     masscom_yr1_sem2 = masscom_year1_semester2.objects.all()
     if request.method == 'POST':
-        form =massCourseForm2(request.POST)
+        form = massCourseForm2(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year1_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year1_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year1_second_semester')
+
     else:
-        form = massCourseForm2()
-    return render(request, 'result/masscom_year1_second_semester.html',{'masscom_yr1_sem2':masscom_yr1_sem2,'form':form})
+        form = massCourseForm1()
+
+    return render(request, 'result/masscom_year1_second_semester.html', {'masscom_yr1_sem2': masscom_yr1_sem2, 'form': form})
+
 
 # *********EDIT year2_second_semester***********
 def edit_masscom_year1_second_semester(request, pk):
@@ -2054,14 +2266,24 @@ def upload_masscom_course2(request):
 def masscom_year2_first_semester(request):
     masscom_yr2_sem1 = masscom_year2_semester1.objects.all()
     if request.method == 'POST':
-        form =massCourseForm3(request.POST)
+        form = massCourseForm3(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year2_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year2_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year2_first_semester')
+
     else:
         form = massCourseForm3()
-    return render(request, 'result/masscom_year2_first_semester.html',{'masscom_yr2_sem1':masscom_yr2_sem1,'form':form})
+
+    return render(request, 'result/masscom_year2_first_semester.html', {'masscom_yr2_sem1': masscom_yr2_sem1, 'form': form})
+
 
 # *********EDIT year2_second_semester***********
 def edit_masscom_year2_first_semester(request, pk):
@@ -2146,14 +2368,23 @@ def upload_masscom_course3(request):
 def masscom_year2_second_semester(request):
     masscom_yr2_sem2 = masscom_year2_semester2.objects.all()
     if request.method == 'POST':
-        form =massCourseForm4(request.POST)
+        form = massCourseForm4(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year2_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year2_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year2_second_semester')
+
     else:
         form = massCourseForm4()
-    return render(request, 'result/masscom_year2_second_semester.html',{'masscom_yr2_sem2':masscom_yr2_sem2,'form':form})
+
+    return render(request, 'result/masscom_year2_second_semester.html', {'masscom_yr2_sem2': masscom_yr2_sem2, 'form': form})
 
 
 # *********EDIT year2_second_semester***********
@@ -2237,18 +2468,29 @@ def upload_masscom_course4(request):
 
 
 # *********ADD year3_first_semester***********
+# *********ADD year2_first_semester***********
 @login_required(login_url='login')
 def masscom_year3_first_semester(request):
     masscom_yr3_sem1 = masscom_year3_semester1.objects.all()
     if request.method == 'POST':
-        form =massCourseForm5(request.POST)
+        form = massCourseForm5(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year3_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year3_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year3_first_semester')
+
     else:
         form = massCourseForm5()
-    return render(request, 'result/masscom_year3_first_semester.html',{'masscom_yr3_sem1':masscom_yr3_sem1,'form':form})
+
+    return render(request, 'result/masscom_year3_first_semester.html', {'masscom_yr3_sem1': masscom_yr3_sem1, 'form': form})
+
 
 # *********EDIT year3_first_semester***********
 def edit_masscom_year3_first_semester(request, pk):
@@ -2334,14 +2576,25 @@ def upload_masscom_course5(request):
 def masscom_year3_second_semester(request):
     masscom_yr3_sem2 = masscom_year3_semester2.objects.all()
     if request.method == 'POST':
-        form =massCourseForm6(request.POST)
+        form = massCourseForm6(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year3_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year3_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year3_second_semester')
+
     else:
         form = massCourseForm6()
-    return render(request, 'result/masscom_year3_second_semester.html',{'masscom_yr3_sem2':masscom_yr3_sem2,'form':form})
+
+    return render(request, 'result/masscom_year3_second_semester.html', {'masscom_yr3_sem2': masscom_yr3_sem2, 'form': form})
+
+
 
 # *********EDIT year2_second_semester***********
 def edit_masscom_year3_second_semester(request, pk):
@@ -2426,14 +2679,24 @@ def upload_masscom_course6(request):
 def masscom_year4_first_semester(request):
     masscom_yr4_sem1 = masscom_year4_semester1.objects.all()
     if request.method == 'POST':
-        form =massCourseForm7(request.POST)
+        form = massCourseForm7(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year4_semester1.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year4_first_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year4_first_semester')
+
     else:
         form = massCourseForm7()
-    return render(request, 'result/masscom_year4_first_semester.html',{'masscom_yr4_sem1':masscom_yr4_sem1,'form':form})
+
+    return render(request, 'result/masscom_year4_first_semester.html', {'masscom_yr4_sem1': masscom_yr4_sem1, 'form': form})
+
 
 # *********EDIT year3_first_semester***********
 def edit_masscom_year4_first_semester(request, pk):
@@ -2519,14 +2782,24 @@ def upload_masscom_course7(request):
 def masscom_year4_second_semester(request):
     masscom_yr4_sem2 = masscom_year4_semester2.objects.all()
     if request.method == 'POST':
-        form =massCourseForm8(request.POST)
+        form = massCourseForm8(request.POST)
         if form.is_valid():
+            course = form.cleaned_data['course']
+
+            # Check if a faculty with the same name already exists
+            if masscom_year4_semester2.objects.filter(course=course).exists():
+                messages.error(request, f"'{course}' already exists!")
+                return redirect('masscom_year4_second_semester')  # Redirect back to the faculty page without saving the form
+
             form.save()
-            messages.success(request, "Course added Successfully!")
+            messages.success(request, "Course has been added!")
             return redirect('masscom_year4_second_semester')
+
     else:
         form = massCourseForm8()
-    return render(request, 'result/masscom_year4_second_semester.html',{'masscom_yr4_sem2':masscom_yr4_sem2,'form':form})
+
+    return render(request, 'result/masscom_year4_second_semester.html', {'masscom_yr4_sem2': masscom_yr4_sem2, 'form': form})
+
 
 # *********EDIT year4_second_semester***********
 def edit_masscom_year4_second_semester(request, pk):
@@ -2615,6 +2888,143 @@ def upload_masscom_course8(request):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ===============================STUDENT REGISTRATION==============================
+# ****************STUDENT REGISTRATION******************
+def register_student(request):
+    return render(request, 'result/register_student.html', {})
+
+
+# ===============================ADDING STUDENTS==============================
+# *********ADD STUDENTS***********
+@login_required(login_url='login')
+def student(request):
+    stu = Student.objects.all()
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+                form.save()
+                messages.success(request, "Student added successfully!")
+                return redirect('student')
+    else:
+        form = StudentForm()
+    return render(request, 'result/student.html', {'stu': stu, 'form': form})
+
+# **************EDIT STUDENT***********
+def edit_student(request, pk):
+    editstu = Student.objects.get(id=pk)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance = editstu)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Students updated successfully!")
+            return redirect('student')
+    else:
+        form = StudentForm(instance = editstu)
+
+    return render(request, 'result/edit_student.html',{'form':form})
+
+
+# *********DELETE STUDENT***********
+def delete_student(request, pk):
+    del_stu = Student.objects.get(id=pk)
+    if request.method == 'POST':
+        del_stu.delete()
+        messages.success(request, "Student removed successfully! ")
+        return redirect('student')
+    return render(request, 'result/delete_student.html',{})
+
+
+# ****************VIEW LEVEL******************
+def view_student(request, pk):
+    viewstu = Student.objects.get(id=pk)
+    return render(request, 'result/view_student.html', {'viewstu': viewstu})
+
+# ***********************UPLOAD STUDENTS*****************************
+@login_required(login_url='login')
+def upload_students(request):
+    if request.method == 'POST':
+        form = StudentFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            excel_file = request.FILES['file']
+            try:
+                df = pd.read_excel(excel_file)
+            except Exception as e:
+                messages.error(request, "An error occurred while reading the Excel file.")
+                return redirect('student')
+
+            students_added = 0
+            students_skipped = 0
+            errors = []
+
+            for _, row in df.iterrows():
+                fullname = row['fullname']
+                email = row['email']
+                contact = row['contact']
+                gender = row['gender']
+                department_name = row['department']
+                program_name = row['program']
+                dob = row['dob']
+
+                department_qs = Department.objects.filter(department=department_name)
+                if department_qs.exists():
+                    department = department_qs.first()
+                else:
+                    department = Department.objects.create(department=department_name)
+
+                program, _ = Program.objects.get_or_create(program=program_name, department=department)
+
+                student = Student(
+                    fullname=fullname,
+                    email=email,
+                    contact=contact,
+                    gender=gender,
+                    department=department,
+                    program=program,
+                    dob=dob
+                )
+
+                try:
+                    student.save()
+                    students_added += 1
+                except Exception as e:
+                    errors.append(f"Error creating student '{fullname}': {str(e)}")
+
+            if students_added > 0:
+                messages.success(request, f"{students_added} student(s) have been added successfully!")
+            if students_skipped > 0:
+                messages.warning(request, f"{students_skipped} student(s) already exist and were skipped.")
+            if errors:
+                messages.error(request, "Some errors occurred while saving students. Please check the error messages.")
+                for error in errors:
+                    messages.error(request, error)
+
+            return redirect('student')
+        else:
+            messages.error(request, "Invalid form submission. Please check the form fields.")
+            return redirect('student')
+    else:
+        form = StudentFileForm()
+
+    return render(request, 'result/uploadStudent.html', {'form': form})
 
 
 
@@ -2881,57 +3291,7 @@ def view_result(request, pk):
     return render(request, 'result/view_result.html', {'viewresult': viewresult})
 
 
-
-
-# # ************************************************************
-#                  # BUSINESS INFORMATION TECHNOLOGY
-# #*************************************************************
-
-@login_required(login_url='login')
-def bit(request):
-    return render(request, 'result/bit.html', {})
-
-@login_required(login_url='login')
-def bit_result(request):
-    bit_results_entry = BitResult.objects.all()
-    if request.method == 'POST':
-        form = BitResultForm(request.POST)
-        if form.is_valid():
-            result = form.save(commit=False)
-            result.save()
-            messages.success(request, "Results added successfully!")
-            return redirect('bit')
-        else:
-            messages.error(request, "There was an error adding the results.")
-    else:
-        form = BitResultForm()
-    return render(request, 'result/bit.html', {'bit_results_entry':bit_results_entry,'form': form})
-
-# # ************************************************************
-#                  # MASS COMMUNICATION
-# #*************************************************************
-
-@login_required(login_url='login')
-def masscom(request):
-    return render(request, 'result/masscom.html', {})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#***************************SEARCHING FOR THE RESULT************************
+#***************************SEARCHING FOR COMPUTER SCIENCE TRANSCRIPT ************************
 @login_required(login_url='login')
 def search_result(request):
     email = request.GET.get('email')
@@ -2950,8 +3310,7 @@ def search_result(request):
     return render(request, 'result/view_student_result.html', context)
 
 
-
-#***********DISPLAYING THE RESULT*************
+#***********DISPLAYING THE TRANSCRIPT*************
 @login_required(login_url='login')
 def view_student_result(request, email, id_number):
     try:
@@ -2963,3 +3322,228 @@ def view_student_result(request, email, id_number):
         'result': result,
     }
     return render(request, 'result_display.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # ************************************************************
+#                  # BUSINESS INFORMATION TECHNOLOGY
+# #*************************************************************
+
+
+@login_required(login_url='login')
+def bit_result(request):
+    bit_results_entry = BitResult.objects.all()
+    if request.method == 'POST':
+        form = BitResultForm(request.POST)
+        if form.is_valid():
+            result = form.save(commit=False)
+            result.save()
+            messages.success(request, "Results added successfully!")
+            return redirect('bit_result')
+        else:
+            messages.error(request, "There was an error adding the results.")
+    else:
+        form = BitResultForm()
+    return render(request, 'result/bit_result.html', {'bit_results_entry':bit_results_entry,'form': form})
+
+
+# **************EDIT Result***********
+def edit_bit_result(request, pk):
+    editres = BitResult.objects.get(id=pk)
+    if request.method == 'POST':
+        form = BitResultForm(request.POST, instance = editres)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Result updated successfully!")
+            return redirect('bit_result')
+    else:
+        form = BitResultForm(instance = editres)
+
+    return render(request, 'result/edit_bit_result.html',{'form':form})
+
+
+# *********VIEW RESULT***********
+def view_bit_result(request, pk):
+    viewresult = BitResult.objects.get(id=pk)
+    return render(request, 'result/view_bit_result.html', {'viewresult': viewresult})
+
+
+# *********DELETE STUDENT***********
+def delete_bit_result(request, pk):
+    del_result = BitResult.objects.get(id=pk)
+    if request.method == 'POST':
+        del_result.delete()
+        messages.success(request, "Result removed successfully! ")
+        return redirect('bit_result')
+    return render(request, 'result/delete_bit_result.html',{})
+
+#***************************SEARCHING FOR BIT TRANSCRIPT ************************
+@login_required(login_url='login')
+def search_bit_result(request):
+    email = request.GET.get('email')
+    id_number = request.GET.get('id_number')
+    result = None
+
+    if email and id_number:
+        try:
+            result = BitResult.objects.get(student__email=email, student__student_id=id_number)
+        except BitResult.DoesNotExist:
+            result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result/view_bit_student_result.html', context)
+
+
+#***********DISPLAYING THE TRANSCRIPT*************
+@login_required(login_url='login')
+def view_bit_student_result(request, email, id_number):
+    try:
+        result = BitResult.objects.get(student__email=email, student__student_id=id_number)
+    except BitResult.DoesNotExist:
+        result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'bit_result_display.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # *********************************************************************************************************************************
+#                                               # MASS COMMUNICATION RESULT
+# #**********************************************************************************************************************************
+
+@login_required(login_url='login')
+def masscom_result(request):
+    masscom_results_entry = MasscomResult.objects.all()
+    if request.method == 'POST':
+        form = MasscomResultForm(request.POST)
+        if form.is_valid():
+            result = form.save(commit=False)
+            result.save()
+            messages.success(request, "Results added successfully!")
+            return redirect('masscom_result')
+        else:
+            messages.error(request, "There was an error adding the results.")
+    else:
+        form = MasscomResultForm()
+    return render(request, 'result/masscom_result.html', {'masscom_results_entry':masscom_results_entry,'form': form})
+
+
+# **************EDIT Result***********
+def edit_masscom_result(request, pk):
+    editres = MasscomResult.objects.get(id=pk)
+    if request.method == 'POST':
+        form = MasscomResultForm(request.POST, instance = editres)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Result updated successfully!")
+            return redirect('masscom_result')
+    else:
+        form = MasscomResultForm(instance = editres)
+
+    return render(request, 'result/edit_masscom_result.html',{'form':form})
+
+
+# *********DELETE STUDENT***********
+def delete_masscom_result(request, pk):
+    del_result = MasscomResult.objects.get(id=pk)
+    if request.method == 'POST':
+        del_result.delete()
+        messages.success(request, "Result removed successfully! ")
+        return redirect('masscom_result')
+    return render(request, 'result/delete_masscom_result.html',{})
+
+
+# *********VIEW RESULT***********
+def view_masscom_result(request, pk):
+    viewresult = MasscomResult.objects.get(id=pk)
+    return render(request, 'result/view_masscom_result.html', {'viewresult': viewresult})
+
+
+
+
+#***************************SEARCHING FOR MASSCOM TRANSCRIPT ************************
+@login_required(login_url='login')
+def search_masscom_result(request):
+    email = request.GET.get('email')
+    id_number = request.GET.get('id_number')
+    result = None
+
+    if email and id_number:
+        try:
+            result = MasscomResult.objects.get(student__email=email, student__student_id=id_number)
+        except MasscomResult.DoesNotExist:
+            result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result/view_masscom_student_result.html', context)
+
+
+
+
+#***********DISPLAYING THE TRANSCRIPT*************
+@login_required(login_url='login')
+def view_masscom_student_result(request, email, id_number):
+    try:
+        result = MasscomResult.objects.get(student__email=email, student__student_id=id_number)
+    except MasscomResult.DoesNotExist:
+        result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'masscom_result_display.html', context)
+
+
+

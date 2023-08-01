@@ -3,12 +3,19 @@ from . import views
 
 
 urlpatterns = [
+    
+    path('uni_home/', views.uni_home, name='uni_home'),
+    path('bit_home_search/', views.bit_home_search, name='bit_home_search'),
+    path('comsci_home_search/', views.comsci_home_search, name='comsci_home_search'),
+    path('masscom_home_search/', views.masscom_home_search, name='masscom_home_search'),
+    path('request_transcript/', views.request_transcript, name='request_transcript'),
+    path('verify/', views.verify, name='verify'),
 
               # LOGIN-REGISTER PAGE
     #***************************************
     path('login_register/', views.login_register, name='login_register'),
 
-
+    
 
     # CUSL HOME PAGE
     #***************************************
@@ -58,7 +65,6 @@ urlpatterns = [
 
 
     
-    
                  # FACULTIES
     #*****************************************
     path('faculty/', views.faculty, name='faculty'), #create and list all faculties
@@ -67,7 +73,6 @@ urlpatterns = [
     path('view_faculty/<int:pk>/', views.view_faculty, name='view_faculty'), #view faculty
     path('upload_faculty/', views.upload_faculty, name='upload_faculty'),
    
-    
 
     # ***************************************
                  # DEPARTMENTS
@@ -77,7 +82,6 @@ urlpatterns = [
      path('edit_department/<int:pk>/', views.edit_department, name='edit_department'), #edit faculty
      path('view_department/<int:pk>/', views.view_department, name='view_department'), #view faculty
      path('upload/', views.upload_file, name='upload_file'),
-
 
 
      # ***************************************
@@ -100,46 +104,6 @@ urlpatterns = [
 
 
 
-
-    # ***************************************
-                 # COMPUTER SCIENCE STUDENTS RESULTS
-    #*****************************************
-    path('result/', views.result, name='result'),
-    path('edit_result/<int:pk>/', views.edit_result, name='edit_result'),
-    path('delete_result/<int:pk>/', views.delete_result, name='delete_result'), 
-    path('view_result/<int:pk>/', views.view_result, name='view_result'),
-    
-
-     # ***************************************
-                 # BIT  STUDENTS RESULTS
-    #*****************************************
-    path('bit/', views.bit, name='bit'),
-    path('bit_result/', views.bit_result, name='bit_result'),
-    # path('edit_bit_result/<int:pk>/', views.edit_bit_result, name='edit_bit_result'),
-    # path('delete_bit_result/<int:pk>/', views.delete_bit_result, name='delete_bit_result'), 
-    # path('view_bit_result/<int:pk>/', views.view_bit_result, name='view_bit_result'),
-    
-
-
-    # ***************************************
-                 # MASSCOM  STUDENTS RESULTS
-    #*****************************************
-    path('masscom/', views.masscom, name='masscom'),
-    # path('edit_bit_result/<int:pk>/', views.edit_bit_result, name='edit_bit_result'),
-    # path('delete_bit_result/<int:pk>/', views.delete_bit_result, name='delete_bit_result'), 
-    # path('view_bit_result/<int:pk>/', views.view_bit_result, name='view_bit_result'),
-
-
-     # ***************************************
-                 #  Searching for result
-    #*****************************************
-    path('search_result/', views.search_result, name='search_result'),
-    path('view_student_result/<str:email>/<str:id_number>/', views.view_student_result, name='view_student_result'),
-    
-
-
-
-    
 
 
 
@@ -391,4 +355,84 @@ urlpatterns = [
     path('view_masscom_year4_second_semester/<int:pk>/', views.view_masscom_year4_second_semester, name='view_masscom_year4_second_semester'),
     path('upload_masscom_course8/', views.upload_masscom_course8, name='upload_masscom_course8'),
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ====================================================================================================================================================
+
+
+                    # *****************************COMPLETE TRANSCRIPT SEARCH************************************************
+
+
+# ===================================================================================================================================================
+
+    # ***************************************
+       # COMPUTER SCIENCE STUDENTS RESULTS
+    #*****************************************
+    path('result/', views.result, name='result'),
+    path('edit_result/<int:pk>/', views.edit_result, name='edit_result'),
+    path('delete_result/<int:pk>/', views.delete_result, name='delete_result'), 
+    path('view_result/<int:pk>/', views.view_result, name='view_result'),
+     # ***************************************
+                 #  Searching for computer science transcript
+    #*****************************************
+    path('search_result/', views.search_result, name='search_result'),
+    path('view_student_result/<str:email>/<str:id_number>/', views.view_student_result, name='view_student_result'),
+    
+
+
+     # ***************************************
+                 # BIT  STUDENTS RESULTS
+    #*****************************************
+    path('bit_result/', views.bit_result, name='bit_result'),
+    path('edit_bit_result/<int:pk>/', views.edit_bit_result, name='edit_bit_result'),
+    path('delete_bit_result/<int:pk>/', views.delete_bit_result, name='delete_bit_result'), 
+    path('view_bit_result/<int:pk>/', views.view_bit_result, name='view_bit_result'),
+    path('search_bit_result/', views.search_bit_result, name='search_bit_result'),
+    path('view_bit_student_result/<str:email>/<str:id_number>/', views.view_bit_student_result, name='view_bit_student_result'),
+
+
+    # ***************************************
+                 # MASSCOM  STUDENTS RESULTS
+    #*****************************************
+    path('masscom_result/', views.masscom_result, name='masscom_result'),
+    path('edit_masscom_result/<int:pk>/', views.edit_masscom_result, name='edit_masscom_result'),
+    path('delete_masscom_result/<int:pk>/', views.delete_masscom_result, name='delete_masscom_result'), 
+    path('view_masscom_result/<int:pk>/', views.view_masscom_result, name='view_masscom_result'),
+    path('search_masscom_result/', views.search_masscom_result, name='search_masscom_result'),
+    path('view_masscom_student_result/<str:email>/<str:id_number>/', views.view_masscom_student_result, name='view_masscom_student_result'),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]
+    
+
+
+
+    
+
+

@@ -65,6 +65,69 @@ def login_view2(request):
         context['login_form'] = form
     return render(request, "result/login_register.html", context)
 
+
+# com sci login
+def comsci_login(request):
+    context={}
+    if request.method=='POST':
+        form=UserLoginForm(request.POST)
+        if form.is_valid():
+            email=request.POST['email']
+            password=request.POST['password']
+            user=authenticate(request,email=email,password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("comsci_home_search")
+        else:
+            context['login_form'] = form
+    else:
+        form=UserLoginForm()
+        context['login_form'] = form
+    return render(request, "result/comsci_login.html", context)
+
+
+
+# BIT LOGIN
+def bit_login(request):
+    context={}
+    if request.method=='POST':
+        form=UserLoginForm(request.POST)
+        if form.is_valid():
+            email=request.POST['email']
+            password=request.POST['password']
+            user=authenticate(request,email=email,password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("bit_home_search")
+        else:
+            context['login_form'] = form
+    else:
+        form=UserLoginForm()
+        context['login_form'] = form
+    return render(request, "result/bit_login.html", context)
+
+
+
+# BIT LOGIN
+def masscom_login(request):
+    context={}
+    if request.method=='POST':
+        form=UserLoginForm(request.POST)
+        if form.is_valid():
+            email=request.POST['email']
+            password=request.POST['password']
+            user=authenticate(request,email=email,password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("masscom_home_search")
+        else:
+            context['login_form'] = form
+    else:
+        form=UserLoginForm()
+        context['login_form'] = form
+    return render(request, "result/masscom_login.html", context)
+
+
 # LOGOUT
 
 def logout_view(request):

@@ -1,4 +1,4 @@
-// Exports the "silver" theme for usage with course loaders
+// Exports the "silver" theme for usage with module loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/themes/silver')

@@ -38,14 +38,17 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="{% url 'admin1' %}" class="logo d-flex align-items-center">
-        <img  src="{% static 'assets/img/cusl.jpg' %}" alt="">
-        <span class="d-none d-lg-block">CUSL-Result Portal</span>
-      </a>
-
+      
+        <a href="{% url 'admin1' %}" class="logo d-flex align-items-center">
+          <!-- <span class="d-none d-lg-block">CUSL-Result Portal</span> -->
+        </a>
+        <img style="width: 60px; margin-left: -250px; margin-right: 50px; margin-top: 30px; margin-bottom:30px;"  src="{% static 'assets/img/cusl.jpeg' %}" alt="">
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+     
+  
       <div class="search-bar">
-        <marquee style="font-size: 50px;" behavior="" direction="">Central University Results Portal</marquee>
-       </div><!-- End Search Bar -->
+       <marquee style="font-size: 50px;" behavior="" direction="">Central University Transcripts Management System</marquee>
+      </div><!-- End Search Bar -->
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto " href="{% url 'profile' %}"

@@ -1,4 +1,4 @@
-// Exports the "preview" plugin for usage with course loaders
+// Exports the "preview" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/plugins/preview')

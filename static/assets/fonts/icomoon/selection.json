@@ -40189,19 +40189,19 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "tags": [
-          "view_course"
+          "view_module"
         ],
         "defaultCode": 59632,
         "grid": 24
       },
       "attrs": [],
       "properties": {
-        "ligatures": "view_course",
+        "ligatures": "view_module",
         "id": 809,
         "order": 820,
         "prevSize": 24,
         "code": 59632,
-        "name": "view_course"
+        "name": "view_module"
       },
       "setIdx": 2,
       "setId": 2,

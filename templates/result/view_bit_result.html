@@ -1,0 +1,935 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>cusl-results management system</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+   <!-- FONT AWESOME CDN -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+
+
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- ---Result CSS----------- -->
+  <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
+
+ <style>
+  @media print {
+  .noPrint{
+    display:none;
+  }
+}
+
+
+ </style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+  <div class="row firstline">
+    <div class="col-md-12">
+      <img style="width: 1500px; height: 100px;"   src="{% static 'assets/img/result-logo.png' %}" alt="">
+    </div>
+    
+
+
+
+  
+    <table>
+
+      <tbody>
+        <tr>
+          <th colspan="2" style="border-width:1px;" class="text-center"  scope="row"><h3>STUDENTS PROGRESS RESULT</h3></th>
+        </tr>
+        <tr>
+          <th style="border-width:1px;"  scope="row"><small>Name</small></th>
+          <td style="border-width:1px;" >{{viewresult.student}}</td>
+         
+        </tr>
+        <tr>
+          <th style="border-width:1px;" scope="row">ID Number</th>
+          <td style="border-width:1px;">{{viewresult.student.student_id}}</td>
+          
+        </tr>
+        <tr>
+          <th style="border-width:1px;" scope="row">Department</th>
+          <td style="border-width:1px;" colspan="2">{{viewresult.student.department}}</td>
+          
+        </tr>
+        <tr>
+          <th style="border-width:1px;" scope="row">Program of Study</th>
+          <td style="border-width:1px;" colspan="2">{{viewresult.student.program}}</td>
+          
+        </tr>
+        <tr>
+          <th style="border-width:1px;" scope="row">Date:</th>
+          <td style="border-width:1px;" colspan="2">{{viewresult.entry_date}}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+    <!-- =================================YEAR ONE============================= -->
+    <table style="width:100%">
+      <thead>
+        <tr >
+          <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.level}}</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr >
+          <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.academicYear}} ACADEMIC YEAR</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr >
+          <th colspan="12" scope="col" style="border-width:1px;" class="text-center">First Semester<span style="margin-left: 600px;">Second Semester</span> </th>
+        </tr>
+      </thead>
+    
+      <thead>
+        <tr >
+          <!-- ***************semester one****************** -->
+          <th scope="col" style="border-width:1px;">Module Code</th>
+          <th scope="col" style="border-width:1px;">Semester Module</th>
+          <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+          <th scope="col" style="border-width:1px;">Grade</th>
+          <th scope="col" style="border-width:1px;">Equivalent</th>
+          <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+
+          
+            <!-- ***************semester two****************** -->
+          <th scope="col" style="border-width:1px;">Module Code</th>
+          <th scope="col" style="border-width:1px;">Semester Module</th>
+          <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+          <th scope="col" style="border-width:1px;">Grade</th>
+          <th scope="col" style="border-width:1px;">Equivalent</th>
+          <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- *******************semester one************************ -->
+        <tr>
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.course1.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.course1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.grade1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_equivalent1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_gradepoint1}}</td>
+
+          <!-- *******************semester two************************* -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course1.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_grade1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_equivalent1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_gradepoint1}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.course2.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.course2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.grade2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_equivalent2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_gradepoint2}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course2.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_grade2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_equivalent2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_gradepoint2}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.course3.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.course3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.grade3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_equivalent3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_gradepoint3}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course3.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_grade3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_equivalent3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_gradepoint3}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.course4.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.course4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.grade4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_equivalent4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_gradepoint4}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course4.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_grade4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_equivalent4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_gradepoint4}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.course5.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.course5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.grade5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_equivalent5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_gradepoint5}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course5.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_grade5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_equivalent5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_gradepoint5}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.course6.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.course6}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.grade6}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_equivalent6}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.course_gradepoint6}}</td>
+
+           <!-- *******************semester two************************ -->
+           <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course6.code}}</th>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester2_course6}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester2_sch}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester2_grade6}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_equivalent6}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester2_course_gradepoint6}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.totalsch}}</td>
+          <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.sgp}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_totalsch}}</td>
+          <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester2_sgp}}</td>
+          
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+          <td style="border-width:1px;" width="1%" >{{viewresult.sgpa}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+          <td style="border-width:1px;" width="1%" >{{viewresult.semester2_sgpa}}</td>
+        </tr>
+
+        <tr>
+          <!-- **************************yearly calculations**************************** -->
+          <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC TOTAL CREDIT HOURS</th>
+          <td style="border-width:1px;" width="1%" ><b>{{viewresult.tot_cred_hours}}</b> </td>
+        </tr> 
+        <tr>
+          <!-- **************************yearly calculations**************************** -->
+          <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear}} CUMULATIVE GRADE POINT (CGP) </th>
+          <td style="border-width:1px;" width="1%" ><b>{{viewresult.cgp}}</b></td>
+        </tr>
+        <tr>
+          <!-- **************************yearly calculations**************************** -->
+          <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear}} CUMULATIVE GRADE POINT AVERAGE (CGPA) </th>
+          <td style="border-width:1px;" width="1%" ><b>{{viewresult.cgpa}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+    <!-- ==============================YEAR TWO============================== -->
+    <table style="width:100%">
+      <thead>
+        <tr >
+          <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.level2}}</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr >
+          <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.academicYear2}} ACADEMIC YEAR</th>
+        </tr>
+      </thead>
+      <thead>
+        <tr >
+          <th colspan="12" scope="col" style="border-width:1px;" class="text-center">First Semester<span style="margin-left: 600px;">Second Semester</span> </th>
+        </tr>
+      </thead>
+    
+      <thead>
+        <tr >
+          <!-- ***************semester one****************** -->
+          <th scope="col" style="border-width:1px;">Module Code</th>
+          <th scope="col" style="border-width:1px;">Semester Module</th>
+          <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+          <th scope="col" style="border-width:1px;">Grade</th>
+          <th scope="col" style="border-width:1px;">Equivalent</th>
+          <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+
+          
+            <!-- ***************semester two****************** -->
+          <th scope="col" style="border-width:1px;">Module Code</th>
+          <th scope="col" style="border-width:1px;">Semester Module</th>
+          <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+          <th scope="col" style="border-width:1px;">Grade</th>
+          <th scope="col" style="border-width:1px;">Equivalent</th>
+          <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- *******************semester one************************ -->
+        <tr>
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester3_course1.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_grade1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_equivalent1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_gradepoint1}}</td>
+
+          <!-- *******************semester two************************* -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester2_course1.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_grade1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_equivalent1}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_gradepoint1}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester3_course2.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_grade2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_equivalent2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_gradepoint2}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester4_course2.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_grade2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_equivalent2}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_gradepoint2}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester3_course3.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_grade3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_equivalent3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_gradepoint3}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester4_course3.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_grade3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_equivalent3}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_gradepoint3}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester3_course4.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_grade4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_equivalent4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_gradepoint4}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester4_course4.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_grade4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_equivalent4}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_gradepoint4}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester3_course5.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_grade5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_equivalent5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_gradepoint5}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester4_course5.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_grade5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_equivalent5}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_gradepoint5}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester3_course6.code}}</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course6}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sch}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_grade6}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_equivalent6}}</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_course_gradepoint6}}</td>
+
+           <!-- *******************semester two************************ -->
+           <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester4_course6.code}}</th>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester4_course6}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester4_sch}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester4_grade6}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_equivalent6}}</td>
+           <td style="border-width:1px;" width="1%">{{viewresult.semester4_course_gradepoint6}}</td>
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_totalsch}}</td>
+          <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester3_sgp}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_totalsch}}</td>
+          <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+          <td style="border-width:1px;" width="1%">{{viewresult.semester4_sgp}}</td>
+          
+        </tr>
+        <tr>
+          <!-- *******************semester one************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+          <td style="border-width:1px;" width="1%" >{{viewresult.semester3_sgpa}}</td>
+
+          <!-- *******************semester two************************ -->
+          <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+          <td style="border-width:1px;" width="1%" >{{viewresult.semester4_sgpa}}</td>
+        </tr>
+
+        <tr>
+          <!-- **************************yearly calculations**************************** -->
+          <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC TOTAL CREDIT HOURS</th>
+          <td style="border-width:1px; " width="1%"  ><b>{{viewresult.year2_tot_cred_hours}}</b></td>
+        </tr>
+        <tr>
+          <!-- **************************yearly calculations**************************** -->
+          <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear2}} CUMULATIVE GRADE POINT (CGP) </th>
+          <td  style="border-width:1px; " width="1%" ><b>{{viewresult.year2_cgp}}</b></td>
+        </tr>
+        <tr>
+          <!-- **************************yearly calculations**************************** -->
+          <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear2}} CUMULATIVE GRADE POINT AVERAGE (CGPA) </th>
+          <td style="border-width:1px; " width="1%" ><b>{{viewresult.year2_cgpa}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+        <!-- ==============================YEAR THREE============================== -->
+        <table style="width:100%">
+          <thead>
+            <tr >
+              <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.level3}}</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr >
+              <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.academicYear3}} ACADEMIC YEAR</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr >
+              <th colspan="12" scope="col" style="border-width:1px;" class="text-center">First Semester<span style="margin-left: 600px;">Second Semester</span> </th>
+            </tr>
+          </thead>
+        
+          <thead>
+            <tr >
+              <!-- ***************semester one****************** -->
+              <th scope="col" style="border-width:1px;">Module Code</th>
+              <th scope="col" style="border-width:1px;">Semester Module</th>
+              <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+              <th scope="col" style="border-width:1px;">Grade</th>
+              <th scope="col" style="border-width:1px;">Equivalent</th>
+              <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+    
+              
+                <!-- ***************semester two****************** -->
+              <th scope="col" style="border-width:1px;">Module Code</th>
+              <th scope="col" style="border-width:1px;">Semester Module</th>
+              <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+              <th scope="col" style="border-width:1px;">Grade</th>
+              <th scope="col" style="border-width:1px;">Equivalent</th>
+              <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+    
+            </tr>
+          </thead>
+          <tbody>
+    
+            <!-- *******************semester one************************ -->
+            <tr>
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester5_course1.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_grade1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_equivalent1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_gradepoint1}}</td>
+    
+              <!-- *******************semester two************************* -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester6_course1.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_grade1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_equivalent1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_gradepoint1}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester5_course2.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_grade2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_equivalent2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_gradepoint2}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester6_course2.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_grade2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_equivalent2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_gradepoint2}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester5_course3.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_grade3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_equivalent3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_gradepoint3}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester6_course3.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_grade3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_equivalent3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_gradepoint3}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester5_course4.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_grade4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_equivalent4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_gradepoint4}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester6_course4.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_grade4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_equivalent4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_gradepoint4}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester5_course5.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_grade5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_equivalent5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_gradepoint5}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester6_course5.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_grade5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_equivalent5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_gradepoint5}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester5_course6.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course6}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_grade6}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_equivalent6}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_course_gradepoint6}}</td>
+    
+               <!-- *******************semester two************************ -->
+               <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester6_course6.code}}</th>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester6_course6}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester6_sch}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester6_grade6}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_equivalent6}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester6_course_gradepoint6}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_totalsch}}</td>
+              <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester5_sgp}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_totalsch}}</td>
+              <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester6_sgp}}</td>
+              
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+              <td style="border-width:1px;" width="1%" >{{viewresult.semester5_sgpa}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+              <td style="border-width:1px;" width="1%" >{{viewresult.semester6_sgpa}}</td>
+            </tr>
+    
+            <tr>
+              <!-- **************************yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC TOTAL CREDIT HOURS</th>
+              <td style="border-width:1px; " width="1%"  ><b>{{viewresult.year3_tot_cred_hours}}</b></td>
+            </tr>
+            <tr>
+              <!-- **************************yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear3}} CUMULATIVE GRADE POINT (CGP) </th>
+              <td  style="border-width:1px; " width="1%" ><b>{{viewresult.year3_cgp}}</b></td>
+            </tr>
+            <tr>
+              <!-- **************************yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear3}} CUMULATIVE GRADE POINT AVERAGE (CGPA) </th>
+              <td style="border-width:1px; " width="1%" ><b>{{viewresult.year3_cgpa}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- ==============================YEAR FOUR============================== -->
+        <table style="width:100%">
+          <thead>
+            <tr >
+              <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.level4}}</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr >
+              <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.academicYear4}} ACADEMIC YEAR</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr >
+              <th colspan="12" scope="col" style="border-width:1px;" class="text-center">First Semester<span style="margin-left: 600px;">Second Semester</span> </th>
+            </tr>
+          </thead>
+        
+          <thead>
+            <tr >
+              <!-- ***************semester one****************** -->
+              <th scope="col" style="border-width:1px;">Module Code</th>
+              <th scope="col" style="border-width:1px;">Semester Module</th>
+              <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+              <th scope="col" style="border-width:1px;">Grade</th>
+              <th scope="col" style="border-width:1px;">Equivalent</th>
+              <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+    
+              
+                <!-- ***************semester two****************** -->
+              <th scope="col" style="border-width:1px;">Module Code</th>
+              <th scope="col" style="border-width:1px;">Semester Module</th>
+              <th scope="col" style="border-width:1px;">Credit <br> Hour</th>
+              <th scope="col" style="border-width:1px;">Grade</th>
+              <th scope="col" style="border-width:1px;">Equivalent</th>
+              <th scope="col" style="border-width:1px;">Grade <br>Point</th>
+    
+            </tr>
+          </thead>
+          <tbody>
+    
+            <!-- *******************semester one************************ -->
+            <tr>
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester7_course1.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_grade1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_equivalent1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_gradepoint1}}</td>
+    
+              <!-- *******************semester two************************* -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester8_course1.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_grade1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_equivalent1}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_gradepoint1}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester7_course2.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_grade2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_equivalent2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_gradepoint2}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester8_course2.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_grade2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_equivalent2}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_gradepoint2}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester7_course3.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_grade3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_equivalent3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_gradepoint3}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester8_course3.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_grade3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_equivalent3}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_gradepoint3}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester7_course4.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_grade4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_equivalent4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_gradepoint4}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester8_course4.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_grade4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_equivalent4}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_gradepoint4}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester7_course5.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_grade5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_equivalent5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_gradepoint5}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester8_course5.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_grade5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_equivalent5}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_gradepoint5}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester7_course6.code}}</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course6}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sch}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_grade6}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_equivalent6}}</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_course_gradepoint6}}</td>
+    
+               <!-- *******************semester two************************ -->
+               <th style="border-width:1px;" width="1%" scope="row">{{viewresult.semester8_course6.code}}</th>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester8_course6}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester8_sch}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester8_grade6}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_equivalent6}}</td>
+               <td style="border-width:1px;" width="1%">{{viewresult.semester8_course_gradepoint6}}</td>
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_totalsch}}</td>
+              <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester7_sgp}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="2">SEMESTER CREDIT HOURS (SCH)</th>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_totalsch}}</td>
+              <td style="border-width:1px;" width="1%" colspan="2" class="text-center">SEMESTER GRADE POINT(SGP)</td>
+              <td style="border-width:1px;" width="1%">{{viewresult.semester8_sgp}}</td>
+              
+            </tr>
+            <tr>
+              <!-- *******************semester one************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+              <td style="border-width:1px;" width="1%" >{{viewresult.semester7_sgpa}}</td>
+    
+              <!-- *******************semester two************************ -->
+              <th style="border-width:1px;" width="1%" scope="row" colspan="5">SEMESTER GRADE POINT AVERAGE (SGPA)</th>
+              <td style="border-width:1px;" width="1%" >{{viewresult.semester8_sgpa}}</td>
+            </tr>
+    
+            <tr>
+              <!-- **************************yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC TOTAL CREDIT HOURS</th>
+              <td style="border-width:1px; " width="1%"  ><b>{{viewresult.year4_tot_cred_hours}}</b></td>
+            </tr>
+            <tr>
+              <!-- **************************yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear4}} CUMULATIVE GRADE POINT (CGP) </th>
+              <td  style="border-width:1px; " width="1%" ><b>{{viewresult.year4_cgp}}</b></td>
+            </tr>
+            <tr>
+              <!-- **************************yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear4}} CUMULATIVE GRADE POINT AVERAGE (CGPA) </th>
+              <td style="border-width:1px; " width="1%" ><b>{{viewresult.year4_cgpa}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row" style="margin-top: 20px; margin-left: 450px; margin-bottom: 20px;">
+          <div class="col-md-12" style="margin-left: 200px;">
+           <img src="{% static 'assets/img/sign.png'%}" alt="">
+           <h1 style="margin-top: -100px; margin-left: 130px;">.............................................................</h1>
+           <h4 style="margin-top: -15px; margin-left: 300px;">CHIEF EXAMS OFFICER</h4>
+          </div>
+
+  </div>
+  <div class="row" style="margin-top: 30px; margin-left: 450px; margin-bottom: 50px;">
+    <div class="col-md-12">
+      <a href="{% url 'bit_result' %}" type="button" style="padding-left: 70px; padding-right: 70px;" class="btn btn-info noPrint text-white"><i class="fas fa-home">&nbsp;&nbsp;</i>Back to Results</a>
+      <button onclick="window.print()" style="padding-left: 70px; padding-right: 70px;" class="noPrint btn btn-success"><i class="fas fa-print">&nbsp;&nbsp;</i>Print Result</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+ 
+  
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+  <script src="{% static 'assets/js/script.js' %}"></script>
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  
+
+
+
+  <!-- ************DATA TABLE CDN LINKS****************** -->
+  <link href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.css" rel="stylesheet"/>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.js"></script>
+		
+    
+</body>
+
+</html>

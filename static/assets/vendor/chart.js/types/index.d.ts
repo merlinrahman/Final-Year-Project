@@ -1118,7 +1118,7 @@ export interface Plugin<TType extends ChartType = ChartType, O = AnyObject> exte
 export declare type ChartComponentLike = ChartComponent | ChartComponent[] | { [key: string]: ChartComponent } | Plugin | Plugin[];
 
 /**
- * Please use the course's default export which provides a singleton instance
+ * Please use the module's default export which provides a singleton instance
  * Note: class is exported for typedoc
  */
 export interface Registry {

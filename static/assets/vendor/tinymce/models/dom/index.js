@@ -1,4 +1,4 @@
-// Exports the "dom" model for usage with course loaders
+// Exports the "dom" model for usage with module loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/models/dom')

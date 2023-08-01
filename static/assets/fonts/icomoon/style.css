@@ -4809,7 +4809,7 @@
 .icon-view_list:before {
   content: "\e8ef";
 }
-.icon-view_course:before {
+.icon-view_module:before {
   content: "\e8f0";
 }
 .icon-view_quilt:before {

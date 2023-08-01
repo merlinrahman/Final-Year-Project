@@ -1,5 +1,5 @@
 /**
- * Please use the course's default export which provides a singleton instance
+ * Please use the module's default export which provides a singleton instance
  * Note: class is exported for typedoc
  */
 export class Registry {

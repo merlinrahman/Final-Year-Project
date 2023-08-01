@@ -30220,10 +30220,10 @@
     };
     const tinymce = Tools.extend(EditorManager, publicApi);
 
-    const exportTocourseLoaders = tinymce => {
-      if (typeof course === 'object') {
+    const exportToModuleLoaders = tinymce => {
+      if (typeof module === 'object') {
         try {
-          course.exports = tinymce;
+          module.exports = tinymce;
         } catch (_) {
         }
       }
@@ -30233,6 +30233,6 @@
       window.tinyMCE = tinymce;
     };
     exportToWindowGlobal(tinymce);
-    exportTocourseLoaders(tinymce);
+    exportToModuleLoaders(tinymce);
 
 })();

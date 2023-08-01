@@ -1,4 +1,4 @@
-// Exports the "visualchars" plugin for usage with course loaders
+// Exports the "visualchars" plugin for usage with module loaders
 // Usage:
 //   CommonJS:
 //     require('tinymce/plugins/visualchars')

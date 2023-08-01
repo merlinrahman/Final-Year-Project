@@ -3,7 +3,7 @@
  * @typedef { import('./core.controller.js').default } Chart
  */
 /**
- * Please use the course's default export which provides a singleton instance
+ * Please use the module's default export which provides a singleton instance
  * Note: class is export for typedoc
  */
 export class Animator {
