@@ -13,6 +13,7 @@ from django.contrib.auth.models import User,auth
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
+from django.core.mail import send_mail
 
 
 def uni_home(request):
@@ -30,15 +31,67 @@ def masscom_home_search(request):
 def login_register(request):
     return render(request, 'result/login_register.html',{})
 
-def request_transcript(request):
-    return render(request, 'result/request_transcript.html',{})
 
 def verify(request):
     return render(request, 'result/verify.html',{})
 
+def bit_login(request):
+    return render(request, 'result/bit_login.html',{})
+
+def comsci_login(request):
+    return render(request, 'result/comsci_login.html',{})
+
+def mass_login(request):
+    return render(request, 'result/mass_login.html',{})
+
 # **************CUSL HOME PAGE***********************.
 def cusl_home(request):
     return render(request, 'result/cusl_home.html',{})
+
+
+
+
+# *********************************************************************************
+
+# =====================REQUEST TRANSCRIPT=========================
+
+# *********************************************************************************
+def request_transcript(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        idnumber = request.POST['idnumber']
+        phone = request.POST['phone']
+        message = request.POST['message']
+
+        # Create the email message including idnumber and phone
+        email_message = f"""
+        Transcript Request from: {name}
+        
+        Name: {name}
+        Email: {email}
+        ID Number: {idnumber}
+        Phone: {phone}
+        
+        Message:
+        {message}
+        """
+
+        # Send an email
+        send_mail(
+            f'Transcript Request from: {name}',
+            email_message,
+            email,  # Use the sender's email address
+            ['ardymerlin000@gmail.com'],  # Use a list of recipient email addresses here
+        )
+        # Add a success message
+        messages.success(request, 'Your request is sent.')
+        return redirect('request_transcript')  # Redirect back to the form page
+
+    # Retrieve any messages and pass them to the template
+    messages_data = messages.get_messages(request)
+    return render(request, 'result/request_transcript.html', {'messages': messages_data})
+
 
 
 # ============================ADMIN INTERFACE====================
@@ -50,12 +103,16 @@ def admin1(request):
     department_count = Department.objects.all().count()
     program_count = Program.objects.all().count()
     result_count = Result.objects.all().count()
+    bitresult_count = BitResult.objects.all().count()
+    masscomresult_count = MasscomResult.objects.all().count()
     context = {
         'faculty_count':faculty_count,
         'student_count':student_count,
         'department_count':department_count,
         'program_count':program_count,
         'result_count':result_count,
+        'bitresult_count':bitresult_count,
+        'masscomresult_count':masscomresult_count,
     }
     return render(request, 'result/admin1.html', context)
 
@@ -67,8 +124,6 @@ def admin_login(request):
 # **************ADMIN LOGIN***********************.
 def admin_redirect(request):
     return redirect('admin:index')
-
-
 
 
 
@@ -2907,6 +2962,143 @@ def upload_masscom_course8(request):
 
 
 
+# # ===============================STUDENT REGISTRATION==============================
+# # ****************STUDENT REGISTRATION******************
+# def register_student(request):
+#     return render(request, 'result/register_student.html', {})
+
+
+# # ===============================ADDING STUDENTS==============================
+# # *********ADD STUDENTS***********
+# @login_required(login_url='login')
+# def student(request):
+#     stu = Student.objects.all()
+#     if request.method == 'POST':
+#         form = StudentForm(request.POST, request.FILES)
+#         if form.is_valid():
+#                 form.save()
+#                 messages.success(request, "Student added successfully!")
+#                 return redirect('student')
+#     else:
+#         form = StudentForm()
+#     return render(request, 'result/student.html', {'stu': stu, 'form': form})
+
+# # **************EDIT STUDENT***********
+# def edit_student(request, pk):
+#     editstu = Student.objects.get(id=pk)
+#     if request.method == 'POST':
+#         form = StudentForm(request.POST, instance = editstu)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Students updated successfully!")
+#             return redirect('student')
+#     else:
+#         form = StudentForm(instance = editstu)
+
+#     return render(request, 'result/edit_student.html',{'form':form})
+
+
+# # *********DELETE STUDENT***********
+# def delete_student(request, pk):
+#     del_stu = Student.objects.get(id=pk)
+#     if request.method == 'POST':
+#         del_stu.delete()
+#         messages.success(request, "Student removed successfully! ")
+#         return redirect('student')
+#     return render(request, 'result/delete_student.html',{})
+
+
+# # ****************VIEW LEVEL******************
+# def view_student(request, pk):
+#     viewstu = Student.objects.get(id=pk)
+#     return render(request, 'result/view_student.html', {'viewstu': viewstu})
+
+# # ***********************UPLOAD STUDENTS*****************************
+# @login_required(login_url='login')
+# def upload_students(request):
+#     if request.method == 'POST':
+#         form = StudentFileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             excel_file = request.FILES['file']
+#             try:
+#                 df = pd.read_excel(excel_file)
+#             except Exception as e:
+#                 messages.error(request, "An error occurred while reading the Excel file.")
+#                 return redirect('student')
+
+#             students_added = 0
+#             students_skipped = 0
+#             errors = []
+
+#             for _, row in df.iterrows():
+#                 fullname = row['fullname']
+#                 email = row['email']
+#                 contact = row['contact']
+#                 gender = row['gender']
+#                 department_name = row['department']
+#                 program_name = row['program']
+#                 dob = row['dob']
+
+#                 department_qs = Department.objects.filter(department=department_name)
+#                 if department_qs.exists():
+#                     department = department_qs.first()
+#                 else:
+#                     department = Department.objects.create(department=department_name)
+
+#                 program, _ = Program.objects.get_or_create(program=program_name, department=department)
+
+#                 student = Student(
+#                     fullname=fullname,
+#                     email=email,
+#                     contact=contact,
+#                     gender=gender,
+#                     department=department,
+#                     program=program,
+#                     dob=dob
+#                 )
+
+#                 try:
+#                     student.save()
+#                     students_added += 1
+#                 except Exception as e:
+#                     errors.append(f"Error creating student '{fullname}': {str(e)}")
+
+#             if students_added > 0:
+#                 messages.success(request, f"{students_added} student(s) have been added successfully!")
+#             if students_skipped > 0:
+#                 messages.warning(request, f"{students_skipped} student(s) already exist and were skipped.")
+#             if errors:
+#                 messages.error(request, "Some errors occurred while saving students. Please check the error messages.")
+#                 for error in errors:
+#                     messages.error(request, error)
+
+#             return redirect('student')
+#         else:
+#             messages.error(request, "Invalid form submission. Please check the form fields.")
+#             return redirect('student')
+#     else:
+#         form = StudentFileForm()
+
+#     return render(request, 'result/uploadStudent.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ===============================STUDENT REGISTRATION==============================
 # ****************STUDENT REGISTRATION******************
 def register_student(request):
@@ -2919,144 +3111,7 @@ def register_student(request):
 def student(request):
     stu = Student.objects.all()
     if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-                form.save()
-                messages.success(request, "Student added successfully!")
-                return redirect('student')
-    else:
-        form = StudentForm()
-    return render(request, 'result/student.html', {'stu': stu, 'form': form})
-
-# **************EDIT STUDENT***********
-def edit_student(request, pk):
-    editstu = Student.objects.get(id=pk)
-    if request.method == 'POST':
-        form = StudentForm(request.POST, instance = editstu)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Students updated successfully!")
-            return redirect('student')
-    else:
-        form = StudentForm(instance = editstu)
-
-    return render(request, 'result/edit_student.html',{'form':form})
-
-
-# *********DELETE STUDENT***********
-def delete_student(request, pk):
-    del_stu = Student.objects.get(id=pk)
-    if request.method == 'POST':
-        del_stu.delete()
-        messages.success(request, "Student removed successfully! ")
-        return redirect('student')
-    return render(request, 'result/delete_student.html',{})
-
-
-# ****************VIEW LEVEL******************
-def view_student(request, pk):
-    viewstu = Student.objects.get(id=pk)
-    return render(request, 'result/view_student.html', {'viewstu': viewstu})
-
-# ***********************UPLOAD STUDENTS*****************************
-@login_required(login_url='login')
-def upload_students(request):
-    if request.method == 'POST':
-        form = StudentFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            excel_file = request.FILES['file']
-            try:
-                df = pd.read_excel(excel_file)
-            except Exception as e:
-                messages.error(request, "An error occurred while reading the Excel file.")
-                return redirect('student')
-
-            students_added = 0
-            students_skipped = 0
-            errors = []
-
-            for _, row in df.iterrows():
-                fullname = row['fullname']
-                email = row['email']
-                contact = row['contact']
-                gender = row['gender']
-                department_name = row['department']
-                program_name = row['program']
-                dob = row['dob']
-
-                department_qs = Department.objects.filter(department=department_name)
-                if department_qs.exists():
-                    department = department_qs.first()
-                else:
-                    department = Department.objects.create(department=department_name)
-
-                program, _ = Program.objects.get_or_create(program=program_name, department=department)
-
-                student = Student(
-                    fullname=fullname,
-                    email=email,
-                    contact=contact,
-                    gender=gender,
-                    department=department,
-                    program=program,
-                    dob=dob
-                )
-
-                try:
-                    student.save()
-                    students_added += 1
-                except Exception as e:
-                    errors.append(f"Error creating student '{fullname}': {str(e)}")
-
-            if students_added > 0:
-                messages.success(request, f"{students_added} student(s) have been added successfully!")
-            if students_skipped > 0:
-                messages.warning(request, f"{students_skipped} student(s) already exist and were skipped.")
-            if errors:
-                messages.error(request, "Some errors occurred while saving students. Please check the error messages.")
-                for error in errors:
-                    messages.error(request, error)
-
-            return redirect('student')
-        else:
-            messages.error(request, "Invalid form submission. Please check the form fields.")
-            return redirect('student')
-    else:
-        form = StudentFileForm()
-
-    return render(request, 'result/uploadStudent.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ===============================STUDENT REGISTRATION==============================
-# ****************STUDENT REGISTRATION******************
-def register_student(request):
-    return render(request, 'result/register_student.html', {})
-
-
-# ===============================ADDING STUDENTS==============================
-# *********ADD STUDENTS***********
-@login_required(login_url='login')
-def student(request):
-    stu = Student.objects.all()
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
+        form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
                 form.save()
                 messages.success(request, "Student added successfully!")
@@ -3216,7 +3271,8 @@ def student_logout(request):
     return redirect('login_registered')
 
 
-
+def login_register(request):
+    return render(request, 'result/login_register.html',{})
 
 
 
@@ -3322,28 +3378,6 @@ def view_student_result(request, email, id_number):
         'result': result,
     }
     return render(request, 'result_display.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -3547,3 +3581,191 @@ def view_masscom_student_result(request, email, id_number):
 
 
 
+# **********************************************************************************************************************
+
+                # =============================Student verification========================================
+
+# *********************************************************************************************************************
+@login_required(login_url='login')
+def student_detail(request):
+    idnumber = request.GET.get('idnumber')
+    student = None
+    message = None
+    
+    if idnumber:
+        try:
+            student = Student.objects.get(student_id=idnumber)
+        except Student.DoesNotExist:
+            student = None
+            message = "The student does not exist."
+
+    return render(request, 'result/verify.html', {'student': student, 'message': message})
+
+
+# **********************************************************************************************************************
+
+                # =============================Student CERTIFICATE========================================
+
+# *********************************************************************************************************************
+
+def certificate(request):
+    return render(request,'result/certificate.html', {})
+
+
+def search_certificate(request):
+    return render(request,'result/search_certificate.html', {})
+
+
+
+# ===========admin certificate search==============
+@login_required(login_url='login')
+def admin_certificate(request):
+    idnumber = request.GET.get('idnumber')
+    student = None
+    message = None
+    
+    if idnumber:
+        try:
+            student = Student.objects.get(student_id=idnumber)
+        except Student.DoesNotExist:
+            student = None
+            message = "The certificate does not exist."
+
+    return render(request, 'result/view_certificate.html', {'student': student, 'message': message})
+
+
+
+
+
+
+# **********************************************************************************************************************
+
+                # =============================Student Transcript========================================
+
+# *********************************************************************************************************************
+
+def transcript(request):
+    return render(request,'result/transcript.html', {})
+
+
+#***************************SEARCHING FOR COMPUTER SCIENCE TRANSCRIPT ************************
+@login_required(login_url='login')
+def search_comsci_result(request):
+    transcript_id = request.GET.get('transcript_id')
+    result = None
+
+    if transcript_id:
+        try:
+            result = Result.objects.get(student__transcript_id=transcript_id)
+        except Result.DoesNotExist:
+            result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result/view_comscience_result.html', context)
+
+
+
+#***********DISPLAYING THE TRANSCRIPT*************
+@login_required(login_url='login')
+def view_comsci_result(request, transcript_id):
+    try:
+        result = Result.objects.get(student__transcript_id=transcript_id)
+    except Result.DoesNotExist:
+        result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result_display.html', context)
+
+
+
+
+
+#***************************SEARCHING FOR BIT TRANSCRIPT ************************
+@login_required(login_url='login')
+def search_bitresult(request):
+    transcript_id = request.GET.get('transcriptid')
+    result = None
+
+    if transcript_id:
+        try:
+            result = BitResult.objects.get(student__transcript_id=transcript_id)
+        except Result.DoesNotExist:
+            result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result/view_bitresult.html', context)
+
+
+
+#***********DISPLAYING THE TRANSCRIPT*************
+@login_required(login_url='login')
+def view_bitresult(request, transcript_id):
+    try:
+        result = BitResult.objects.get(student__transcript_id=transcript_id)
+    except Result.DoesNotExist:
+        result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'bitresult.html', context)
+
+
+
+
+
+#***************************SEARCHING FOR MASSCOM TRANSCRIPT ************************
+@login_required(login_url='login')
+def search_masscomresult(request):
+    transcript_id = request.GET.get('transcript_id')
+    result = None
+
+    if transcript_id:
+        try:
+            result = MasscomResult.objects.get(student__transcript_id=transcript_id)
+        except Result.DoesNotExist:
+            result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'result/view_masscomresult.html', context)
+
+
+
+#***********DISPLAYING THE TRANSCRIPT*************
+@login_required(login_url='login')
+def view_masscomresult(request, transcript_id):
+    try:
+        result = MasscomResult.objects.get(student__transcript_id=transcript_id)
+    except Result.DoesNotExist:
+        result = None
+
+    context = {
+        'result': result,
+    }
+    return render(request, 'masscomresult.html', context)
+
+
+
+    # =========== certificate search==============
+@login_required(login_url='login')
+def search_student_certificate(request):
+    transcript_id = request.GET.get('transcript_id')
+    student = None
+    message = None
+    
+    if transcript_id:
+        try:
+            student = Student.objects.get(transcript_id=transcript_id)
+        except Student.DoesNotExist:
+            student = None
+            message = "The certificate does not exist."
+
+    return render(request, 'result/search_student_certificate.html', {'student': student, 'message': message})

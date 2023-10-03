@@ -43,8 +43,7 @@
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
   <!-- ---Result CSS----------- -->
-  <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
-
+  <link href="{% static 'assets/style.css'%}" rel="stylesheet">
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -69,7 +68,7 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-     <marquee style="font-size: 50px;" behavior="" direction="">Central University Transcripts Management System</marquee>
+      <marquee style="font-size: 50px;" behavior="" direction="">Central University Result Management System</marquee>
     </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
@@ -688,7 +687,15 @@
 
 
 
-
+ {% for message in messages %}
+ {% if message.tags == 'error' %}
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script>
+    var m = "{{ message|escapejs|safe }}";
+    swal("Warning !", m, "error")
+ </script>
+ {% endif %}
+ {% endfor %}
 
 
 

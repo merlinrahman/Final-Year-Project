@@ -37,7 +37,7 @@
 
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/style.css'%}" rel="stylesheet">
 
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
@@ -66,7 +66,7 @@
   </div><!-- End Logo -->
 
   <div class="search-bar">
-   <marquee style="font-size: 50px;" behavior="" direction="">Central University Transcripts Management System</marquee>
+    <marquee style="font-size: 50px;" behavior="" direction="">Central University Result Management System</marquee>
   </div><!-- End Search Bar -->
 
   <nav class="header-nav ms-auto">
@@ -508,7 +508,7 @@
       </ul>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person"></i><span>Students Registration</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -519,7 +519,7 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
 
 
 
@@ -552,31 +552,90 @@
         </li>
       </ul>
     </li>
-    
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person"></i><span>Certificates</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="iconnav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'search_certificate' %}">
+            <i class="bi bi-circle"></i><span>Search Certificate</span>
+          </a>
+        </li>
+      </ul>
+    </li> 
   </ul>
 
 </aside><!-- End Sidebar-->
 
 
 
-  <div class="card" style="margin-top: 130px; margin-left: 600px; margin-right: 400px;">
-    <h5 class="display-5" style="margin-left: 20px; margin-top: 20px; text-align: center;"><small><i class="fa fa-info ml-3" aria-hidden="true"></i></small>&nbsp;Student Information</h5>
-    <div class="card-body">
-        <div class="mb-3" >
-                <p class="text-center mt-5">ID Number: <span>{{ viewstu.idnumber }}</span></p>
-                <p class="text-center">Full Name: <span>{{ viewstu.fullname }}</span></p>
-                <p class="text-center">Email: <span>{{ viewstu.university }}</span></p>
-                <p class="text-center">Phone: <span>{{ viewstu.batch }}</span></p>
-                <p class="text-center">Department: <span>{{ viewstu.department }}</span></p>
-                <p class="text-center">Level: <span>{{ viewstu.level }}</span></p>
+<div class="card" style="margin-top: 100px; margin-left: 400px; margin-right: 400px; width: 1000px; margin-bottom: 100px;">
+  <table style="background-color: rgb(253, 247, 247)">
 
-                <div style="margin-left: 300px; margin-top: 50px;">
-                    <a href="{% url 'student' %}" type="button" class="btn btn-info"><i class="fas fa-home">&nbsp;&nbsp;</i>Back to Students</a>
-                    
-                </div>
-          </div>
-    </div>
-  </div>
+    <tbody>
+      <tr>
+        <th colspan="2" style="border-width:1px;" class="text-center"  scope="row">
+          <img style="height: 70px; margin-top: 10px;"   src="{% static 'assets/images/Central.png' %}" alt="">
+          <h6>1 Silicon Hills-Mile-91</h6>
+          <h6>info@central.edu.sl</h6>
+          <h6>www.central.edu.sl</h6>
+        </th>
+
+        <th colspan="" style="border-width:1px;" class="text-center"  scope="row">
+          <!-- <img style="height: 180px; margin-top: 10px;"   src="{% static 'assets/images/cusl-logo.jpeg' %}" alt=""> -->
+          {% if viewstu.stu_image %}
+              <img style="width: 50%; margin-left: -20px; border-radius: 5%;" src="{{ viewstu.stu_image.url}}" alt="">
+              {% endif %}
+          
+
+        <!-- {% if result.student.stu_image %}
+        <img style="width: 60%; margin-left: -20px;" src="{{ result.student.stu_image.url}}" alt="">
+        {% endif %} -->
+        </th>
+       
+          
+      </tr>
+      <tr>
+        <th colspan="3" style="border-width:1px;" class="text-center"  scope="row"><h3>STUDENTS INFORMATION</h3></th>
+      </tr>
+      <tr>
+        <th colspan="2" style="border-width:1px;" class="text-center"   scope="row"><small>Name Of Student</small></th>
+        <th  style="border-width:1px;" colspan="2" >{{ viewstu.fullname }}</th>
+       
+      </tr>
+      <tr>
+        <th colspan="" style="border-width:1px;" class="text-center"  scope="row">ID Number</th>
+        <th style="border-width:1px; width: 30%;" colspan="2" >{{ viewstu.student_id }}</th>
+        
+      </tr>
+
+      <tr>
+        <th colspan="" style="border-width:1px;" class="text-center"  scope="row">Email</th>
+        <th style="border-width:1px; width: 30%;" colspan="2" >{{ viewstu.email }}</th>
+        
+      </tr>
+      <tr>
+        <th style="border-width:1px;" class="text-center"  scope="row">Name Of Department</th>
+        <th style="border-width:1px; width: 30%;" colspan="2">{{ viewstu.department }}</th>
+        
+      </tr>
+      <tr>
+        <th style="border-width:1px;" class="text-center"  scope="row">Program of Study</th>
+        <th style="border-width:1px; width: 30%;" colspan="2">{{ viewstu.program }}</th>
+        
+      </tr>
+      <tr>
+        <th style="border-width:1px;" class="text-center"  scope="row">Contact</th>
+        <th style="border-width:1px; width: 30%;" colspan="2">{{ viewstu.contact }}</th>
+        
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-left: 400px; margin-bottom: 10px; margin-top: 10px;">
+    <a href="{% url 'student' %}" type="button" class="btn btn-info"><i class="fas fa-home">&nbsp;&nbsp;</i>Back to Students</a>
+</div>
+</div>
 
 
  
@@ -631,7 +690,7 @@
 
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer fixed-bottom" style="margin-left: 100px;">
+  <footer id="footer" class="footer " style="margin-left: 100px; margin-top: 100px;">
     <div class="copyright" >
       &copy; Copyright <strong><span>Results Management System</span></strong>. All Rights Reserved
     </div>

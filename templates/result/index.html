@@ -1,8 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="eng">  
-    
-<!-- Mirrored from keenitsolutions.com/products/html/educavo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jul 2023 10:44:58 GMT -->
+<html lang="eng">   
 <head>
         <!-- meta tag -->
         <meta charset="utf-8">
@@ -37,10 +35,11 @@
         <!-- spacing css -->
         <link rel="stylesheet" type="text/css" href="{% static 'assets/css/rs-spacing.css' %}">
         <!-- style css -->
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
         <!-- responsive css -->
         <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
        
+
     </head>
     <body class="defult-home">
         
@@ -61,9 +60,6 @@
                 <!--Header Start-->
                 <header id="rs-header" class="rs-header">
                     <!-- Menu Start -->
-
-
-
                     <div class="topbar-area home9-topbar">
                         <div class="container">
                             <div class="row y-middle">
@@ -94,7 +90,7 @@
                     <div >
                         <div class="container">
                             <div class="row y-middle">
-                                <marquee style="color: white; letter-spacing: 20px; font-size: 30px; padding-bottom: 20px;" behavior="" direction="">Central University Transcript Management System</marquee>
+                                <marquee style="color: white; letter-spacing: 20px; font-size: 30px; padding-bottom: 20px;" behavior="" direction="">Central University Result Management System</marquee>
                             </div>
                         </div>
                     </div>
@@ -118,23 +114,16 @@
                                           </div>
                                           <nav class="rs-menu">
                                              <ul class="nav-menu">
-                                                <li class="rs-mega-menu mega-rs menu-item-has-children current-menu-item"> <a href="{% url 'index' %}">Home</a>
-                                                </li>
-                                                 <li class="menu-item-has-children">
-                                                     <a href="{% url 'about' %}">About</a>
-                                                 </li>
-
-                                                
-
+                                               
                                                  <li class="rs-mega-menu mega-rs menu-item-has-children"> <a href="">Transcripts</a>
                                                     <ul class="mega-menu"> 
                                                         <li class="mega-menu-container">
                                                             <div class="mega-menu-innner">
                                                                 <div class="single-megamenu">
                                                                     <ul class="sub-menu">
-                                                                        <li class=""><a href="mass_login.html">Mass Communication</a> </li>
-                                                                        <li><a href="comsci_login.html">Computer Science</a> </li>
-                                                                        <li><a href="bit_login.html">Business Information Technology</a> </li>
+                                                                        <li class=""><a href="{% url 'mass_login' %}">Mass Communication</a> </li>
+                                                                        <li><a href="{%url 'comsci_login' %}">Computer Science</a> </li>
+                                                                        <li><a href="{% url 'bit_login' %}">Business Information Technology</a> </li>
                                                                         <li class=""><a href="">Accounting & Finance</a> </li>
                                                                     </ul>
                                                                 </div>
@@ -157,28 +146,39 @@
                                                     </ul> <!-- //.mega-menu -->
                                                 </li>
 
+                                                
                                                  <li class="menu-item-has-children">
-                                                     <a href="{% url 'contact' %}">Contact</a>
-                                                     <!-- <ul class="sub-menu">
-                                                        <li><a href="contact.html">Contact One</a> </li>
-                                                        <li><a href="contact2.html">Contact Two</a> </li>
-                                                        <li><a href="contact3.html">Contact Three</a> </li>
-                                                        <li><a href="contact4.html">Contact Four</a> </li>
-                                                     </ul> -->
-                                                 </li>
-
-                                                 <li class="menu-item-has-children">
-                                                    <a href="{% url 'request_transcript' %}">REQUEST TRANSCRIPT</a>
+                                                    <a href="{% url 'request_transcript' %}">TRANSCRIPT Request</a>
                                                 </li>
+
+                                                
 
                                                 <li class="menu-item-has-children">
-                                                    <a  href="{% url 'verify' %}">Verify Student</a>
+                                                    
+                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            Verify Student Result
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                                          <li><a class="dropdown-item" style="margin-right: -10px; text-align: center;" href="{% url 'transcript' %}">Transcript</a></li>
+                                                          <li><a class="dropdown-item" style="margin-right: -10px; text-align: center;" href="{% url 'certificate' %}">Certificate</a></li>
+                                                          
+                                                        </ul>
                                                 </li>
+                                                
+
+                                                <li class="menu-item-has-children">
+                                                    <a data-toggle="modal" data-target="#exampleModal" href="">who are you?</a>
+                                                </li>
+                                                
+
+                                                <!-- href="{% url 'request_transcript' %}" -->
+                                               
+                                                
+                                                
+                                                
                                              </ul> <!-- //.nav-menu -->
                                           </nav>                                       
                                       </div> <!-- //.main-menu -->
-                                                        
-                                    
                                   </div>
                                 </div>
                                 <div class="col-lg-2 text-right">
@@ -253,7 +253,7 @@
                                 <div class="sl-sub-title wow bounceInLeft" data-wow-delay="300ms" data-wow-duration="2000ms">The Access to Your Transcripts</div>
                                 <h1 class="sl-title wow fadeInRight" data-wow-delay="600ms" data-wow-duration="2000ms">Your Transcript Is Your Academic Work</h1>
                                 <div class="sl-btn wow fadeInUp" data-wow-delay="900ms" data-wow-duration="2000ms">
-                                    <a class="readon orange-btn main-home" href="{% url 'index' %}">Know More</a>
+                                    <a class="readon orange-btn main-home" href="{% url 'request_transcript' %}">Request Transcript</a>
                                 </div>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                                 <div class="sl-sub-title wow bounceInLeft" data-wow-delay="300ms" data-wow-duration="2000ms">Your Best Transcript Solution</div>
                                 <h1 class="sl-title wow fadeInRight" data-wow-delay="600ms" data-wow-duration="2000ms">The Product of Your Exams</h1>
                                 <div class="sl-btn wow fadeInUp" data-wow-delay="900ms" data-wow-duration="2000ms">
-                                    <a class="readon orange-btn main-home" href="{% url 'index' %}">Know More</a>
+                                    <a class="readon orange-btn " href="{% url 'request_transcript' %}">Request Transcript</a>
                                 </div>
                             </div>
                         </div>
@@ -366,7 +366,6 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -393,11 +392,9 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    
                                                 </li>
                                             </ul>
                                         </div>
-                                       
                                         <h3 class="title"><a href="{% url 'index' %}">Students Matriculation</a></h3>
                                        
                                     </div>
@@ -510,12 +507,73 @@
         
 
 
+   <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">VERIFY YOURSELF</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Counter Section Start -->
+          <div id="rs-about" class="rs-about style3 pt-100 md-pt-70" style="margin-bottom: 100px; margin-left: 150px;">
+            <div class="container">
+                <div class="row y-middle">
+                    <div class="col-lg-8 off-md-3 lg-pr-0 md-mb-30">
+                        <div class="about-intro">
+                            <div class="sec-title">
+                                <div class="sub-title orange">Who Are You?</div>
+                                <h2 class="title mb-21">Are You a Bonafied Student of Central University?</h2>
+                                <div class="desc big">
+                                    <form method="GET" action="{% url 'student_detail' %}">
+                                        {% csrf_token %}
+                                        <input type="text" name="idnumber" class="form-control shadow-none mt-4 mb-3 p-4" placeholder="ID Number" >
+                                        <button type="submit"  class="readon submit-btn p-3" data-toggle="modal" data-target="#exampleModal2">Verify</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Counter Section End -->
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-
-        
-
+  {% if student %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>ID Number: {{ student.student_id }}</p>
+            <p>First Name: {{ student.fullname }}</p>
+            <p>Last Name: {{ student.department }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
                                                         
 
         <!-- modernizr js -->

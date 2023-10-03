@@ -1,8 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
-    
-<!-- Mirrored from keenitsolutions.com/products/html/educavo/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jul 2023 10:48:25 GMT -->
 <head>
     <!-- meta tag -->
     <meta charset="utf-8">
@@ -37,9 +35,14 @@
     <!-- spacing css -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/rs-spacing.css' %}">
     <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
     <!-- responsive css -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
+
+ <!-- jQuery library -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
    
 </head>
     <body class="defult-home event-bg">
@@ -113,9 +116,9 @@
                                          <ul class="nav-menu">
                                             <li class="rs-mega-menu mega-rs menu-item-has-children"> <a href="{% url 'index' %}">Home</a>
                                             </li>
-                                             <li class="menu-item-has-children">
+                                             <!-- <li class="menu-item-has-children">
                                                  <a href="{% url 'about' %}">About</a>
-                                             </li>
+                                             </li> -->
 
                                             
 
@@ -125,9 +128,9 @@
                                                         <div class="mega-menu-innner">
                                                             <div class="single-megamenu">
                                                                 <ul class="sub-menu">
-                                                                    <li class=""><a href="">Mass Communication</a> </li>
-                                                                    <li><a href="">Computer Science</a> </li>
-                                                                    <li><a href="">Business Information Technology</a> </li>
+                                                                    <li class=""><a href="{% url 'mass_login'%}">Mass Communication</a> </li>
+                                                                    <li><a href="{% url 'comsci_login'%}">Computer Science</a> </li>
+                                                                    <li><a href="{% url 'bit_login'%}">Business Information Technology</a> </li>
                                                                     <li class=""><a href="">Accounting & Finance</a> </li>
                                                                 </ul>
                                                             </div>
@@ -149,15 +152,10 @@
                                                     </li>
                                                 </ul> <!-- //.mega-menu -->
                                             </li>
-                                             <li class="menu-item-has-children">
-                                                 <a href="{% url 'contact' %}">Contact</a>
-                                                 <!-- <ul class="sub-menu">
-                                                    <li><a href="contact.html">Contact One</a> </li>
-                                                    <li><a href="contact2.html">Contact Two</a> </li>
-                                                    <li><a href="contact3.html">Contact Three</a> </li>
-                                                    <li><a href="contact4.html">Contact Four</a> </li>
-                                                 </ul> -->
-                                             </li>
+                                            <li class="menu-item-has-children">
+                                                <a href="{% url 'request_transcript'%}">REQUEST TRANSCRIPT</a>
+                                            </li>
+                                             </li> 
                                          </ul> <!-- //.nav-menu -->
                                       </nav>                                       
                                   </div> <!-- //.main-menu -->
@@ -166,61 +164,7 @@
                             </div>
                             <div class="col-lg-2 text-right">
                                 <div class="expand-btn-inner">
-                                    <ul>
-                                      
-                                        <li>
-                                            <a class="hidden-xs rs-search" data-target=".search-modal" data-toggle="modal" href="#">
-                                                <i class="flaticon-search"></i>
-                                            </a>
-                                        </li>
-                                        <li class="user-icon cart-inner no-border mini-cart-active">
-                                            <a href="#"><i class="fa fa-shopping-bag"></i></a>
-                                            <div class="woocommerce-mini-cart text-left">
-                                                <div class="cart-bottom-part">
-                                                    <ul class="cart-icon-product-list">
-                                                        <li class="display-flex">
-                                                            <div class="icon-cart">
-                                                                <a href="#"><i class="fa fa-times"></i></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <a href="cart.html">Law Book</a><br>
-                                                                <span class="quantity">1 × $30.00</span>
-                                                            </div>
-                                                            <div class="product-image">
-                                                                <a href="cart.html"><img src="assets/images/shop/1.jpg" alt="Product Image"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="display-flex">
-                                                            <div class="icon-cart">
-                                                                <a href="#"><i class="fa fa-times"></i></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <a href="cart.html">Spirit Level</a><br>
-                                                                <span class="quantity">1 × $30.00</span>
-                                                            </div>
-                                                            <div class="product-image">
-                                                                <a href="cart.html"><img src="assets/images/shop/2.jpg" alt="Product Image"></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="total-price text-center">
-                                                        <span class="subtotal">Subtotal:</span>
-                                                        <span class="current-price">$85.00</span>
-                                                    </div>
-
-                                                    <div class="cart-btn text-center">
-                                                        <a class="crt-btn btn1" href="cart.html">View Cart</a>
-                                                        <a class="crt-btn btn2" href="checkout.html">Check Out</a>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </li>
-                                        <li class="user-icon last-icon">
-                                            <a href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
-                                        </li>
-                                        
-                                    </ul>
+                                    
                                     <span>
                                         <a id="nav-expander" class="nav-expander">
                                             <span class="dot1"></span>
@@ -287,7 +231,7 @@
             <!-- Breadcrumbs Start -->
             <div class="rs-breadcrumbs breadcrumbs-overlay">
                 <div class="breadcrumbs-img">
-                    <img src="{% static 'assets/images/library.jpeg' %}" alt="Breadcrumbs Image">
+                    <img  src="{% static 'assets/images/library.jpeg' %}" alt="Breadcrumbs Image">
                 </div>
                 <div class="breadcrumbs-text white-color padding">
                     <h1 class="page-title white-color" style="margin-top: 150px; margin-bottom: 100px;">REQUEST A TRANSCRIPT</h1>
@@ -297,7 +241,7 @@
             <!-- Breadcrumbs End -->            
 
     		<!-- Contact Section Start -->
-    		<div class="contact-page-section pt-100 pb-100 md-pt-70 md-pb-70">
+    		<div class="contact-page-section pt-100 pb-100 md-pt-70 md-pb-70" style="margin-top: -90px;">
             	<div class="container">
             		<div class="row rs-contact-box mb-90 md-mb-50">
         				<p class="text-center display-4">Transcript Request Option</p>
@@ -305,46 +249,42 @@
                     <div class="row rs-contact-box mb-90 md-mb-50">
                         <p style="margin-top: -100px;">Transcript requests are processed Monday through Friday. Requests received after 2:00 pm will not be processed until the following business day.
                             Transcript requests designated for overnight  must be received by 1:00 pm Monday through Friday in order to be processed the same
-                             day. Overnight  requests received after 1:00 pm cannot be processed until the following business day.</p>
-
-                        <p>
-                            Please be sure to include your full name, program of study, I.D number, univeristy email address your phone number. You ensure to pay your transcript fee to the university's account.
+                             day. You ensure to pay your transcript fee to the university's account.
                             Transcript requests are processed in the order in which they are received. Transcript requests are typically processed within 1 to 2 business days.
-                            If requesting an unofficial transcript, there is no charge for an unofficial transcript.
-                        </p>
+                            </p>
             		</div>
-            		<div class="row align-items-center">
+            		<div class="row align-items-center" style="margin-top: -50px;">
             			<div class="col-lg-6 md-mb-30" >
             			</div>
-            			<div class="col-lg-6 pl-60 md-pl-15" style="margin-left: 300px; margin-top: -50px;">
+            			<div class="col-lg-6 pl-60 md-pl-15" style="margin-left: 300px; margin-top: -40px;">
 			        		<div class="contact-comment-box">
 			        			<div class="inner-part">
+                                    <div>
                                     <h2 class="title mb-mb-15">Send Your Transcript Request</h2>
                                 </div>
-								<form id="contact-form" method="post" action="">
-									<fieldset>
+								<form  method="post" action="{% url 'request_transcript' %}">
+                                    {% csrf_token %}
 										<div class="row">
                                             <div class="col-lg-6 mb-35 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="name" name="name" placeholder="Name" required="">
+                                                <input class="from-control p-3" type="text" id="name" name="name" placeholder="Name" required="">
                                             </div> 
                                             <div class="col-lg-6 mb-35 col-md-6 col-sm-6">
                                                 <input class="from-control" type="text" id="email" name="email" placeholder="Email" required="">
                                             </div>   
                                             <div class="col-lg-6 mb-35 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="phone" name="phone" placeholder="Phone" required="">
+                                                <input class="from-control" type="text" id="phone" name="idnumber" placeholder="ID Number" required="">
                                             </div>   
                                             <div class="col-lg-6 mb-35 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="subject" name="subject" placeholder="Subject" required="">
+                                                <input class="from-control" type="phone" id="phone" name="phone" placeholder="Phone" required="">
                                             </div>
                                          
                                             <div class="col-lg-12 mb-50">
                                                 <textarea class="from-control" id="message" name="message" placeholder=" Message" required=""></textarea>
                                             </div>
 										</div>
-										<div class="form-group mb-0">
+										<div class="form-group mb-0" style="margin-top: -50px;">
 											<input class="btn-send" type="submit" value="Request Now">
-										</div>										   
-									</fieldset>
+										</div>
 								</form>
 			        		</div>
             			</div>
@@ -352,7 +292,6 @@
             	</div>
             </div>
             <!-- Contact Section End -->  
-
            
         </div> 
         <!-- Main content End --> 
@@ -364,7 +303,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-12 col-sm-12 footer-widget md-mb-50">
                         <div class="footer-logo mb-30">
-                            <a href="index.html"><img style="width: 40%; border-radius: 50%;" src="assets/images/cusl-logo.jpeg" alt=""></a>
+                            <a href="index.html"><img style="width: 40%; border-radius: 50%;" src="{% static 'assets/images/cusl-logo.jpeg' %}" alt=""></a>
                         </div>
                           <div class="textwidget pr-60 md-pr-15"><p class="white-color">At Central University, we strive towards developing knowledge-based curricula, creating a first-class educational facility with a premier training system. The University has clear and vibrant educational goals.</p>
                           </div>
@@ -420,7 +359,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 footer-widget" style="margin-top: 30px;">
-                        <img style="width: 50%; border-radius: 50%;" src="assets/images/Cusl-logo.jpeg" alt="">
+                        <img style="width: 50%; border-radius: 50%;" src="{% static 'assets/images/Cusl-logo.jpeg' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -469,6 +408,29 @@
         </div>
         <!-- Search Modal End -->
 
+
+
+
+ <!--
+     ***************************
+        SWEET ALERT MESSAGES
+     **************************
+ -->
+ <!--====sweet Asert messageS-->
+ {% for message in messages %}
+ {% if message.tags == 'success' %}
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script>
+    var m = "{{ message }}";
+    swal("Request Sent", m, "success")
+ </script>
+ {% endif %}
+ {% endfor %}
+
+
+
+
+
         <!-- modernizr js -->
         <script src="{% static 'assets/js/modernizr-2.8.3.min.js' %}"></script>
         <!-- jquery latest version -->
@@ -491,5 +453,4 @@
         <script src="{% static 'assets/js/main.js' %}"></script>
     </body>
 
-<!-- Mirrored from keenitsolutions.com/products/html/educavo/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jul 2023 10:48:26 GMT -->
 </html>

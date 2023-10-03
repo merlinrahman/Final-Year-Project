@@ -37,7 +37,7 @@
 
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/style.css'%}" rel="stylesheet">
 
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
@@ -59,9 +59,7 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-     <marquee style="font-size: 50px;" behavior="" direction="">Central University Transcripts Management System</marquee>
-    </div><!-- End Search Bar -->
+    
     <div class="search-bar">
       <marquee style="font-size: 50px;" behavior="" direction="">Central University Results Portal</marquee>
      </div><!-- End Search Bar -->
@@ -509,13 +507,13 @@
       <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person"></i><span>Students Registration</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="iconnav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <!-- <ul id="iconnav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a href="{% url 'register' %}">
             <i class="bi bi-circle"></i><span>Register Student</span>
           </a>
         </li>
-      </ul>
+      </ul> -->
     </li>
 
 
@@ -549,7 +547,18 @@
         </li>
       </ul>
     </li>
-
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person"></i><span>Certificates</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="iconnav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'search_certificate' %}">
+            <i class="bi bi-circle"></i><span>Search Certificate</span>
+          </a>
+        </li>
+      </ul>
+    </li> 
     
   </ul>
 
@@ -567,25 +576,32 @@
             <div class="col-md-6 offset-md-3">
 
               {% csrf_token %}
-              {{ form.student.label }}
+              
+              
+              <div class="form-group">
+                <label for="{{ form.student.id_for_label }}"></label>
+                {{ form.student.label }}
               {{ form.student }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.department.id_for_label }}"></label>
               {{ form.department.label }}
               {{ form.department }}
-              
+          </div>
             </div>
           </div>
           <div class="row">
             <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
               <div class="col-md-12">
-                <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">1st Year Result</span>
-                <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">2nd Year Result</span>
+                <span style=" margin-left: 250px; margin-bottom: 100px; font-weight: bold; font-size: large;">1st Year Result</span>
+                <span style="margin-left: 440px; margin-bottom: 100px; font-weight: bold; font-size: large;">2nd Year Result</span>
               </div>
             </div>
             <div class="row">
               <div class="col md-12">
                 <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
                 <span style="margin-left: 150px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
-                <span style="margin-left: 100px;  margin-bottom: 150px; font-size: large;">First Semester</span>
+                <span style="margin-left: 250px;  margin-bottom: 150px; font-size: large;">First Semester</span>
                 <span style="margin-left: 170px;  margin-bottom: 300px; font-size: large;">Second Semester</span>
                 
               </div>
@@ -593,135 +609,337 @@
             
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+                {{ form.academicYear.label }}
               {{ form.academicYear }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ form.level.id_for_label }}"></label>
               {{ form.level.label }}
               {{ form.level }}
-              {{ form.semester.label }}
+          </div>
+          
+          <div class="form-group">
+            <label for="{{ form.semester.id_for_label }}"></label>
+            {{ form.semester.label }}
               {{ form.semester }}
-              {{ form.module1.label }}
+        </div>
+        
+        <div class="form-group">
+          <label for="{{ form.module1.id_for_label }}"></label>
+          {{ form.module1.label }}
               {{ form.module1 }}
-              {{ form.module_grade1.label }}
-              {{ form.module_grade1 }}
-              {{ form.module2.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.module_grade1.id_for_label }}"></label>
+        {{ form.module_grade1.label }}
+        {{ form.module_grade1 }}
+    </div>   
+    
+    <div class="form-group">
+      <label for="{{ form.module2.id_for_label }}"></label>
+      {{ form.module2.label }}
               {{ form.module2 }}
-              {{ form.module_grade2.label }}
-              {{ form.module_grade2 }}
-              {{ form.module3.label }}
-              {{ form.module3 }}
-              {{ form.module_grade3.label }}
-              {{ form.module_grade3 }}
-              {{ form.module4.label }}
-              {{ form.module4 }}
-              {{ form.module_grade4.label }}
-              {{ form.module_grade4 }}
-              {{ form.module5.label }}
-              {{ form.module5 }}
-              {{ form.module_grade5.label }}
-              {{ form.module_grade5 }}
-              {{ form.module6.label }}
-              {{ form.module6 }}
-              {{ form.module_grade6.label }}
-              {{ form.module_grade6 }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.module_grade2.id_for_label }}"></label>
+    {{ form.module_grade2.label }}
+    {{ form.module_grade2 }}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.module3.id_for_label }}"></label>
+    {{ form.module3.label }}
+    {{ form.module3 }}
+</div>
+<div class="form-group">
+  <label for="{{ form.module_grade3.id_for_label }}"></label>
+  {{ form.module_grade3.label }}
+  {{ form.module_grade3 }}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.module4.id_for_label }}"></label>
+  {{ form.module4.label }}
+  {{ form.module4 }}
+</div>
+<div class="form-group">
+<label for="{{ form.module_grade4.id_for_label }}"></label>
+    {{ form.module_grade4.label }}
+    {{ form.module_grade4 }}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.module5.id_for_label }}"></label>
+   {{ form.module5.label }}
+  {{ form.module5 }}
+</div>
+<div class="form-group">
+<label for="{{ form.module_grade5.id_for_label }}"></label>
+        {{ form.module_grade5.label }}
+        {{ form.module_grade5 }}
+</div>
+
+<div class="form-group">
+  <label for="{{ form.module6.id_for_label }}"></label>
+  {{ form.module6.label }}
+  {{ form.module6 }}
+</div>
+<div class="form-group">
+<label for="{{ form.module_grade6.id_for_label }}"></label>
+    {{ form.module_grade6.label }}
+    {{ form.module_grade6 }}
+</div>
+              
+              
+              
+              
+             
+              
+              
+              
             </div>
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+                {{ form.academicYear.label }}
               {{ form.academicYear }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level.id_for_label }}"></label>
               {{ form.level.label }}
               {{ form.level }}
-              {{ form.semester2.label }}
-              {{ form.semester2 }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.semester2.id_for_label }}"></label>
+            {{ form.semester2.label }}
+            {{ form.semester2 }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester2_module1.id_for_label }}"></label>
               {{ form.semester2_module1.label }}
               {{ form.semester2_module1 }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester2_module_grade1.id_for_label }}"></label>
               {{ form.semester2_module_grade1.label }}
               {{ form.semester2_module_grade1 }}
-              {{ form.semester2_module2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester2_module2.id_for_label }}"></label>
+         {{ form.semester2_module2.label }}
               {{ form.semester2_module2 }}
-              {{ form.semester2_module_grade2.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester2_module_grade2.id_for_label }}"></label>
+        {{ form.semester2_module_grade2.label }}
               {{ form.semester2_module_grade2 }}
-              {{ form.semester2_module3.label }}
+        </div> 
+        <div class="form-group">
+          <label for="{{ form.semester2_module1.id_for_labe3 }}"></label>
+          {{ form.semester2_module3.label }}
               {{ form.semester2_module3 }}
-              {{ form.semester2_module_grade3.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester2_module_grade3.id_for_label }}"></label>
+        {{ form.semester2_module_grade3.label }}
               {{ form.semester2_module_grade3 }}
-              {{ form.semester2_module4.label }}
+        </div> 
+        <div class="form-group">
+          <label for="{{ form.semester2_module4.id_for_label }}"></label>
+          {{ form.semester2_module4.label }}
               {{ form.semester2_module4 }}
-              {{ form.semester2_module_grade4.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester2_module_grade4.id_for_label }}"></label>
+        {{ form.semester2_module_grade4.label }}
               {{ form.semester2_module_grade4 }}
-              {{ form.semester2_module5.label }}
+        </div> 
+        <div class="form-group">
+          <label for="{{ form.semester2_module5.id_for_label }}"></label>
+          {{ form.semester2_module5.label }}
               {{ form.semester2_module5 }}
-              {{ form.semester2_module_grade5.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester2_module_grade5.id_for_label }}"></label>
+        {{ form.semester2_module_grade5.label }}
               {{ form.semester2_module_grade5 }}
-              {{ form.semester2_module6.label }}
+        </div>  
+        <div class="form-group">
+          <label for="{{ form.semester2_module6.id_for_label }}"></label>
+          {{ form.semester2_module6.label }}
               {{ form.semester2_module6 }}
-              {{ form.semester2_module_grade6.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester2_module_grade6.id_for_label }}"></label>
+        {{ form.semester2_module_grade6.label }}
               {{ form.semester2_module_grade6 }}
+        </div>     
+              
             </div>
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear2.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear2.id_for_label }}"></label>
+               {{ form.academicYear2.label }}
               {{ form.academicYear2 }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level2.id_for_label }}"></label>
               {{ form.level2.label }}
               {{ form.level2 }}
-              {{ form.semester3.label }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.semester3.id_for_label }}"></label>
+            {{ form.semester3.label }}
               {{ form.semester3 }}
-              {{ form.semester3_module1.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester3_module1.id_for_label }}"></label>
+          {{ form.semester3_module1.label }}
               {{ form.semester3_module1 }}
-              {{ form.semester3_module_grade1.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester3_module_grade1.id_for_label }}"></label>
+        {{ form.semester3_module_grade1.label }}
               {{ form.semester3_module_grade1 }}
-              {{ form.semester3_module2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester3_module2.id_for_label }}"></label>
+          {{ form.semester3_module2.label }}
               {{ form.semester3_module2 }}
-              {{ form.semester3_module_grade2.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester3_module_grade2.id_for_label }}"></label>
+        {{ form.semester3_module_grade2.label }}
               {{ form.semester3_module_grade2 }}
-              {{ form.semester3_module3.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester3_module3.id_for_label }}"></label>
+          {{ form.semester3_module3.label }}
               {{ form.semester3_module3 }}
-              {{ form.semester3_module_grade3.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester3_module_grade3.id_for_label }}"></label>
+        {{ form.semester3_module_grade3.label }}
               {{ form.semester3_module_grade3 }}
-              {{ form.semester3_module4.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester3_module4.id_for_label }}"></label>
+          {{ form.semester3_module4.label }}
               {{ form.semester3_module4 }}
-              {{ form.semester3_module_grade4.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester3_module_grade4.id_for_label }}"></label>
+        {{ form.semester3_module_grade4.label }}
               {{ form.semester3_module_grade4 }}
-              {{ form.semester3_module5.label }}
+        </div>    
+              
+        <div class="form-group">
+          <label for="{{ form.semester3_module5.id_for_label }}"></label>
+           {{ form.semester3_module5.label }}
               {{ form.semester3_module5 }}
-              {{ form.semester3_module_grade5.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester3_module_grade5.id_for_label }}"></label>
+        {{ form.semester3_module_grade5.label }}
               {{ form.semester3_module_grade5 }}
-              {{ form.semester3_module6.label }}
+        </div>
+              
+        <div class="form-group">
+          <label for="{{ form.semester3_module6.id_for_label }}"></label>
+          {{ form.semester3_module6.label }}
               {{ form.semester3_module6 }}
-              {{ form.semester3_module_grade6.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester3_module_grade6.id_for_label }}"></label>
+        {{ form.semester3_module_grade6.label }}
               {{ form.semester3_module_grade6 }}
+        </div>
+             
             </div>
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear2.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+                {{ form.academicYear2.label }}
               {{ form.academicYear2 }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level2.id_for_label }}"></label>
               {{ form.level2.label }}
               {{ form.level2 }}
-              {{ form.semester4.label }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.semester4.id_for_label }}"></label>
+            {{ form.semester4.label }}
               {{ form.semester4 }}
-              {{ form.semester4_module1.label }}
+        </div>
+              
+        <div class="form-group">
+          <label for="{{ form.semester4_module1.id_for_label }}"></label>
+          {{ form.semester4_module1.label }}
               {{ form.semester4_module1 }}
-              {{ form.semester4_module_grade1.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester4_module_grade1.id_for_label }}"></label>
+        {{ form.semester4_module_grade1.label }}
               {{ form.semester4_module_grade1 }}
-              {{ form.semester4_module2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester4_module2.id_for_label }}"></label>
+          {{ form.semester4_module2.label }}
               {{ form.semester4_module2 }}
-              {{ form.semester4_module_grade2.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester4_module_grade2.id_for_label }}"></label>
+        {{ form.semester4_module_grade2.label }}
               {{ form.semester4_module_grade2 }}
-              {{ form.semester4_module3.label }}
+        </div>
+              
+        <div class="form-group">
+          <label for="{{ form.semester4_module3.id_for_label }}"></label>
+          {{ form.semester4_module3.label }}
               {{ form.semester4_module3 }}
-              {{ form.semester4_module_grade3.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester4_module_grade3.id_for_label }}"></label>
+        {{ form.semester4_module_grade3.label }}
               {{ form.semester4_module_grade3 }}
-              {{ form.semester4_module4.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester4_module4.id_for_label }}"></label>
+         {{ form.semester4_module4.label }}
               {{ form.semester4_module4 }}
-              {{ form.semester4_module_grade4.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester4_module_grade4.id_for_label }}"></label>
+        {{ form.semester4_module_grade4.label }}
               {{ form.semester4_module_grade4 }}
-              {{ form.semester4_module5.label }}
+        </div>   
+        <div class="form-group">
+          <label for="{{ form.semester4_module5.id_for_label }}"></label>
+          {{ form.semester4_module5.label }}
               {{ form.semester4_module5 }}
-              {{ form.semester4_module_grade5.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester4_module_grade5.id_for_label }}"></label>
+         {{ form.semester4_module_grade5.label }}
               {{ form.semester4_module_grade5 }}
-              {{ form.semester4_module6.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester4_module6.id_for_label }}"></label>
+          {{ form.semester4_module6.label }}
               {{ form.semester4_module6 }}
-              {{ form.semester4_module_grade6.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester4_module_grade6.id_for_label }}"></label>
+        {{ form.semester4_module_grade6.label }}
               {{ form.semester4_module_grade6 }}
+        </div>
+
             </div>
           </div>
           
@@ -730,15 +948,15 @@
            <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
             <div class="row">
               <div class="col-md-12">
-                <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">3rd Year Result</span>
-                <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">Final Year Result</span>
+                <span style=" margin-left: 250px; margin-bottom: 100px; font-weight: bold; font-size: large;">3rd Year Result</span>
+                <span style="margin-left: 440px; margin-bottom: 100px; font-weight: bold; font-size: large;">Final Year Result</span>
               </div>
             </div>
             <div class="row">
               <div class="col md-12">
                 <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
                 <span style="margin-left: 120px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
-                <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">First Semester</span>
+                <span style="margin-left: 250px;  margin-bottom: 200px; font-size: large;">First Semester</span>
                 <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">Second Semester</span>
                 
               </div>
@@ -746,135 +964,296 @@
             
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear3.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+                {{ form.academicYear3.label }}
               {{ form.academicYear3 }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level3.id_for_label }}"></label>
               {{ form.level3.label }}
               {{ form.level3 }}
-              {{ form.semester5.label }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.semester5.id_for_label }}"></label>
+           {{ form.semester5.label }}
               {{ form.semester5 }}
-              {{ form.semester5_module1.label }}
-              {{ form.semester5_module1 }}
-              {{ form.semester5_module_grade1.label }}
-              {{ form.semester5_module_grade1 }}
-              {{ form.semester5_module2.label }}
-              {{ form.semester5_module2 }}
-              {{ form.semester5_module_grade2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester5_module1.id_for_label }}"></label>
+          {{ form.semester5_module1.label }}
+          {{ form.semester5_module1 }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester5_module_grade1.id_for_label }}"></label>
+        {{ form.semester5_module_grade1.label }}
+        {{ form.semester5_module_grade1 }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester5_module2.id_for_label }}"></label>
+          {{ form.semester5_module2.label }}
+          {{ form.semester5_module2 }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester5_module_grade2.id_for_label }}"></label>
+        {{ form.semester5_module_grade2.label }}
               {{ form.semester5_module_grade2 }}
-              {{ form.semester5_module3.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester5_module3.id_for_label }}"></label>
+          {{ form.semester5_module3.label }}
               {{ form.semester5_module3 }}
-              {{ form.semester5_module_grade3.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester5_module_grade3.id_for_label }}"></label>
+        {{ form.semester5_module_grade3.label }}
               {{ form.semester5_module_grade3 }}
-              {{ form.semester5_module4.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester5_module4.id_for_label }}"></label>
+          {{ form.semester5_module4.label }}
               {{ form.semester5_module4 }}
-              {{ form.semester5_module_grade4.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester5_module_grade4.id_for_label }}"></label>
+        {{ form.semester5_module_grade4.label }}
               {{ form.semester5_module_grade4 }}
-              {{ form.semester5_module5.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester5_module5.id_for_label }}"></label>
+          {{ form.semester5_module5.label }}
               {{ form.semester5_module5 }}
-              {{ form.semester5_module_grade5.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester5_module_grade5.id_for_label }}"></label>
+        {{ form.semester5_module_grade5.label }}
               {{ form.semester5_module_grade5 }}
-              {{ form.semester5_module6.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester5_module6.id_for_label }}"></label>
+          {{ form.semester5_module6.label }}
               {{ form.semester5_module6 }}
-              {{ form.semester5_module_grade6.label }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.semester5_module_grade6.id_for_label }}"></label>
+        {{ form.semester5_module_grade6.label }}
               {{ form.semester5_module_grade6 }}
+        </div>
+              
+              
+              
+             
+             
+              
+              
+              
+              
+              
+             
+              
+              
+              
             </div>
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear3.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+               {{ form.academicYear3.label }}
               {{ form.academicYear3 }}
-              {{ form.level3.label }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level3.id_for_label }}"></label>
+             {{ form.level3.label }}
               {{ form.level3 }}
-              {{ form.semester6.label }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.semester6.id_for_label }}"></label>
+            {{ form.semester6.label }}
               {{ form.semester6 }}
-              {{ form.semester6_module1.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester6_module1.id_for_label }}"></label>
+          {{ form.semester6_module1.label }}
               {{ form.semester6_module1 }}
-              {{ form.semester6_module_grade1.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester6_module_grade1.id_for_label }}"></label>
+        {{ form.semester6_module_grade1.label }}
               {{ form.semester6_module_grade1 }}
-              {{ form.semester6_module2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester6_module2.id_for_label }}"></label>
+          {{ form.semester6_module2.label }}
               {{ form.semester6_module2 }}
-              {{ form.semester6_module_grade2.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester6_module_grade2.id_for_label }}"></label>
+        {{ form.semester6_module_grade2.label }}
               {{ form.semester6_module_grade2 }}
-              {{ form.semester6_module3.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester6_module3.id_for_label }}"></label>
+          {{ form.semester6_module3.label }}
               {{ form.semester6_module3 }}
-              {{ form.semester6_module_grade3.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester6_module_grade3.id_for_label }}"></label>
+        {{ form.semester6_module_grade3.label }}
               {{ form.semester6_module_grade3 }}
-              {{ form.semester6_module4.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester6_module4.id_for_label }}"></label>
+          {{ form.semester6_module4.label }}
               {{ form.semester6_module4 }}
-              {{ form.semester6_module_grade4.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester6_module_grade4.id_for_label }}"></label>
+        {{ form.semester6_module_grade4.label }}
               {{ form.semester6_module_grade4 }}
-              {{ form.semester6_module5.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester6_module5.id_for_label }}"></label>
+          {{ form.semester6_module5.label }}
               {{ form.semester6_module5 }}
-              {{ form.semester6_module_grade5.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester6_module_grade5.id_for_label }}"></label>
+        {{ form.semester6_module_grade5.label }}
               {{ form.semester6_module_grade5 }}
-              {{ form.semester6_module6.label }}
-              {{ form.semester6_module6 }}
-              {{ form.semester6_module_grade6.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester6_module6.id_for_label }}"></label>
+          {{ form.semester6_module6.label }}
+          {{ form.semester6_module6 }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester6_module_grade6.id_for_label }}"></label>
+        {{ form.semester6_module_grade6.label }}
               {{ form.semester6_module_grade6 }}
+        </div>
+        
+
+              
             </div>
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear4.label }}
-              {{ form.academicYear4 }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+                {{ form.academicYear4.label }}
+                {{ form.academicYear4 }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level4.id_for_label }}"></label>
               {{ form.level4.label }}
               {{ form.level4 }}
-              {{ form.semester7.label }}
-              {{ form.semester7 }}
-              {{ form.semester7_module1.label }}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.semester7.id_for_label }}"></label>
+            {{ form.semester7.label }}
+            {{ form.semester7 }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester7_module1.id_for_label }}"></label>
+         {{ form.semester7_module1.label }}
               {{ form.semester7_module1 }}
-              {{ form.semester7_module_grade1.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester7_module_grade1.id_for_label }}"></label>
+        {{ form.semester7_module_grade1.label }}
               {{ form.semester7_module_grade1 }}
-              {{ form.semester7_module2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester7_module2.id_for_label }}"></label>
+          {{ form.semester7_module2.label }}
               {{ form.semester7_module2 }}
-              {{ form.semester7_module_grade2.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester7_module_grade2.id_for_label }}"></label>
+        {{ form.semester7_module_grade2.label }}
               {{ form.semester7_module_grade2 }}
-              {{ form.semester7_module3.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester7_module3.id_for_label }}"></label>
+          {{ form.semester7_module3.label }}
               {{ form.semester7_module3 }}
-              {{ form.semester7_module_grade3.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester7_module_grade3.id_for_label }}"></label>
+        {{ form.semester7_module_grade3.label }}
               {{ form.semester7_module_grade3 }}
-              {{ form.semester7_module4.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester7_module4.id_for_label }}"></label>
+          {{ form.semester7_module4.label }}
               {{ form.semester7_module4 }}
-              {{ form.semester7_module_grade4.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester7_module_grade4.id_for_label }}"></label>
+        {{ form.semester7_module_grade4.label }}
               {{ form.semester7_module_grade4 }}
-              {{ form.semester7_module5.label }}
+        </div>   
+        <div class="form-group">
+          <label for="{{ form.semester7_module5.id_for_label }}"></label>
+          {{ form.semester7_module5.label }}
               {{ form.semester7_module5 }}
-              {{ form.semester7_module_grade5.label }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester7_module_grade5.id_for_label }}"></label>
+        {{ form.semester7_module_grade5.label }}
               {{ form.semester7_module_grade5 }}
-              {{ form.semester7_module6.label }}
-              {{ form.semester7_module6 }}
-              {{ form.semester7_module_grade6.label }}
-              {{ form.semester7_module_grade6 }}
+        </div>
+            
             </div>
             <div class="col-md-3">
               {% csrf_token %}
-              {{ form.academicYear4.label }}
+              <div class="form-group">
+                <label for="{{ form.academicYear.id_for_label }}"></label>
+                {{ form.academicYear4.label }}
               {{ form.academicYear4 }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.level4.id_for_label }}"></label>
               {{ form.level4.label }}
               {{ form.level4 }}
-              {{ form.semester8.label }}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.semester8.id_for_label }}"></label>
+            {{ form.semester8.label }}
               {{ form.semester8 }}
-              {{ form.semester8_module1.label }}
-              {{ form.semester8_module1 }}
-              {{ form.semester8_module_grade1.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester8_module1.id_for_label }}"></label>
+          {{ form.semester8_module1.label }}
+          {{ form.semester8_module1 }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester8_module_grade1.id_for_label }}"></label>
+        {{ form.semester8_module_grade1.label }}
               {{ form.semester8_module_grade1 }}
-              {{ form.semester8_module2.label }}
-              {{ form.semester8_module2 }}
-              {{ form.semester8_module_grade2.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester8_module2.id_for_label }}"></label>
+          {{ form.semester8_module2.label }}
+          {{ form.semester8_module2 }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester8_module_grade2.id_for_label }}"></label>
+        {{ form.semester8_module_grade2.label }}
               {{ form.semester8_module_grade2 }}
-              {{ form.semester8_module3.label }}
-              {{ form.semester8_module3 }}
-              {{ form.semester8_module_grade3.label }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.semester8_module3.id_for_label }}"></label>
+          {{ form.semester8_module3.label }}
+          {{ form.semester8_module3 }}
+        </div>
+        <div class="form-group">
+        <label for="{{ form.semester8_module_grade3.id_for_label }}"></label>
+        {{ form.semester8_module_grade3.label }}
               {{ form.semester8_module_grade3 }}
-              {{ form.semester8_module4.label }}
-              {{ form.semester8_module4 }}
-              {{ form.semester8_module_grade4.label }}
-              {{ form.semester8_module_grade4 }}
-              {{ form.semester8_module5.label }}
-              {{ form.semester8_module5 }}
-              {{ form.semester8_module_grade5.label }}
-              {{ form.semester8_module_grade5 }}
-              {{ form.semester8_module6.label }}
-              {{ form.semester8_module6 }}
-              {{ form.semester8_module_grade6.label }}
-              {{ form.semester8_module_grade6 }}
+        </div>
+              
             </div> 
           </div> 
           
@@ -912,7 +1291,15 @@
 
 
 
-
+ {% for message in messages %}
+ {% if message.tags == 'error' %}
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script>
+    var m = "{{ message|escapejs|safe }}";
+    swal("Warning !", m, "error")
+ </script>
+ {% endif %}
+ {% endfor %}
 
 
 

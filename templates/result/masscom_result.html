@@ -43,13 +43,19 @@
 
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/style.css'%}" rel="stylesheet">
 
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
 
 
-
+  <style>
+    /* Add margin and padding to form fields */
+    .form-field {
+        margin-bottom: 5px; /* Adjust the margin as needed */
+        padding: 5px; /* Adjust the padding as needed */
+    }
+</style>
  
 </head>
 
@@ -67,7 +73,7 @@
   </div><!-- End Logo -->
 
   <div class="search-bar">
-   <marquee style="font-size: 50px;" behavior="" direction="">Central University Transcripts Management System</marquee>
+    <marquee style="font-size: 50px;" behavior="" direction="">Central University Result Management System</marquee>
   </div><!-- End Search Bar -->
 
   <nav class="header-nav ms-auto">
@@ -504,7 +510,7 @@
       </ul>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person"></i><span>Students Registration</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -515,7 +521,7 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
 
 
 
@@ -549,7 +555,18 @@
       </ul>
     </li>
 
-    
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person"></i><span>Certificates</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="iconnav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'search_certificate' %}">
+            <i class="bi bi-circle"></i><span>Search Certificate</span>
+          </a>
+        </li>
+      </ul>
+    </li> 
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -633,306 +650,507 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-                <div class="card">
-                  <h1 style="text-align: center; margin-top: 40px;">Progress Report Entry for Mass Communication</h1>
-                  <form method="post">
-                    <div class="row" style="margin-top: 20px;">
-                      <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <h1 style="text-align: center; margin-top: 40px;">Progress Report Entry for Mass Communication</h1>
+            <form method="post">
+              <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6 offset-md-3">
 
-                        {% csrf_token %}
-                        {{ form.student.label }}
-                        {{ form.student }}
-                        {{ form.department.label }}
-                        {{ form.department }}
-                        
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
-                        <div class="col-md-12">
-                          <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">1st Year Result</span>
-                          <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">2nd Year Result</span>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col md-12">
-                          <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
-                          <span style="margin-left: 150px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
-                          <span style="margin-left: 100px;  margin-bottom: 150px; font-size: large;">First Semester</span>
-                          <span style="margin-left: 170px;  margin-bottom: 300px; font-size: large;">Second Semester</span>
-                          
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear.label }}
-                        {{ form.academicYear }}
-                        {{ form.level.label }}
-                        {{ form.level }}
-                        {{ form.semester.label }}
-                        {{ form.semester }}
-                        {{ form.mass_course1.label }}
-                        {{ form.mass_course1 }}
-                        {{ form.mass_course_grade1.label }}
-                        {{ form.mass_course_grade1 }}
-                        {{ form.mass_course2.label }}
-                        {{ form.mass_course2 }}
-                        {{ form.mass_course_grade2.label }}
-                        {{ form.mass_course_grade2 }}
-                        {{ form.mass_course3.label }}
-                        {{ form.mass_course3 }}
-                        {{ form.mass_course_grade3.label }}
-                        {{ form.mass_course_grade3 }}
-                        {{ form.mass_course4.label }}
-                        {{ form.mass_course4 }}
-                        {{ form.mass_course_grade4.label }}
-                        {{ form.mass_course_grade4 }}
-                        {{ form.mass_course5.label }}
-                        {{ form.mass_course5 }}
-                        {{ form.mass_course_grade5.label }}
-                        {{ form.mass_course_grade5 }}
-                        {{ form.mass_course6.label }}
-                        {{ form.mass_course6 }}
-                        {{ form.mass_course_grade6.label }}
-                        {{ form.mass_course_grade6 }}
-                      </div>
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear.label }}
-                        {{ form.academicYear }}
-                        {{ form.level.label }}
-                        {{ form.level }}
-                        {{ form.semester2.label }}
-                        {{ form.semester2 }}
-                        {{ form.semester2_mass_course1.label }}
-                        {{ form.semester2_mass_course1 }}
-                        {{ form.semester2_mass_course_grade1.label }}
-                        {{ form.semester2_mass_course_grade1 }}
-                        {{ form.semester2_mass_course2.label }}
-                        {{ form.semester2_mass_course2 }}
-                        {{ form.semester2_mass_course_grade2.label }}
-                        {{ form.semester2_mass_course_grade2 }}
-                        {{ form.semester2_mass_course3.label }}
-                        {{ form.semester2_mass_course3 }}
-                        {{ form.semester2_mass_course_grade3.label }}
-                        {{ form.semester2_mass_course_grade3 }}
-                        {{ form.semester2_mass_course4.label }}
-                        {{ form.semester2_mass_course4 }}
-                        {{ form.semester2_mass_course_grade4.label }}
-                        {{ form.semester2_mass_course_grade4 }}
-                        {{ form.semester2_mass_course5.label }}
-                        {{ form.semester2_mass_course5 }}
-                        {{ form.semester2_mass_course_grade5.label }}
-                        {{ form.semester2_mass_course_grade5 }}
-                        {{ form.semester2_mass_course6.label }}
-                        {{ form.semester2_mass_course6 }}
-                        {{ form.semester2_mass_course_grade6.label }}
-                        {{ form.semester2_mass_course_grade6 }}
-                      </div>
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear2.label }}
-                        {{ form.academicYear2 }}
-                        {{ form.level2.label }}
-                        {{ form.level2 }}
-                        {{ form.semester3.label }}
-                        {{ form.semester3 }}
-                        {{ form.semester3_mass_course1.label }}
-                        {{ form.semester3_mass_course1 }}
-                        {{ form.semester3_mass_course_grade1.label }}
-                        {{ form.semester3_mass_course_grade1 }}
-                        {{ form.semester3_mass_course2.label }}
-                        {{ form.semester3_mass_course2 }}
-                        {{ form.semester3_mass_course_grade2.label }}
-                        {{ form.semester3_mass_course_grade2 }}
-                        {{ form.semester3_mass_course3.label }}
-                        {{ form.semester3_mass_course3 }}
-                        {{ form.semester3_mass_course_grade3.label }}
-                        {{ form.semester3_mass_course_grade3 }}
-                        {{ form.semester3_mass_course4.label }}
-                        {{ form.semester3_mass_course4 }}
-                        {{ form.semester3_mass_course_grade4.label }}
-                        {{ form.semester3_mass_course_grade4 }}
-                        {{ form.semester3_mass_course5.label }}
-                        {{ form.semester3_mass_course5 }}
-                        {{ form.semester3_mass_course_grade5.label }}
-                        {{ form.semester3_mass_course_grade5 }}
-                       
-                      </div>
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear2.label }}
-                        {{ form.academicYear2 }}
-                        {{ form.level2.label }}
-                        {{ form.level2 }}
-                        {{ form.semester4.label }}
-                        {{ form.semester4 }}
-                        {{ form.semester4_mass_course1.label }}
-                        {{ form.semester4_mass_course1 }}
-                        {{ form.semester4_mass_course_grade1.label }}
-                        {{ form.semester4_mass_course_grade1 }}
-                        {{ form.semester4_mass_course2.label }}
-                        {{ form.semester4_mass_course2 }}
-                        {{ form.semester4_mass_course_grade2.label }}
-                        {{ form.semester4_mass_course_grade2 }}
-                        {{ form.semester4_mass_course3.label }}
-                        {{ form.semester4_mass_course3 }}
-                        {{ form.semester4_mass_course_grade3.label }}
-                        {{ form.semester4_mass_course_grade3 }}
-                        {{ form.semester4_mass_course4.label }}
-                        {{ form.semester4_mass_course4 }}
-                        {{ form.semester4_mass_course_grade4.label }}
-                        {{ form.semester4_mass_course_grade4 }}
-                        {{ form.semester4_mass_course5.label }}
-                        {{ form.semester4_mass_course5 }}
-                        {{ form.semester4_mass_course_grade5.label }}
-                        {{ form.semester4_mass_course_grade5 }}
-                       
-                      </div>
-                    </div>
-                    
-                    
-
-                     <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">3rd Year Result</span>
-                          <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">Final Year Result</span>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col md-12">
-                          <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
-                          <span style="margin-left: 120px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
-                          <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">First Semester</span>
-                          <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">Second Semester</span>
-                          
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear3.label }}
-                        {{ form.academicYear3 }}
-                        {{ form.level3.label }}
-                        {{ form.level3 }}
-                        {{ form.semester5.label }}
-                        {{ form.semester5 }}
-                        {{ form.semester5_mass_course1.label }}
-                        {{ form.semester5_mass_course1 }}
-                        {{ form.semester5_mass_course_grade1.label }}
-                        {{ form.semester5_mass_course_grade1 }}
-                        {{ form.semester5_mass_course2.label }}
-                        {{ form.semester5_mass_course2 }}
-                        {{ form.semester5_mass_course_grade2.label }}
-                        {{ form.semester5_mass_course_grade2 }}
-                        {{ form.semester5_mass_course3.label }}
-                        {{ form.semester5_mass_course3 }}
-                        {{ form.semester5_mass_course_grade3.label }}
-                        {{ form.semester5_mass_course_grade3 }}
-                        {{ form.semester5_mass_course4.label }}
-                        {{ form.semester5_mass_course4 }}
-                        {{ form.semester5_mass_course_grade4.label }}
-                        {{ form.semester5_mass_course_grade4 }}
-                        {{ form.semester5_mass_course5.label }}
-                        {{ form.semester5_mass_course5 }}
-                        {{ form.semester5_mass_course_grade5.label }}
-                        {{ form.semester5_mass_course_grade5 }}
-                        
-                      </div>
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear3.label }}
-                        {{ form.academicYear3 }}
-                        {{ form.level3.label }}
-                        {{ form.level3 }}
-                        {{ form.semester6.label }}
-                        {{ form.semester6 }}
-                        {{ form.semester6_mass_course1.label }}
-                        {{ form.semester6_mass_course1 }}
-                        {{ form.semester6_mass_course_grade1.label }}
-                        {{ form.semester6_mass_course_grade1 }}
-                        {{ form.semester6_mass_course2.label }}
-                        {{ form.semester6_mass_course2 }}
-                        {{ form.semester6_mass_course_grade2.label }}
-                        {{ form.semester6_mass_course_grade2 }}
-                        {{ form.semester6_mass_course3.label }}
-                        {{ form.semester6_mass_course3 }}
-                        {{ form.semester6_mass_course_grade3.label }}
-                        {{ form.semester6_mass_course_grade3 }}
-                        {{ form.semester6_mass_course4.label }}
-                        {{ form.semester6_mass_course4 }}
-                        {{ form.semester6_mass_course_grade4.label }}
-                        {{ form.semester6_mass_course_grade4 }}
-                        {{ form.semester6_mass_course5.label }}
-                        {{ form.semester6_mass_course5 }}
-                        {{ form.semester6_mass_course_grade5.label }}
-                        {{ form.semester6_mass_course_grade5 }}
-                       
-                      </div>
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear4.label }}
-                        {{ form.academicYear4 }}
-                        {{ form.level4.label }}
-                        {{ form.level4 }}
-                        {{ form.semester7.label }}
-                        {{ form.semester7 }}
-                        {{ form.semester7_mass_course1.label }}
-                        {{ form.semester7_mass_course1 }}
-                        {{ form.semester7_mass_course_grade1.label }}
-                        {{ form.semester7_mass_course_grade1 }}
-                        {{ form.semester7_mass_course2.label }}
-                        {{ form.semester7_mass_course2 }}
-                        {{ form.semester7_mass_course_grade2.label }}
-                        {{ form.semester7_mass_course_grade2 }}
-                        {{ form.semester7_mass_course3.label }}
-                        {{ form.semester7_mass_course3 }}
-                        {{ form.semester7_mass_course_grade3.label }}
-                        {{ form.semester7_mass_course_grade3 }}
-                        {{ form.semester7_mass_course4.label }}
-                        {{ form.semester7_mass_course4 }}
-                        {{ form.semester7_mass_course_grade4.label }}
-                        {{ form.semester7_mass_course_grade4 }}
-                        {{ form.semester7_mass_course5.label }}
-                        {{ form.semester7_mass_course5 }}
-                        {{ form.semester7_mass_course_grade5.label }}
-                        {{ form.semester7_mass_course_grade5 }}
-                        
-                      </div>
-                      <div class="col-md-3">
-                        {% csrf_token %}
-                        {{ form.academicYear4.label }}
-                        {{ form.academicYear4 }}
-                        {{ form.level4.label }}
-                        {{ form.level4 }}
-                        {{ form.semester8.label }}
-                        {{ form.semester8 }}
-                        {{ form.semester8_mass_course1.label }}
-                        {{ form.semester8_mass_course1 }}
-                        {{ form.semester8_mass_course_grade1.label }}
-                        {{ form.semester8_mass_course_grade1 }}
-                        {{ form.semester8_mass_course2.label }}
-                        {{ form.semester8_mass_course2 }}
-                        {{ form.semester8_mass_course_grade2.label }}
-                        {{ form.semester8_mass_course_grade2 }}
-                        {{ form.semester8_mass_course3.label }}
-                        {{ form.semester8_mass_course3 }}
-                        {{ form.semester8_mass_course_grade3.label }}
-                        {{ form.semester8_mass_course_grade3 }}
-                        {{ form.semester8_mass_course4.label }}
-                        {{ form.semester8_mass_course4 }}
-                        {{ form.semester8_mass_course_grade4.label }}
-                        {{ form.semester8_mass_course_grade4 }}
-                      </div> 
-                    </div> 
-                    
-                    <button type="submit" class="btn btn-lg btn-secondary mt-3" style="margin-left: 250px; padding-left: 200px; padding-right: 200px; margin-top: 30px;"><i class="fas fa-database"></i>
-                    Add Result</button>
-                  </form>
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Student</label>
+                    {{ form.student.label }}
+                    {{ form.student }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Department</label>
+                  {{ form.department.label }}
+                  {{ form.department }}
+              </div>
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
+                  <div class="col-md-12">
+                    <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">1st Year Result</span>
+                    <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">2nd Year Result</span>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col md-12">
+                    <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
+                    <span style="margin-left: 150px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
+                    <span style="margin-left: 100px;  margin-bottom: 150px; font-size: large;">First Semester</span>
+                    <span style="margin-left: 170px;  margin-bottom: 300px; font-size: large;">Second Semester</span>
+                    
+                  </div>
+                </div>
+                
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear.label }}
+                    {{ form.academicYear }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level.label }}
+                  {{ form.level }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester.label }}
+                {{ form.semester }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.mass_course1.label }}
+              {{ form.mass_course1 }}
+          </div>
+                  {{ form.mass_course_grade1.label }}
+                  {{ form.mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.mass_course2.label }}
+                    {{ form.mass_course2 }}
+                </div>
+                  {{ form.mass_course_grade2.label }}
+                  {{ form.mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.mass_course3.label }}
+                    {{ form.mass_course3 }}
+                </div>
+                  {{ form.mass_course_grade3.label }}
+                  {{ form.mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.mass_course4.label }}
+                    {{ form.mass_course4 }}
+                </div>
+                  {{ form.mass_course_grade4.label }}
+                  {{ form.mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.mass_course5.label }}
+                    {{ form.mass_course5 }}
+                </div>
+                  {{ form.mass_course_grade5.label }}
+                  {{ form.mass_course_grade5 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.mass_course6.label }}
+                    {{ form.mass_course6 }}
+                </div>
+                  {{ form.mass_course_grade6.label }}
+                  {{ form.mass_course_grade6 }}
+                </div>
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear.label }}
+                    {{ form.academicYear }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level.label }}
+                  {{ form.level }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester2.label }}
+                {{ form.semester2 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester2_mass_course1.label }}
+              {{ form.semester2_mass_course1 }}
+          </div>
+                  {{ form.semester2_mass_course_grade1.label }}
+                  {{ form.semester2_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester2_mass_course2.label }}
+                    {{ form.semester2_mass_course2 }}
+                </div>
+                  {{ form.semester2_mass_course_grade2.label }}
+                  {{ form.semester2_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester2_mass_course3.label }}
+                    {{ form.semester2_mass_course3 }}
+                </div>
+                  {{ form.semester2_mass_course_grade3.label }}
+                  {{ form.semester2_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester2_mass_course4.label }}
+                    {{ form.semester2_mass_course4 }}
+                </div>
+                  {{ form.semester2_mass_course_grade4.label }}
+                  {{ form.semester2_mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester2_mass_course5.label }}
+                    {{ form.semester2_mass_course5 }}
+                </div>
+                  {{ form.semester2_mass_course_grade5.label }}
+                  {{ form.semester2_mass_course_grade5 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester2_mass_course6.label }}
+                    {{ form.semester2_mass_course6 }}
+                </div>
+                  {{ form.semester2_mass_course_grade6.label }}
+                  {{ form.semester2_mass_course_grade6 }}
+                </div>
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear2.label }}
+                    {{ form.academicYear2 }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level2.label }}
+                  {{ form.level2 }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester3.label }}
+                {{ form.semester3 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester3_mass_course1.label }}
+              {{ form.semester3_mass_course1 }}
+          </div>
+                  {{ form.semester3_mass_course_grade1.label }}
+                  {{ form.semester3_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester3_mass_course2.label }}
+                    {{ form.semester3_mass_course2 }}
+                </div>
+                  {{ form.semester3_mass_course_grade2.label }}
+                  {{ form.semester3_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester3_mass_course3.label }}
+                    {{ form.semester3_mass_course3 }}
+                </div>
+                  {{ form.semester3_mass_course_grade3.label }}
+                  {{ form.semester3_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester3_mass_course4.label }}
+                    {{ form.semester3_mass_course4 }}
+                </div>
+                  {{ form.semester3_mass_course_grade4.label }}
+                  {{ form.semester3_mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester3_mass_course5.label }}
+                    {{ form.semester3_mass_course5 }}
+                </div>
+                  {{ form.semester3_mass_course_grade5.label }}
+                  {{ form.semester3_mass_course_grade5 }}
+                 
+                </div>
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear2.label }}
+                    {{ form.academicYear2 }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level2.label }}
+                  {{ form.level2 }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester4.label }}
+                {{ form.semester4 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester4_mass_course1.label }}
+              {{ form.semester4_mass_course1 }}
+          </div>
+                  {{ form.semester4_mass_course_grade1.label }}
+                  {{ form.semester4_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester4_mass_course2.label }}
+                    {{ form.semester4_mass_course2 }}
+                </div>
+                  {{ form.semester4_mass_course_grade2.label }}
+                  {{ form.semester4_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester4_mass_course3.label }}
+                    {{ form.semester4_mass_course3 }}
+                </div>
+                  {{ form.semester4_mass_course_grade3.label }}
+                  {{ form.semester4_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester4_mass_course4.label }}
+                    {{ form.semester4_mass_course4 }}
+                </div>
+                  {{ form.semester4_mass_course_grade4.label }}
+                  {{ form.semester4_mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester4_mass_course5.label }}
+                    {{ form.semester4_mass_course5 }}
+                </div>
+                  {{ form.semester4_mass_course_grade5.label }}
+                  {{ form.semester4_mass_course_grade5 }}
+                 
+                </div>
+              </div>
+              
+              
+
+               <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span style=" margin-left: 200px; margin-bottom: 100px; font-weight: bold; font-size: large;">3rd Year Result</span>
+                    <span style="margin-left: 400px; margin-bottom: 100px; font-weight: bold; font-size: large;">Final Year Result</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col md-12">
+                    <span style="margin-left: 40px; margin-bottom: 200px;  font-size: large;">First Semester</span>
+                    <span style="margin-left: 120px; margin-bottom: 200px;  font-size: large;">Second Semester</span>
+                    <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">First Semester</span>
+                    <span style="margin-left: 150px;  margin-bottom: 200px; font-size: large;">Second Semester</span>
+                    
+                  </div>
+                </div>
+                
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear3.label }}
+                    {{ form.academicYear3 }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level3.label }}
+                  {{ form.level3 }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester5.label }}
+                {{ form.semester5 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester5_mass_course1.label }}
+              {{ form.semester5_mass_course1 }}
+          </div>
+                  {{ form.semester5_mass_course_grade1.label }}
+                  {{ form.semester5_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester5_mass_course2.label }}
+                    {{ form.semester5_mass_course2 }}
+                </div>
+                  {{ form.semester5_mass_course_grade2.label }}
+                  {{ form.semester5_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester5_mass_course3.label }}
+                    {{ form.semester5_mass_course3 }}
+                </div>
+                  {{ form.semester5_mass_course_grade3.label }}
+                  {{ form.semester5_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester5_mass_course4.label }}
+                    {{ form.semester5_mass_course4 }}
+                </div>
+                  {{ form.semester5_mass_course_grade4.label }}
+                  {{ form.semester5_mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester5_mass_course5.label }}
+                    {{ form.semester5_mass_course5 }}
+                </div>
+                  {{ form.semester5_mass_course_grade5.label }}
+                  {{ form.semester5_mass_course_grade5 }}
+                  
+                </div>
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear3.label }}
+                    {{ form.academicYear3 }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level3.label }}
+                  {{ form.level3 }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester6.label }}
+                {{ form.semester6 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester6_mass_course1.label }}
+              {{ form.semester6_mass_course1 }}
+          </div>
+                  {{ form.semester6_mass_course_grade1.label }}
+                  {{ form.semester6_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester6_mass_course2.label }}
+                    {{ form.semester6_mass_course2 }}
+                </div>
+                  {{ form.semester6_mass_course_grade2.label }}
+                  {{ form.semester6_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester6_mass_course3.label }}
+                    {{ form.semester6_mass_course3 }}
+                </div>
+                  {{ form.semester6_mass_course_grade3.label }}
+                  {{ form.semester6_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester6_mass_course4.label }}
+                    {{ form.semester6_mass_course4 }}
+                </div>
+                  {{ form.semester6_mass_course_grade4.label }}
+                  {{ form.semester6_mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester6_mass_course5.label }}
+                    {{ form.semester6_mass_course5 }}
+                </div>
+                  {{ form.semester6_mass_course_grade5.label }}
+                  {{ form.semester6_mass_course_grade5 }}
+                 
+                </div>
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear4.label }}
+                    {{ form.academicYear4 }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level4.label }}
+                  {{ form.level4 }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester7.label }}
+                {{ form.semester7 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester7_mass_course1.label }}
+              {{ form.semester7_mass_course1 }}
+          </div>
+                  {{ form.semester7_mass_course_grade1.label }}
+                  {{ form.semester7_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester7_mass_course2.label }}
+                    {{ form.semester7_mass_course2 }}
+                </div>
+                  {{ form.semester7_mass_course_grade2.label }}
+                  {{ form.semester7_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester7_mass_course3.label }}
+                    {{ form.semester7_mass_course3 }}
+                </div>
+                  {{ form.semester7_mass_course_grade3.label }}
+                  {{ form.semester7_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester7_mass_course4.label }}
+                    {{ form.semester7_mass_course4 }}
+                </div>
+                  {{ form.semester7_mass_course_grade4.label }}
+                  {{ form.semester7_mass_course_grade4 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester7_mass_course5.label }}
+                    {{ form.semester7_mass_course5 }}
+                </div>
+                  {{ form.semester7_mass_course_grade5.label }}
+                  {{ form.semester7_mass_course_grade5 }}
+                  
+                </div>
+                <div class="col-md-3">
+                  {% csrf_token %}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Academic Year</label>
+                    {{ form.academicYear4.label }}
+                    {{ form.academicYear4 }}
+                </div>
+                <div class="form-field">
+                  <label for="" style="color: rgb(121, 121, 122);">Level</label>
+                  {{ form.level4.label }}
+                  {{ form.level4 }}
+              </div>
+              <div class="form-field">
+                <label for="" style="color: rgb(121, 121, 122);">Semester</label>
+                {{ form.semester8.label }}
+                {{ form.semester8 }}
+            </div>
+            <div class="form-field">
+              <label for="" style="color: rgb(121, 121, 122);">Module</label>
+              {{ form.semester8_mass_course1.label }}
+              {{ form.semester8_mass_course1 }}
+          </div>
+                  {{ form.semester8_mass_course_grade1.label }}
+                  {{ form.semester8_mass_course_grade1 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester8_mass_course2.label }}
+                    {{ form.semester8_mass_course2 }}
+                </div>
+                  {{ form.semester8_mass_course_grade2.label }}
+                  {{ form.semester8_mass_course_grade2 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester8_mass_course3.label }}
+                    {{ form.semester8_mass_course3 }}
+                </div>
+                  {{ form.semester8_mass_course_grade3.label }}
+                  {{ form.semester8_mass_course_grade3 }}
+                  <div class="form-field">
+                    <label for="" style="color: rgb(121, 121, 122);">Module</label>
+                    {{ form.semester8_mass_course4.label }}
+                    {{ form.semester8_mass_course4 }}
+                </div>
+                  {{ form.semester8_mass_course_grade4.label }}
+                  {{ form.semester8_mass_course_grade4 }}
+                </div> 
+              </div> 
+              
+              <button type="submit" class="btn btn-lg btn-secondary mt-3" style="margin-left: 250px; padding-left: 200px; padding-right: 200px; margin-top: 30px;"><i class="fas fa-database"></i>
+              Add Result</button>
+            </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -967,7 +1185,15 @@
 
 
 
-
+ {% for message in messages %}
+ {% if message.tags == 'error' %}
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script>
+    var m = "{{ message|escapejs|safe }}";
+    swal("Warning !", m, "error")
+ </script>
+ {% endif %}
+ {% endfor %}
 
 
 

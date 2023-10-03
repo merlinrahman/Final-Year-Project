@@ -37,7 +37,7 @@
     <!-- spacing css -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/rs-spacing.css' %}">
     <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
     <!-- responsive css -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
    
@@ -88,7 +88,7 @@
                 <div >
                     <div class="container">
                         <div class="row y-middle">
-                            <marquee style="color: rgb(0, 0, 0); letter-spacing: 20px; font-size: 30px; padding-bottom: 10px;" behavior="" direction="">Central University Transcript Management System</marquee>
+                            <marquee style="color: rgb(0, 0, 0); letter-spacing: 20px; font-size: 30px; padding-bottom: 10px;" behavior="" direction="">Central University Result Management System</marquee>
                         </div>
                     </div>
                 </div>
@@ -116,9 +116,9 @@
                                          <ul class="nav-menu">
                                             <li class="rs-mega-menu mega-rs menu-item-has-children current-menu-item"> <a href="{% url 'index' %}">Home</a>
                                             </li>
-                                             <li class="menu-item-has-children">
+                                             <!-- <li class="menu-item-has-children">
                                                  <a href="{% url 'about' %}">About</a>
-                                             </li>
+                                             </li> -->
 
                                             
 
@@ -153,9 +153,9 @@
                                                 </ul> <!-- //.mega-menu -->
                                             </li>
 
-                                             <li class="menu-item-has-children">
+                                             <!-- <li class="menu-item-has-children">
                                                  <a href="{% url 'contact' %}">Contact</a>
-                                             </li>
+                                             </li> -->
 
                                              <li class="menu-item-has-children">
                                                 <a href="{% url 'request_transcript'%}">REQUEST TRANSCRIPT</a>
@@ -285,7 +285,7 @@
         <!--Full width header End-->
 
 		<!-- Main content Start -->
-        <div class="main-content" style="margin-top: -60px;">
+        <div class="main-content" style="margin-top: -80px;">
             <!-- Breadcrumbs Start -->
             <!-- <div class="rs-breadcrumbs breadcrumbs-overlay">
                 <div class="breadcrumbs-img">
@@ -316,7 +316,7 @@
                                     <input type="password" name="password" placeholder="Password" required="">
                                     <button type="submit" class="readon submit-btn">login</button>
                                     <div class="last-password">
-                                        <p><a href="{% url 'password_reset' %}">Forget Password?</a></p>
+                                        <!-- <p><a href="{% url 'password_reset' %}">Forget Password?</a></p> -->
                                     </div>
                                             {% if login_form.non_field_errors %}
                                             {% for err in login_form.non_field_errors %}
@@ -324,7 +324,7 @@
                                             {% endfor %}
                                             {% endif %}
                                             <label>
-                                                <a href="{% url 'admin_redirect' %}" class="lost-password">ADMIN LOGIN</a>
+                                                <a href="{% url 'admin_redirect' %}" class="lost-password">ADMINISTRATOR</a>
                                             </label>
                                 </form>
                             </div>

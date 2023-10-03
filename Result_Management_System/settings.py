@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "mainapp",
     "result",
-    "result2",
     "import_export",
     "account",
     'crispy_forms',
@@ -85,23 +84,23 @@ WSGI_APPLICATION = "Result_Management_System.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Result_Management_System',
-        'USER': 'postgres',
-        'PASSWORD': 'ardymerlin',
-        'HOST': 'localhost',
-        'PORT': '5432'
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Result_Management_System',
+#         'USER': 'postgres',
+#         'PASSWORD': 'ardymerlin',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 
 
 
@@ -142,7 +141,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 MEDIA_URL = '/media/'
-MEDIA_ROOT = (BASE_DIR/ 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -154,6 +153,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGOUT_REDIRECT_URL = 'login'
 
 # *******JAZZMIN TEMPLATE SETUP*************
 
@@ -185,5 +185,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'merlinrahman94@gmail.com'
-EMAIL_HOST_PASSWORD = 'tdmyhoxhpnyiwbiq'
+EMAIL_HOST_USER = 'ardymerlin000@gmail.com'
+EMAIL_HOST_PASSWORD = 'uhqderxkjgjvritp'
+ADMIN_EMAIL = 'merlinrahman94@gmail.com'
+

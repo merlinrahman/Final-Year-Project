@@ -40,7 +40,7 @@
 
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/style.css'%}" rel="stylesheet">
 
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
@@ -69,7 +69,7 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-     <marquee style="font-size: 50px;" behavior="" direction="">Central University Transcripts Management System</marquee>
+     <marquee style="font-size: 50px;" behavior="" direction="">Central University Result Management System</marquee>
     </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
@@ -511,7 +511,7 @@
       </ul>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person"></i><span>Students Registration</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -522,7 +522,7 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
 
 
 
@@ -556,7 +556,18 @@
       </ul>
     </li>
 
-    
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#iconnav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person"></i><span>Certificates</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="iconnav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'search_certificate' %}">
+            <i class="bi bi-circle"></i><span>Search Certificate</span>
+          </a>
+        </li>
+      </ul>
+    </li> 
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -637,9 +648,22 @@
                     
                     <form method="post">
                       {% csrf_token %}
-                      {{ form }}
-                      <button type="submit" class="btn btn-secondary mt-3" style="margin-left: 150px;"><i class="fas fa-database"></i>
-                        Add Department</button>
+                      <div class="form-group">
+                          <label for="{{ form.faculty.id_for_label }}"></label>
+                          <select class="form-control shadow-none" id="{{ form.faculty.id_for_label }}" name="{{ form.faculty.name }}">
+                              <option value="" disabled selected>-----Select Faculty-----</option>
+                              {% for choice in form.faculty.field.choices %}
+                                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="{{ form.department.id_for_label }}"></label>
+                          {{ form.department }}
+                      </div>
+                      <button type="submit" class="btn btn-secondary mt-3" style="margin-left: 150px;">
+                          <i class="fas fa-database"></i> Add Department
+                      </button>
                   </form>
                   
                         
@@ -674,7 +698,15 @@
 
 
 
-
+ {% for message in messages %}
+ {% if message.tags == 'error' %}
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script>
+    var m = "{{ message|escapejs|safe }}";
+    swal("Warning !", m, "error")
+ </script>
+ {% endif %}
+ {% endfor %}
 
 
 

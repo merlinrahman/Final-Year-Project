@@ -37,7 +37,7 @@
 
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/style.css'%}" rel="stylesheet">
 
   <!-- ---Result CSS----------- -->
   <link rel="stylesheet" href="{% static 'assets/css/result.css' %}">
@@ -52,58 +52,65 @@
 
  </style>
 </head>
-<body>
+<body style="background-color: gray;">
 
 
-  <div class="container-fluid">
+  <div class="container-fluid" style="width: 1000px; ">
     <div class="row firstline">
       {% if result %}
-      <div class="row" style="margin-left: 20px;">
-        <div class="col-md-12">
-          <a href="{% url 'index' %}" type="button" style="padding-left: 40px; padding-right: 40px; margin-top: 20px; margin-left: 1100px;" class="btn btn-info noPrint text-white"><i class="fas fa-sign-out-alt">&nbsp;&nbsp;</i>Logout</a>
-          <button onclick="window.print()" style="padding-left: 40px; padding-right: 40px;" class="noPrint btn btn-success mt-4"><i class="fas fa-print">&nbsp;&nbsp;</i>Print</button>
-            <div class="d-flex justify-content-center">
-              <div class="card" style="width: 1400px; margin-top: 30px;">
-                <div class="card-body">
-                  <div class="col-md-12">
-                    <img style="width: 1300px; height: 80px;"   src="{% static 'assets/img/result-logo.png' %}" alt="">
-                  </div>
-
+      <table style="margin-top: 50px; background-color: rgb(253, 247, 247)">
   
-                  <table width="100%" style="margin-top: 20px;">
-                    <tbody>
-                      <tr>
-                        <th colspan="2" style="border-width:1px;" class="text-center"  scope="row"><h3>STUDENTS PROGRESS RESULT</h3></th>
-                      </tr>
-                      <tr>
-                        <th style="border-width:1px;"  scope="row"><small>Name</small></th>
-                        <td style="border-width:1px;" >{{result.student}}</td>
-                      </tr>
-                      <tr>
-                        <th style="border-width:1px;" scope="row">ID Number</th>
-                        <td style="border-width:1px;">{{result.student.student_id}}</td>
-                      </tr>
-                      <tr>
-                        <th style="border-width:1px;" scope="row">Email</th>
-                        <td style="border-width:1px;">{{result.student.email}}</td>
-                      </tr>
-                      <tr>
-                        <th style="border-width:1px;" scope="row">Department</th>
-                        <td style="border-width:1px;" colspan="2">{{result.student.department}}</td>
-                        
-                      </tr>
-                      <tr>
-                        <th style="border-width:1px;" scope="row">Program of Study</th>
-                        <td style="border-width:1px;" colspan="2">{{result.student.program}}</td>
-                        
-                      </tr>
-                      <tr>
-                        <th style="border-width:1px;" scope="row">Date:</th>
-                        <td style="border-width:1px;" colspan="2">{{result.entry_date}}</td>
-                        
-                      </tr>
-                    </tbody>
-                  </table>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-width:1px;" class="text-center"  scope="row">
+              <img style="height: 70px; margin-top: 10px;"   src="{% static 'assets/images/Central.png' %}" alt="">
+              <h6>1 Silicon Hills-Mile-91</h6>
+              <h6>info@central.edu.sl</h6>
+              <h6>www.central.edu.sl</h6>
+              <h6>(+232)-99-140-208/(+232)-79-630-407/ (+232)-88-333-888</h6>
+            </th>
+  
+            <th colspan="" style="border-width:1px;" class="text-center"  scope="row">
+              <!-- <img style="height: 180px; margin-top: 10px;"   src="{% static 'assets/images/cusl-logo.jpeg' %}" alt=""> -->
+              {% if result.student.stu_image %}
+                <img style="width: 60%; margin-left: -20px;" src="{{ result.student.stu_image.url}}" alt="">
+                {% endif %}
+              
+            </th>
+           
+              
+          </tr>
+          <tr>
+            <th colspan="3" style="border-width:1px;" class="text-center"  scope="row"><h3>STUDENTS PROGRESS RESULT</h3></th>
+          </tr>
+          <tr>
+            <th colspan="2" style="border-width:1px;" class="text-center"   scope="row"><small>Name Of Student</small></th>
+            <th  style="border-width:1px;" colspan="2" >{{result.student}}</th>
+           
+          </tr>
+          <tr>
+            <th colspan="" style="border-width:1px;" class="text-center"  scope="row">ID Number</th>
+            <th style="border-width:1px; width: 30%;" colspan="2" >{{result.student.student_id}}</th>
+            
+          </tr>
+          <tr>
+            <th style="border-width:1px;" class="text-center"  scope="row">Name Of Department</th>
+            <th style="border-width:1px; width: 30%;" colspan="2">{{result.student.department}}</th>
+            
+          </tr>
+          <tr>
+            <th style="border-width:1px;" class="text-center"  scope="row">Program of Study</th>
+            <th style="border-width:1px; width: 30%;" colspan="2">{{result.student.program}}</th>
+            
+          </tr>
+          <tr>
+            <th style="border-width:1px;" class="text-center"  scope="row">Date Of Result Entry:</th>
+            <th style="border-width:1px; width: 30%;" colspan="2">{{result.entry_date}}</th>
+            
+          </tr>
+        </tbody>
+      </table>
+
 
               
               
@@ -111,7 +118,7 @@
               
               
                   <!-- =================================YEAR ONE============================= -->
-                  <table style="width:100%">
+                  <table style="background-color: rgb(253, 247, 247)">
                     <thead>
                       <tr >
                         <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{viewresult.level}}</th>
@@ -298,7 +305,7 @@
               
               
                   <!-- ==============================YEAR TWO============================== -->
-                  <table style="width:100%">
+                  <table style="background-color: rgb(253, 247, 247)">
                     <thead>
                       <tr >
                         <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{result.level2}}</th>
@@ -484,7 +491,7 @@
               
               
                       <!-- ==============================YEAR THREE============================== -->
-                      <table style="width:100%">
+                      <table style="background-color: rgb(253, 247, 247)">
                         <thead>
                           <tr >
                             <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{result.level3}}</th>
@@ -670,7 +677,7 @@
               
               
                       <!-- ==============================YEAR FOUR============================== -->
-                      <table style="width:100%">
+                      <table style="background-color: rgb(253, 247, 247)">
                         <thead>
                           <tr >
                             <th colspan="12" scope="col" style="border-width:1px;" class="text-center">{{result.level4}}</th>
@@ -851,27 +858,84 @@
                             <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear4}} CUMULATIVE GRADE POINT AVERAGE (CGPA) </th>
                             <td style="border-width:1px; " width="1%" ><b>{{result.year4_cgpa}}</b></td>
                           </tr>
+
+                         <!-- =============================================Division =========================-->
+             <tr>
+              <!-- **************************Total yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">TOTAL CREDIT HOURS FROM {{viewresult.academicYear}} TO {{viewresult.academicYear4}} ACADEMIC YEARS </th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.final_credit_hours}}</b></td>
+            </tr>
+
+
+            <tr>
+              <!-- **************************Total cumulative GPA calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear}} TO {{viewresult.academicYear4}} CUMULATIVE GRADE POINT (CGP) </th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.final_cgp}}</b></td>
+            </tr>
+
+            <tr>
+              <!-- **************************TOTAL CUMMULATIVE CGPA yearly calculations**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">ACADEMIC YEAR {{viewresult.academicYear}} TO {{viewresult.academicYear4}} CUMULATIVE GRADE POINT AVERAGE (CGPA) </th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.final_cgpa}}</b></td>
+            </tr>
+
+            <tr>
+              <!-- **************************INTERNAL ASSESSMENT**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">INTERNAL ASSESSMENT  (70%)</th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.internal_assessment}}</b></td>
+            </tr>
+
+            <tr>
+              <!-- **************************INTERNAL ASSESSMENT**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="12">FINAL DISSERTATION AND PROJECT</th>
+            </tr>
+            <tr>
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11"><i> Project Grade</i></th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.semester8_mass_course_grade5}}</b></td>
+            </tr>
+
+            <tr>
+              <!-- **************************INTERNAL ASSESSMENT**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11"><i>Equivalent</i></th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.semester8_mass_course_equivalent5}}</b></td>
+            </tr>
+
+            <tr>
+              <!-- **************************INTERNAL ASSESSMENT**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">PROJECT ASSESSMENT  (30%)</th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.project_assessment}}</b></td>
+            </tr>
+
+            <tr>
+              <!-- **************************INTERNAL ASSESSMENT**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="11">FINAL GRADE POINT</th>
+              <td style="border-width:1px; " width="1%" ><b>{{result.final_grade_point}}</b></td>
+            </tr>
+
+
+            <tr>
+              <!-- **************************INTERNAL ASSESSMENT**************************** -->
+              <th style="border-width:1px; text-align: center;" width="1%" scope="row" colspan="12">FINAL DIVISION <i>{{result.division}}</i> </th>
+             
+            </tr>
                         </tbody>
                       </table>
-
+                      <div class="row" style="margin-top:10px; margin-left: 330px; margin-bottom: 50px;">
+                        <div class="col-md-12">
+                          <a href="{% url 'index' %}" type="button" style="padding-left: 50px; padding-right: 50px;" class="btn btn-info noPrint text-white"><i class="fas fa-home">&nbsp;&nbsp;</i>Back</a>
+                          <button onclick="window.print()" style="padding-left: 50px; padding-right: 50px;" class="noPrint btn btn-success"><i class="fas fa-print">&nbsp;&nbsp;</i>Print</button>
+                        </div>
+                      </div>
       </div>
     </div>
   </div>
 </div>
 </div>
-
-<div class="row" style="margin-top: -40px; margin-left: 450px; margin-bottom: 20px;">
-  <div class="col-md-12" style="margin-left: 200px;">
-   <img style="width: 500px; margin-left: 150px;" src="{% static 'assets/img/sign.png'%}" alt="">
-   <h1 style="margin-top: -70px; margin-left: 150px;">.............................................................</h1>
-   <h4 style="margin-top: -15px; margin-left: 300px;">CHIEF EXAMS OFFICER</h4>
-  </div>
-
-
 {% else %}
 <p>No result found.</p>
 {% endif %}
 
+</div>
 </div>
 </div>
 

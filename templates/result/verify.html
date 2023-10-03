@@ -37,7 +37,7 @@
     <!-- spacing css -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/rs-spacing.css' %}">
     <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"> <!-- This stylesheet dynamically changed from style.less -->
     <!-- responsive css -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
    
@@ -99,7 +99,7 @@
                     <div class="container">
                         <div class="row y-middle">
                             <div class="col-lg-2">
-                                <a href="{ % url 'index' %}">
+                                <a href="{% url 'index' %}">
                                            
                                     <img style="width: 40%; border-radius: 50%;" src="{% static 'assets/images/Cusl-logo.jpeg' %}" alt="">
                                 </a>
@@ -116,9 +116,9 @@
                                          <ul class="nav-menu">
                                             <li class="rs-mega-menu mega-rs menu-item-has-children"> <a href="{% url 'index' %}">Home</a>
                                             </li>
-                                             <li class="menu-item-has-children current-menu-item">
+                                             <!-- <li class="menu-item-has-children current-menu-item">
                                                  <a href="{% url 'about' %}">About</a>
-                                             </li>
+                                             </li> -->
 
                                             
 
@@ -153,12 +153,17 @@
                                                 </ul> <!-- //.mega-menu -->
                                             </li>
 
-                                             <li class="menu-item-has-children">
+                                             <!-- <li class="menu-item-has-children">
                                                  <a href="{% url 'contact' %}">Contact</a>
-                                             </li>
+                                             </li> -->
 
                                              <li class="menu-item-has-children">
                                                 <a href="{% url 'request_transcript'%}">REQUEST TRANSCRIPT</a>
+                                            </li>
+
+                                            <li class="menu-item-has-children">
+                                                <a  href="" data-toggle="modal" data-target="#exampleModal1">Verify Student</a>
+                                                
                                             </li>
                                          </ul> <!-- //.nav-menu -->
                                       </nav>                                       
@@ -168,61 +173,7 @@
                             </div>
                             <div class="col-lg-2 text-right">
                                 <div class="expand-btn-inner">
-                                    <ul>
-                                      
-                                        <li>
-                                            <a class="hidden-xs rs-search" data-target=".search-modal" data-toggle="modal" href="#">
-                                                <i class="flaticon-search"></i>
-                                            </a>
-                                        </li>
-                                        <li class="user-icon cart-inner no-border mini-cart-active">
-                                            <a href="#"><i class="fa fa-shopping-bag"></i></a>
-                                            <div class="woocommerce-mini-cart text-left">
-                                                <div class="cart-bottom-part">
-                                                    <ul class="cart-icon-product-list">
-                                                        <li class="display-flex">
-                                                            <div class="icon-cart">
-                                                                <a href="#"><i class="fa fa-times"></i></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <a href="cart.html">Law Book</a><br>
-                                                                <span class="quantity">1 × $30.00</span>
-                                                            </div>
-                                                            <div class="product-image">
-                                                                <a href="cart.html"><img src="assets/images/shop/1.jpg" alt="Product Image"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="display-flex">
-                                                            <div class="icon-cart">
-                                                                <a href="#"><i class="fa fa-times"></i></a>
-                                                            </div>
-                                                            <div class="product-info">
-                                                                <a href="cart.html">Spirit Level</a><br>
-                                                                <span class="quantity">1 × $30.00</span>
-                                                            </div>
-                                                            <div class="product-image">
-                                                                <a href="cart.html"><img src="assets/images/shop/2.jpg" alt="Product Image"></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="total-price text-center">
-                                                        <span class="subtotal">Subtotal:</span>
-                                                        <span class="current-price">$85.00</span>
-                                                    </div>
-
-                                                    <div class="cart-btn text-center">
-                                                        <a class="crt-btn btn1" href="cart.html">View Cart</a>
-                                                        <a class="crt-btn btn2" href="checkout.html">Check Out</a>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </li>
-                                        <li class="user-icon last-icon">
-                                            <a href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
-                                        </li>
-                                        
-                                    </ul>
+                                    
                                     <span>
                                         <a id="nav-expander" class="nav-expander" style="color: black;">
                                             <span class="dot1"></span>
@@ -287,62 +238,40 @@
 		<!-- Main content Start -->
         <div class="main-content">
             <!-- Breadcrumbs Start -->
-            <div class="rs-breadcrumbs breadcrumbs-overlay">
-                <div class="breadcrumbs-img">
-                    <img src="{% static 'assets/images/newbuilding2.png' %}" alt="Breadcrumbs Image">
-                </div>
-                <div class="breadcrumbs-text white-color">
-                    <h1 class="page-title display-3">STDENT VERIFICATION</h1>
-                    <ul>
-                        <li>
-                            <a class="active" href="index.html">Are you a bonafied Student?</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </div>
-            <!-- Breadcrumbs End -->
+           
 
             <!-- Counter Section Start -->
-            <div id="rs-about" class="rs-about style3 pt-100 md-pt-70" style="margin-bottom: 100px; margin-left: 100px;">
+            <div id="rs-about" class="rs-about style3 pt-100 md-pt-70" style="margin-left: 300px; margin-top: -50px; margin-bottom: 70px;">
                 <div class="container">
                     <div class="row y-middle">
                         <div class="col-lg-4 lg-pr-0 md-mb-30">
+                            {% if message %}
+                            <h4 style="margin-left: 250px; margin-right: -200px;" class="text-danger">{{ message }}</h4>
+                            {% else %}
                             <div class="about-intro">
                                 <div class="sec-title">
-                                    <div class="sub-title orange">Who Are You?</div>
-                                    <h2 class="title mb-21">Are You a Bonafied Student of Central University?</h2>
+                                    <div class="sub-title orange">THIS IS</div>
+                                    <h2 class="title mb-21">{{ student.fullname }}</h2>
                                     <div class="desc big">
-                                        <form>
-                                            <input type="email" name="E-mail" class="form-control shadow-none" placeholder="E-mail" required="">
-                                            <input type="text" name="text" class="form-control shadow-none mt-4 mb-3" placeholder="ID Number" required="">
-                                            <button type="submit" class="readon submit-btn">Verify</button>
-                                            
-                                                    {% if login_form.non_field_errors %}
-                                                    {% for err in login_form.non_field_errors %}
-                                                    <p style="color:red;">Invalid Credentials</p>
-                                                    {% endfor %}
-                                                    {% endif %}
-                                                    
-                                        </form>
+                                        <p>
+                                            {{ student.fullname }} is a Student in the {{ student.department }} department at CENTRAL UNIVERSITY and has completed
+                                            a program of study in {{ student.program }}. {{ student.fullname }}’s ID number is {{ student.student_id }} 
+                                            with an email address which is {{ student.email }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                        {% endif %}
                         </div>
                         <div class="col-lg-8 pl-83 md-pl-15">
-                                        <img class="count-img" style="border-radius: 20px; width: 80%;" src="{% static 'assets/images/verify.jpg' %}" alt="">
+                            {% if student.stu_image %}
+                            <img style="width: 40%; margin-left: -20px;" src="{{ student.stu_image.url}}" alt="">
+                            {% endif %}                         
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Counter Section End -->
-
-            
-
-           
-          
-
-           
         </div> 
         <!-- Main content End --> 
 
@@ -438,56 +367,59 @@
             <i class="fa fa-angle-up"></i>
         </div>
         <!-- End scrollUp  -->
+    </div>
+  </div>
 
 
 
 
 
-
-
-<!-- ===========================Login page========================= -->
- <!-- The Modal -->
- <div class="modal animated fadeIn" id="myModal1">
-    <div class="modal-dialog">
-    <div class="modal-content">
-
-        <!-- Modal Header -->
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title text-center">Login</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div> 
-        <!-- Modal body -->
-        <div class="modal-body">
-           
-            <form>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control shadow-none" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">ID Number</label>
-                  <input type="password" class="form-control shadow-none" id="exampleInputPassword1">
-                </div>
-               
-                <div class="login-submit">
-                    <button type="submit" class="readon orange-btn" style="size: 20px; padding-top: 10px; padding-bottom: 10px;">Login</button>
-                    <label>
-                        <a href="{% url 'admin_redirect' %}" class="lost-password" style="margin-left: 20px;">ADMIN LOGIN</a>
-                    </label>
-
-                    <div class="lost-password" style="margin-top: 10px;">
-                        <a href="{% url 'password_reset' %}" >Forget Password?</a>
-                    </div>
-                </div>
-              </form>
+          <h5 class="modal-title" id="exampleModalLabel">VERIFY YOURSELF</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-        <button type="button" class="btn orange-btn readon" data-dismiss="modal">Back to Home</button>
-        </div> 
+        <div class="modal-body">
+          <!-- Counter Section Start -->
+          <div id="rs-about" class="rs-about style3 pt-100 md-pt-70" style="margin-bottom: 100px; margin-left: 150px;">
+            <div class="container">
+                <div class="row y-middle">
+                    <div class="col-lg-8 off-md-3 lg-pr-0 md-mb-30">
+                        <div class="about-intro">
+                            <div class="sec-title">
+                                <div class="sub-title orange">Who Are You?</div>
+                                <h2 class="title mb-21">Are You a Bonafied Student of Central University?</h2>
+                                <div class="desc big">
+                                    <form method="GET" action="{% url 'student_detail' %}">
+                                        {% csrf_token %}
+                                        <input type="text" name="idnumber" class="form-control shadow-none mt-4 mb-3 p-4" placeholder="ID Number" >
+                                        <button type="submit"  class="readon submit-btn p-3" data-toggle="modal" data-target="#exampleModal2">Verify</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Counter Section End -->
+        </div>
+      </div>
     </div>
-    </div>
-</div>
+  </div>
+
+
+
+
+
+
 
         <!-- modernizr js -->
         <script src="{% static 'assets/js/modernizr-2.8.3.min.js' %}"></script>
@@ -524,6 +456,27 @@
         <script src="{% static 'assets/js/contact.form.js' %}"></script>
         <!-- main js -->
         <script src="{% static 'assets/js/main.js' %}"></script>
+        <script>
+            document.getElementById('verifyButton').addEventListener('click', function() {
+                // Show the Bootstrap modal
+                $('#exampleModal').modal('show');
+                
+                // Submit the form after a short delay (adjust as needed)
+                setTimeout(function() {
+                    document.getElementById('myForm').submit();
+                }, 1000); // Delay of 1 second (1000 milliseconds)
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
     </body>
 
 <!-- Mirrored from keenitsolutions.com/products/html/educavo/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jul 2023 10:48:14 GMT -->

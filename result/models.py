@@ -142,6 +142,7 @@ class Program(models.Model):
         return self.program
 class Student(models.Model):
     student_id = models.CharField(max_length=50, unique=True)
+    transcript_id = models.CharField(max_length=50)
     fullname = models.CharField(max_length=100)
     email = models.EmailField(max_length=20)
     contact = models.CharField(max_length=15)
@@ -149,6 +150,7 @@ class Student(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
     dob = models.DateField(null=True)
+    stu_image = models.ImageField(null=True, blank=True, upload_to="media/")
 
     def __str__(self):
         return self.fullname
@@ -158,9 +160,19 @@ class Student(models.Model):
             random_numbers = ''.join(random.choices(string.digits, k=5))
             self.student_id = 'cusl' + random_numbers
             
-            # You can add additional logic to ensure uniqueness if necessary
+        
+        if not self.transcript_id:
+            random_number = ''.join(random.choices(string.digits, k=8))
+            self.transcript_id = 'cusl-cs' + random_number
             
         super().save(*args, **kwargs)
+
+    
+        
+            
+       
+
+    
 
 
 
@@ -251,6 +263,7 @@ class year4_semester2(models.Model):
 
 class Result(models.Model):
     entry_date = models.DateTimeField(auto_now_add=True, null=True)
+    # transcript_id = models.CharField(max_length=50, unique=True)
     academicYear = models.TextField(max_length=20, choices=ACADEMIC_YEAR, null=True)
     academicYear2 = models.TextField(max_length=20, choices=YEAR2_ACADEMIC_YEAR, null=True)
     academicYear3 = models.TextField(max_length=20, choices=YEAR3_ACADEMIC_YEAR, null=True)
@@ -270,15 +283,15 @@ class Result(models.Model):
     semester7 = models.TextField(max_length=50, choices=YEAR1_SEMESTER1, null=True)
     semester8 = models.TextField(max_length=50, choices=YEAR2_SEMESTER2, null=True)
     
-
+  
     # =====================YEAR ONE=========================================#
     # ****************SEMESTER ONE************************
-    module1 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module1_results',null=True,default='')
-    module2 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module2_results',null=True,default='')
-    module3 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module3_results',null=True,default='')
-    module4 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module4_results',null=True,default='')
-    module5 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module5_results',null=True,default='')
-    module6 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module6_results',null=True,default='')
+    module1 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module1_results',null=True)
+    module2 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module2_results',null=True)
+    module3 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module3_results',null=True)
+    module4 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module4_results',null=True)
+    module5 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module5_results',null=True)
+    module6 = models.ForeignKey(year1_semester1, on_delete=models.CASCADE, related_name='module6_results',null=True)
     module_grade1 = models.IntegerField(null=True,default='')
     module_grade2 = models.IntegerField(null=True,default='')
     module_grade3 = models.IntegerField(null=True,default='')
@@ -587,18 +600,23 @@ class Result(models.Model):
     semester8_module1 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module1_results',null=True)
     semester8_module2 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module2_results',null=True)
     semester8_module3 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module3_results',null=True)
+    semester8_module4 = models.ForeignKey(year4_semester2, on_delete=models.CASCADE, related_name='semester8_module4_results',null=True)
     semester8_module_grade1 = models.IntegerField(null=True)
     semester8_module_grade2 = models.IntegerField(null=True)
     semester8_module_grade3 = models.IntegerField(null=True)
+    semester8_module_grade4 = models.IntegerField(null=True)
     semester8_gradepoint1 = models.TextField(max_length=2,null=True)
     semester8_gradepoint2 = models.TextField(max_length=2,null=True)
     semester8_gradepoint3 = models.TextField(max_length=2,null=True)
+    semester8_gradepoint4 = models.TextField(max_length=2,null=True)
     semester8_equivalent1 = models.IntegerField(null=True)
     semester8_equivalent2 = models.IntegerField(null=True)
     semester8_equivalent3 = models.IntegerField(null=True)
+    semester8_equivalent4 = models.IntegerField(null=True)
     semester8_grade1 = models.CharField(max_length=1, null=True)
     semester8_grade2 = models.CharField(max_length=1, null=True)
     semester8_grade3 = models.CharField(max_length=1, null=True)
+    semester8_grade4 = models.CharField(max_length=1, null=True)
     semester8_total_marks = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     semester8_gpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     semester8_sgp = models.DecimalField(max_digits=5, decimal_places=2, null=True)
@@ -615,6 +633,22 @@ class Result(models.Model):
     year4_cgp = models.IntegerField(null=True, default=0 )
     year4_cgpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
+
+
+    # =================FINAL CALCULATION=====================
+    final_credit_hours = models.IntegerField(null=True)
+    final_cgp = models.IntegerField(null=True)
+    final_cgpa = models.DecimalField(max_digits=5, decimal_places=2)
+    internal_assessment = models.DecimalField(max_digits=5, decimal_places=2)
+    final_grade_point = models.DecimalField(max_digits=5, decimal_places=2)
+    project_assessment = models.DecimalField(max_digits=5, decimal_places=2)
+    division = models.TextField(max_length=20)
+    
+
+
+
+
+
     def save(self, *args, **kwargs):
         # **********SEMESTER ONE************************
         if self.module_grade1 >= 75:
@@ -626,7 +660,7 @@ class Result(models.Model):
         elif self.module_grade1 >= 50:
             self.equivalent1 = 3
             self.grade1 = 'C'
-        elif self.module_grade1 >= 35:
+        elif self.module_grade1 >=40:
             self.equivalent1 = 2
             self.grade1 = 'D'
         elif self.module_grade1 >= 20:
@@ -648,7 +682,7 @@ class Result(models.Model):
         elif self.module_grade2 >= 50:
             self.equivalent2 = 3
             self.grade2 = 'C'
-        elif self.module_grade2 >= 35:
+        elif self.module_grade2 >= 40:
             self.equivalent2 = 2
             self.grade2 = 'D'
         elif self.module_grade2 >= 20:
@@ -671,7 +705,7 @@ class Result(models.Model):
         elif self.module_grade3 >= 50:
             self.equivalent3 = 3
             self.grade3 = 'C'
-        elif self.module_grade3 >= 35:
+        elif self.module_grade3 >= 40:
             self.equivalent3 = 2
             self.grade3 = 'D'
         elif self.module_grade3 >= 20:
@@ -693,7 +727,7 @@ class Result(models.Model):
         elif self.module_grade4 >= 50:
             self.equivalent4 = 3
             self.grade4 = 'C'
-        elif self.module_grade4 >= 35:
+        elif self.module_grade4 >= 40:
             self.equivalent4 = 2
             self.grade4 = 'D'
         elif self.module_grade4 >= 20:
@@ -715,7 +749,7 @@ class Result(models.Model):
         elif self.module_grade5 >= 50:
             self.equivalent5 = 3
             self.grade5 = 'C'
-        elif self.module_grade5 >= 35:
+        elif self.module_grade5 >= 40:
             self.equivalent5 = 2
             self.grade5 = 'D'
         elif self.module_grade5 >= 20:
@@ -738,7 +772,7 @@ class Result(models.Model):
         elif self.module_grade6 >= 50:
             self.equivalent6 = 3
             self.grade6 = 'C'
-        elif self.module_grade6 >= 35:
+        elif self.module_grade6 >= 40:
             self.equivalent6 = 2
             self.grade6 = 'D'
         elif self.module_grade6 >= 20:
@@ -761,7 +795,7 @@ class Result(models.Model):
         elif self.semester2_module_grade1 >= 50:
             self.semester2_equivalent1 = 3
             self.semester2_grade1 = 'C'
-        elif self.semester2_module_grade1 >= 35:
+        elif self.semester2_module_grade1 >= 40:
             self.semester2_equivalent1 = 2
             self.semester2_grade1 = 'D'
         elif self.semester2_module_grade1 >= 20:
@@ -783,7 +817,7 @@ class Result(models.Model):
         elif self.semester2_module_grade2 >= 50:
             self.semester2_equivalent2 = 3
             self.semester2_grade2 = 'C'
-        elif self.semester2_module_grade2 >= 35:
+        elif self.semester2_module_grade2 >= 40:
             self.semester2_equivalent2 = 2
             self.semester2_grade2 = 'D'
         elif self.semester2_module_grade2 >= 20:
@@ -806,7 +840,7 @@ class Result(models.Model):
         elif self.semester2_module_grade3 >= 50:
             self.semester2_equivalent3 = 3
             self.semester2_grade3 = 'C'
-        elif self.semester2_module_grade3 >= 35:
+        elif self.semester2_module_grade3 >= 40:
             self.semester2_equivalent3 = 2
             self.semester2_grade3 = 'D'
         elif self.semester2_module_grade3 >= 20:
@@ -828,7 +862,7 @@ class Result(models.Model):
         elif self.semester2_module_grade4 >= 50:
             self.semester2_equivalent4 = 3
             self.semester2_grade4 = 'C'
-        elif self.semester2_module_grade4 >= 35:
+        elif self.semester2_module_grade4 >= 40:
             self.semester2_equivalent4 = 2
             self.semester2_grade4 = 'D'
         elif self.semester2_module_grade4 >= 20:
@@ -850,7 +884,7 @@ class Result(models.Model):
         elif self.semester2_module_grade5 >= 50:
             self.semester2_equivalent5 = 3
             self.semester2_grade5 = 'C'
-        elif self.semester2_module_grade5 >= 35:
+        elif self.semester2_module_grade5 >= 40:
             self.semester2_equivalent5 = 2
             self.semester2_grade5 = 'D'
         elif self.semester2_module_grade5 >= 20:
@@ -873,7 +907,7 @@ class Result(models.Model):
         elif self.semester2_module_grade6 >= 50:
             self.semester2_equivalent6 = 3
             self.semester2_grade6 = 'C'
-        elif self.semester2_module_grade6 >= 35:
+        elif self.semester2_module_grade6 >= 40:
             self.semester2_equivalent6 = 2
             self.semester2_grade6 = 'D'
         elif self.semester2_module_grade6 >= 20:
@@ -895,7 +929,7 @@ class Result(models.Model):
         elif self.semester3_module_grade1 >= 50:
             self.semester3_equivalent1 = 3
             self.semester3_grade1 = 'C'
-        elif self.semester3_module_grade1 >= 35:
+        elif self.semester3_module_grade1 >= 40:
             self.semester3_equivalent1 = 2
             self.semester3_grade1 = 'D'
         elif self.semester3_module_grade1 >= 20:
@@ -917,7 +951,7 @@ class Result(models.Model):
         elif self.semester3_module_grade2 >= 50:
             self.semester3_equivalent2 = 3
             self.semester3_grade2 = 'C'
-        elif self.semester3_module_grade2 >= 35:
+        elif self.semester3_module_grade2 >= 40:
             self.semester3_equivalent2 = 2
             self.semester3_grade2 = 'D'
         elif self.semester3_module_grade2 >= 20:
@@ -940,7 +974,7 @@ class Result(models.Model):
         elif self.semester3_module_grade3 >= 50:
             self.semester3_equivalent3 = 3
             self.semester3_grade3 = 'C'
-        elif self.semester3_module_grade3 >= 35:
+        elif self.semester3_module_grade3 >= 40:
             self.semester3_equivalent3 = 2
             self.semester3_grade3 = 'D'
         elif self.semester3_module_grade3 >= 20:
@@ -962,7 +996,7 @@ class Result(models.Model):
         elif self.semester3_module_grade4 >= 50:
             self.semester3_equivalent4 = 3
             self.semester3_grade4 = 'C'
-        elif self.semester3_module_grade4 >= 35:
+        elif self.semester3_module_grade4 >= 40:
             self.semester3_equivalent4 = 2
             self.semester3_grade4 = 'D'
         elif self.semester3_module_grade4 >= 20:
@@ -984,7 +1018,7 @@ class Result(models.Model):
         elif self.semester3_module_grade5 >= 50:
             self.semester3_equivalent5 = 3
             self.semester3_grade5 = 'C'
-        elif self.semester3_module_grade5 >= 35:
+        elif self.semester3_module_grade5 >= 40:
             self.semester3_equivalent5 = 2
             self.semester3_grade5 = 'D'
         elif self.semester3_module_grade5 >= 20:
@@ -1006,7 +1040,7 @@ class Result(models.Model):
         elif self.semester3_module_grade6 >= 50:
             self.semester3_equivalent6 = 3
             self.semester3_grade6 = 'C'
-        elif self.semester3_module_grade6 >= 35:
+        elif self.semester3_module_grade6 >= 40:
             self.semester3_equivalent6 = 2
             self.semester3_grade6 = 'D'
         elif self.semester3_module_grade6 >= 20:
@@ -1028,7 +1062,7 @@ class Result(models.Model):
         elif self.semester4_module_grade1 >= 50:
             self.semester4_equivalent1 = 3
             self.semester4_grade1 = 'C'
-        elif self.semester4_module_grade1 >= 35:
+        elif self.semester4_module_grade1 >= 40:
             self.semester4_equivalent1 = 2
             self.semester4_grade1 = 'D'
         elif self.semester4_module_grade1 >= 20:
@@ -1050,7 +1084,7 @@ class Result(models.Model):
         elif self.semester4_module_grade2 >= 50:
             self.semester4_equivalent2 = 3
             self.semester4_grade2 = 'C'
-        elif self.semester4_module_grade2 >= 35:
+        elif self.semester4_module_grade2 >= 40:
             self.semester4_equivalent2 = 2
             self.semester4_grade2 = 'D'
         elif self.semester4_module_grade2 >= 20:
@@ -1073,7 +1107,7 @@ class Result(models.Model):
         elif self.semester4_module_grade3 >= 50:
             self.semester4_equivalent3 = 3
             self.semester4_grade3 = 'C'
-        elif self.semester4_module_grade3 >= 35:
+        elif self.semester4_module_grade3 >= 40:
             self.semester4_equivalent3 = 2
             self.semester4_grade3 = 'D'
         elif self.semester4_module_grade3 >= 20:
@@ -1095,7 +1129,7 @@ class Result(models.Model):
         elif self.semester4_module_grade4 >= 50:
             self.semester4_equivalent4 = 3
             self.semester4_grade4 = 'C'
-        elif self.semester4_module_grade4 >= 35:
+        elif self.semester4_module_grade4 >= 40:
             self.semester4_equivalent4 = 2
             self.semester4_grade4 = 'D'
         elif self.semester4_module_grade4 >= 20:
@@ -1117,7 +1151,7 @@ class Result(models.Model):
         elif self.semester4_module_grade5 >= 50:
             self.semester4_equivalent5 = 3
             self.semester4_grade5 = 'C'
-        elif self.semester4_module_grade5 >= 35:
+        elif self.semester4_module_grade5 >= 40:
             self.semester4_equivalent5 = 2
             self.semester4_grade5 = 'D'
         elif self.semester4_module_grade5 >= 20:
@@ -1139,7 +1173,7 @@ class Result(models.Model):
         elif self.semester4_module_grade6 >= 50:
             self.semester4_equivalent6 = 3
             self.semester4_grade6 = 'C'
-        elif self.semester4_module_grade6 >= 35:
+        elif self.semester4_module_grade6 >= 40:
             self.semester4_equivalent6 = 2
             self.semester4_grade6 = 'D'
         elif self.semester4_module_grade6 >= 20:
@@ -1162,7 +1196,7 @@ class Result(models.Model):
         elif self.semester5_module_grade1 >= 50:
             self.semester5_equivalent1 = 3
             self.semester5_grade1 = 'C'
-        elif self.semester5_module_grade1 >= 35:
+        elif self.semester5_module_grade1 >= 40:
             self.semester5_equivalent1 = 2
             self.semester5_grade1 = 'D'
         elif self.semester5_module_grade1 >= 20:
@@ -1184,7 +1218,7 @@ class Result(models.Model):
         elif self.semester5_module_grade2 >= 50:
             self.semester5_equivalent2 = 3
             self.semester5_grade2 = 'C'
-        elif self.semester5_module_grade2 >= 35:
+        elif self.semester5_module_grade2 >= 40:
             self.semester5_equivalent2 = 2
             self.semester5_grade2 = 'D'
         elif self.semester5_module_grade2 >= 20:
@@ -1207,7 +1241,7 @@ class Result(models.Model):
         elif self.semester5_module_grade3 >= 50:
             self.semester5_equivalent3 = 3
             self.semester5_grade3 = 'C'
-        elif self.semester5_module_grade3 >= 35:
+        elif self.semester5_module_grade3 >= 40:
             self.semester5_equivalent3 = 2
             self.semester5_grade3 = 'D'
         elif self.semester5_module_grade3 >= 20:
@@ -1229,7 +1263,7 @@ class Result(models.Model):
         elif self.semester5_module_grade4 >= 50:
             self.semester5_equivalent4 = 3
             self.semester5_grade4 = 'C'
-        elif self.semester5_module_grade4 >= 35:
+        elif self.semester5_module_grade4 >= 40:
             self.semester5_equivalent4 = 2
             self.semester5_grade4 = 'D'
         elif self.semester5_module_grade4 >= 20:
@@ -1251,7 +1285,7 @@ class Result(models.Model):
         elif self.semester5_module_grade5 >= 50:
             self.semester5_equivalent5 = 3
             self.semester5_grade5 = 'C'
-        elif self.semester5_module_grade5 >= 35:
+        elif self.semester5_module_grade5 >= 40:
             self.semester5_equivalent5 = 2
             self.semester5_grade5 = 'D'
         elif self.semester5_module_grade5 >= 20:
@@ -1273,7 +1307,7 @@ class Result(models.Model):
         elif self.semester5_module_grade6 >= 50:
             self.semester5_equivalent6 = 3
             self.semester5_grade6 = 'C'
-        elif self.semester5_module_grade6 >= 35:
+        elif self.semester5_module_grade6 >= 40:
             self.semester5_equivalent6 = 2
             self.semester5_grade6 = 'D'
         elif self.semester5_module_grade6 >= 20:
@@ -1296,7 +1330,7 @@ class Result(models.Model):
         elif self.semester6_module_grade1 >= 50:
             self.semester6_equivalent1 = 3
             self.semester6_grade1 = 'C'
-        elif self.semester6_module_grade1 >= 35:
+        elif self.semester6_module_grade1 >= 40:
             self.semester6_equivalent1 = 2
             self.semester6_grade1 = 'D'
         elif self.semester6_module_grade1 >= 20:
@@ -1318,7 +1352,7 @@ class Result(models.Model):
         elif self.semester5_module_grade2 >= 50:
             self.semester6_equivalent2 = 3
             self.semester6_grade2 = 'C'
-        elif self.semester6_module_grade2 >= 35:
+        elif self.semester6_module_grade2 >= 40:
             self.semester6_equivalent2 = 2
             self.semester6_grade2 = 'D'
         elif self.semester6_module_grade2 >= 20:
@@ -1341,7 +1375,7 @@ class Result(models.Model):
         elif self.semester6_module_grade3 >= 50:
             self.semester6_equivalent3 = 3
             self.semester6_grade3 = 'C'
-        elif self.semester6_module_grade3 >= 35:
+        elif self.semester6_module_grade3 >= 40:
             self.semester6_equivalent3 = 2
             self.semester6_grade3 = 'D'
         elif self.semester6_module_grade3 >= 20:
@@ -1363,7 +1397,7 @@ class Result(models.Model):
         elif self.semester6_module_grade4 >= 50:
             self.semester6_equivalent4 = 3
             self.semester6_grade4 = 'C'
-        elif self.semester6_module_grade4 >= 35:
+        elif self.semester6_module_grade4 >= 40:
             self.semester6_equivalent4 = 2
             self.semester6_grade4 = 'D'
         elif self.semester6_module_grade4 >= 20:
@@ -1385,7 +1419,7 @@ class Result(models.Model):
         elif self.semester6_module_grade5 >= 50:
             self.semester6_equivalent5 = 3
             self.semester6_grade5 = 'C'
-        elif self.semester6_module_grade5 >= 35:
+        elif self.semester6_module_grade5 >= 40:
             self.semester6_equivalent5 = 2
             self.semester6_grade5 = 'D'
         elif self.semester6_module_grade5 >= 20:
@@ -1407,7 +1441,7 @@ class Result(models.Model):
         elif self.semester6_module_grade6 >= 50:
             self.semester6_equivalent6 = 3
             self.semester6_grade6 = 'C'
-        elif self.semester6_module_grade6 >= 35:
+        elif self.semester6_module_grade6 >= 40:
             self.semester6_equivalent6 = 2
             self.semester6_grade6 = 'D'
         elif self.semester6_module_grade6 >= 20:
@@ -1429,7 +1463,7 @@ class Result(models.Model):
         elif self.semester7_module_grade1 >= 50:
             self.semester7_equivalent1 = 3
             self.semester7_grade1 = 'C'
-        elif self.semester7_module_grade1 >= 35:
+        elif self.semester7_module_grade1 >= 40:
             self.semester7_equivalent1 = 2
             self.semester7_grade1 = 'D'
         elif self.semester7_module_grade1 >= 20:
@@ -1451,7 +1485,7 @@ class Result(models.Model):
         elif self.semester7_module_grade2 >= 50:
             self.semester7_equivalent2 = 3
             self.semester7_grade2 = 'C'
-        elif self.semester7_module_grade2 >= 35:
+        elif self.semester7_module_grade2 >= 40:
             self.semester7_equivalent2 = 2
             self.semester7_grade2 = 'D'
         elif self.semester7_module_grade2 >= 20:
@@ -1474,7 +1508,7 @@ class Result(models.Model):
         elif self.semester7_module_grade3 >= 50:
             self.semester7_equivalent3 = 3
             self.semester7_grade3 = 'C'
-        elif self.semester7_module_grade3 >= 35:
+        elif self.semester7_module_grade3 >= 40:
             self.semester7_equivalent3 = 2
             self.semester7_grade3 = 'D'
         elif self.semester7_module_grade3 >= 20:
@@ -1496,7 +1530,7 @@ class Result(models.Model):
         elif self.semester7_module_grade4 >= 50:
             self.semester7_equivalent4 = 3
             self.semester7_grade4 = 'C'
-        elif self.semester7_module_grade4 >= 35:
+        elif self.semester7_module_grade4 >= 40:
             self.semester7_equivalent4 = 2
             self.semester7_grade4 = 'D'
         elif self.semester7_module_grade4 >= 20:
@@ -1518,7 +1552,7 @@ class Result(models.Model):
         elif self.semester7_module_grade5 >= 50:
             self.semester7_equivalent5 = 3
             self.semester7_grade5 = 'C'
-        elif self.semester7_module_grade5 >= 35:
+        elif self.semester7_module_grade5 >= 40:
             self.semester7_equivalent5 = 2
             self.semester7_grade5 = 'D'
         elif self.semester7_module_grade5 >= 20:
@@ -1542,7 +1576,7 @@ class Result(models.Model):
         elif self.semester8_module_grade1 >= 50:
             self.semester8_equivalent1 = 3
             self.semester8_grade1 = 'C'
-        elif self.semester8_module_grade1 >= 35:
+        elif self.semester8_module_grade1 >= 40:
             self.semester8_equivalent1 = 2
             self.semester8_grade1 = 'D'
         elif self.semester8_module_grade1 >= 20:
@@ -1564,7 +1598,7 @@ class Result(models.Model):
         elif self.semester8_module_grade2 >= 50:
             self.semester8_equivalent2 = 3
             self.semester8_grade2 = 'C'
-        elif self.semester8_module_grade2 >= 35:
+        elif self.semester8_module_grade2 >= 40:
             self.semester8_equivalent2 = 2
             self.semester8_grade2 = 'D'
         elif self.semester8_module_grade2 >= 20:
@@ -1587,7 +1621,7 @@ class Result(models.Model):
         elif self.semester8_module_grade3 >= 50:
             self.semester8_equivalent3 = 3
             self.semester8_grade3 = 'C'
-        elif self.semester8_module_grade3 >= 35:
+        elif self.semester8_module_grade3 >= 40:
             self.semester8_equivalent3 = 2
             self.semester8_grade3 = 'D'
         elif self.semester8_module_grade3 >= 20:
@@ -1600,14 +1634,52 @@ class Result(models.Model):
 
 
 
+        if self.semester8_module_grade4 >= 75:
+            self.semester8_equivalent4 = 5
+            self.semester8_grade4 = 'A'
+        elif self.semester8_module_grade4 >= 65:
+            self.semester8_equivalent4 = 4
+            self.semester8_grade4 = 'B'
+        elif self.semester8_module_grade4 >= 50:
+            self.semester8_equivalent4 = 3
+            self.semester8_grade4 = 'C'
+        elif self.semester8_module_grade4 >= 40:
+            self.semester8_equivalent4 = 2
+            self.semester8_grade4 = 'D'
+        elif self.semester8_module_grade4 >= 20:
+            self.semester8_equivalent4 = 1
+            self.semester8_grade4 = 'E'
+        else:
+            self.semester8_equivalent4 = 0
+            self.semester8_grade4 = 'F'
+
+        
+        
+        
+
+
+
+
+   
+
+
+
+
+
+
+
+
+        
+        
+        
        
 
 
+        
 
+       
 
-
-
-
+       
         # ======================FIRST YEAR======================================#
         # ******************semester one****************
         self.totalsch = self.sch + self.sch + self.sch + self.sch  + self.sch  + self.sch
@@ -1653,7 +1725,7 @@ class Result(models.Model):
         self.semester5_sgpa = self.semester5_sgp / self.semester5_totalsch
 
         # *****************semester two*****************
-        self.semester6_totalsch = self.semester6_sch + self.semester6_sch + self.semester6_sch 
+        self.semester6_totalsch = self.semester6_sch + self.semester6_sch + self.semester6_sch + self.semester6_sch + self.semester6_sch + self.semester6_sch
         self.semester6_sgp = int(self.semester6_gradepoint1) + int(self.semester6_gradepoint2) + int(self.semester6_gradepoint3) + int(self.semester6_gradepoint4) + int(self.semester6_gradepoint5) + int(self.semester6_gradepoint6) 
         self.semester6_sgpa = self.semester6_sgp / self.semester6_totalsch
 
@@ -1676,10 +1748,43 @@ class Result(models.Model):
         self.semester8_sgpa = self.semester8_sgp / self.semester8_totalsch
 
          # *******YEARLY CALCULATIONS****
-        self.year4_tot_cred_hours = self.semester5_totalsch + self.semester6_totalsch
+        self.year4_tot_cred_hours = self.semester7_totalsch + self.semester8_totalsch
         self.year4_cgp = self.semester7_sgp + self.semester8_sgp
         self.year4_cgpa = self.year4_cgp / self.year4_tot_cred_hours
 
+
+
+        # ======================FINAL CUMULATIVE GPA AND DIVISION CALCULATION======================================#
+
+        self.final_credit_hours = self.tot_cred_hours + self.year2_tot_cred_hours + self.year3_tot_cred_hours + self.year4_tot_cred_hours
+        self.final_cgp = self.cgp + self.year2_cgp + self.year3_cgp + self.year4_cgp
+        self.final_cgpa = self.final_cgp / self.final_credit_hours
+        self.internal_assessment = self.final_cgpa * 0.7
+        self.project_assessment = self.semester8_equivalent4 * 0.3
+        self.final_grade_point = self.internal_assessment + self.project_assessment
+        
+
+
+        if self.final_grade_point is not None:
+            if self.final_grade_point >= 4.30:
+                self.division = "First Class"
+            elif self.final_grade_point >= 4.00:
+                self.division = "Second Class (First Division)"
+            elif self.final_grade_point >= 3.60:
+                self.division = "Second Class (Second Division)"
+            else:
+                self.division = "Third Class"
+        else:
+            # Handle the case where self.final_grade_point is None
+            self.division = "N/A"  # Or any other appropriate value
+        # if self.final_grade_point >= 4.30:
+        #     self.division = "FIRST CLASS"
+        # elif self.final_grade_point >= 4.00:
+        #     self.division = "SECOND CLASS (FIRST DIVISION)"
+        # elif self.final_grade_point >= 3.60:
+        #     self.division = "SECOND CLASS (SECOND DIVISION)"
+        # else:
+        #     self.division = "THIRD CLASS"
         # Save the result
         super(Result, self).save(*args, **kwargs)
     def __str__(self):
@@ -1811,12 +1916,12 @@ class BitResult(models.Model):
 
     # =====================YEAR ONE=========================================#
     # ****************SEMESTER ONE************************
-    course1 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course1_results',null=True,default='')
-    course2 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course2_results',null=True,default='')
-    course3 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course3_results',null=True,default='')
-    course4 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course4_results',null=True,default='')
-    course5 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course5_results',null=True,default='')
-    course6 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course6_results',null=True,default='')
+    course1 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course1_results',null=True)
+    course2 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course2_results',null=True)
+    course3 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course3_results',null=True)
+    course4 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course4_results',null=True)
+    course5 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course5_results',null=True)
+    course6 = models.ForeignKey(bit_year1_semester1, on_delete=models.CASCADE, related_name='bit_course6_results',null=True)
     course_grade1 = models.IntegerField(null=True,default='')
     course_grade2 = models.IntegerField(null=True,default='')
     course_grade3 = models.IntegerField(null=True,default='')
@@ -2125,18 +2230,23 @@ class BitResult(models.Model):
     semester8_course1 = models.ForeignKey(bit_year4_semester2, on_delete=models.CASCADE, related_name='bit_semester8_course1_results',null=True)
     semester8_course2 = models.ForeignKey(bit_year4_semester2, on_delete=models.CASCADE, related_name='bit_semester8_course2_results',null=True)
     semester8_course3 = models.ForeignKey(bit_year4_semester2, on_delete=models.CASCADE, related_name='bit_semester8_course3_results',null=True)
+    semester8_course4 = models.ForeignKey(bit_year4_semester2, on_delete=models.CASCADE, related_name='bit_semester8_course4_results',null=True)
     semester8_course_grade1 = models.IntegerField(null=True)
     semester8_course_grade2 = models.IntegerField(null=True)
     semester8_course_grade3 = models.IntegerField(null=True)
+    semester8_course_grade4 = models.IntegerField(null=True)
     semester8_course_gradepoint1 = models.TextField(max_length=2,null=True)
     semester8_course_gradepoint2 = models.TextField(max_length=2,null=True)
     semester8_course_gradepoint3 = models.TextField(max_length=2,null=True)
+    semester8_course_gradepoint4 = models.TextField(max_length=2,null=True)
     semester8_course_equivalent1 = models.IntegerField(null=True)
     semester8_course_equivalent2 = models.IntegerField(null=True)
     semester8_course_equivalent3 = models.IntegerField(null=True)
+    semester8_course_equivalent4 = models.IntegerField(null=True)
     semester8_grade1 = models.CharField(max_length=1, null=True)
     semester8_grade2 = models.CharField(max_length=1, null=True)
     semester8_grade3 = models.CharField(max_length=1, null=True)
+    semester8_grade4 = models.CharField(max_length=1, null=True)
     semester8_total_marks = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     semester8_gpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     semester8_sgp = models.DecimalField(max_digits=5, decimal_places=2, null=True)
@@ -2153,6 +2263,17 @@ class BitResult(models.Model):
     year4_cgp = models.IntegerField(null=True, default=0 )
     year4_cgpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
+
+    # =================FINAL CALCULATION=====================
+    final_credit_hours = models.IntegerField(null=True)
+    final_cgp = models.IntegerField(null=True)
+    final_cgpa = models.DecimalField(max_digits=5, decimal_places=2)
+    internal_assessment = models.DecimalField(max_digits=5, decimal_places=2)
+    final_grade_point = models.DecimalField(max_digits=5, decimal_places=2)
+    project_assessment = models.DecimalField(max_digits=5, decimal_places=2)
+    division = models.TextField(max_length=20)
+
+
     def save(self, *args, **kwargs):
         # **********SEMESTER ONE************************
         if self.course_grade1 >= 75:
@@ -2164,7 +2285,7 @@ class BitResult(models.Model):
         elif self.course_grade1 >= 50:
             self.course_equivalent1 = 3
             self.grade1 = 'C'
-        elif self.course_grade1 >= 35:
+        elif self.course_grade1 >= 40:
             self.course_equivalent1 = 2
             self.grade1 = 'D'
         elif self.course_grade1 >= 20:
@@ -2186,7 +2307,7 @@ class BitResult(models.Model):
         elif self.course_grade2 >= 50:
             self.course_equivalent2 = 3
             self.grade2 = 'C'
-        elif self.course_grade2 >= 35:
+        elif self.course_grade2 >= 40:
             self.course_equivalent2 = 2
             self.grade2 = 'D'
         elif self.course_grade2 >= 20:
@@ -2209,7 +2330,7 @@ class BitResult(models.Model):
         elif self.course_grade3 >= 50:
             self.course_equivalent3 = 3
             self.grade3 = 'C'
-        elif self.course_grade3 >= 35:
+        elif self.course_grade3 >= 40:
             self.course_equivalent3 = 2
             self.grade3 = 'D'
         elif self.course_grade3 >= 20:
@@ -2231,7 +2352,7 @@ class BitResult(models.Model):
         elif self.course_grade4 >= 50:
             self.course_equivalent4 = 3
             self.grade4 = 'C'
-        elif self.course_grade4 >= 35:
+        elif self.course_grade4 >= 40:
             self.course_equivalent4 = 2
             self.grade4 = 'D'
         elif self.course_grade4 >= 20:
@@ -2253,7 +2374,7 @@ class BitResult(models.Model):
         elif self.course_grade5 >= 50:
             self.course_equivalent5 = 3
             self.grade5 = 'C'
-        elif self.course_grade5 >= 35:
+        elif self.course_grade5 >= 40:
             self.course_equivalent5 = 2
             self.course_grade5 = 'D'
         elif self.grade5 >= 20:
@@ -2276,7 +2397,7 @@ class BitResult(models.Model):
         elif self.course_grade6 >= 50:
             self.course_equivalent6 = 3
             self.grade6 = 'C'
-        elif self.course_grade6 >= 35:
+        elif self.course_grade6 >= 40:
             self.course_equivalent6 = 2
             self.grade6 = 'D'
         elif self.course_grade6 >= 20:
@@ -2299,7 +2420,7 @@ class BitResult(models.Model):
         elif self.semester2_course_grade1 >= 50:
             self.semester2_course_equivalent1 = 3
             self.semester2_grade1 = 'C'
-        elif self.semester2_course_grade1 >= 35:
+        elif self.semester2_course_grade1 >= 40:
             self.semester2_course_equivalent1 = 2
             self.semester2_grade1 = 'D'
         elif self.semester2_course_grade1 >= 20:
@@ -2321,7 +2442,7 @@ class BitResult(models.Model):
         elif self.semester2_course_grade2 >= 50:
             self.semester2_course_equivalent2 = 3
             self.semester2_grade2 = 'C'
-        elif self.semester2_course_grade2 >= 35:
+        elif self.semester2_course_grade2 >= 40:
             self.semester2_course_equivalent2 = 2
             self.semester2_grade2 = 'D'
         elif self.semester2_course_grade2 >= 20:
@@ -2344,7 +2465,7 @@ class BitResult(models.Model):
         elif self.semester2_course_grade3 >= 50:
             self.semester2_course_equivalent3 = 3
             self.semester2_grade3 = 'C'
-        elif self.semester2_course_grade3 >= 35:
+        elif self.semester2_course_grade3 >= 40:
             self.semester2_course_equivalent3 = 2
             self.semester2_grade3 = 'D'
         elif self.semester2_course_grade3 >= 20:
@@ -2366,7 +2487,7 @@ class BitResult(models.Model):
         elif self.semester2_course_grade4 >= 50:
             self.semester2_course_equivalent4 = 3
             self.semester2_grade4 = 'C'
-        elif self.semester2_course_grade4 >= 35:
+        elif self.semester2_course_grade4 >= 40:
             self.semester2_course_equivalent4 = 2
             self.semester2_grade4 = 'D'
         elif self.semester2_course_grade4 >= 20:
@@ -2388,7 +2509,7 @@ class BitResult(models.Model):
         elif self.semester2_course_grade5 >= 50:
             self.semester2_course_equivalent5 = 3
             self.semester2_grade5 = 'C'
-        elif self.semester2_course_grade5 >= 35:
+        elif self.semester2_course_grade5 >= 40:
             self.semester2_course_equivalent5 = 2
             self.semester2_grade5 = 'D'
         elif self.semester2_course_grade5 >= 20:
@@ -2411,7 +2532,7 @@ class BitResult(models.Model):
         elif self.semester2_course_grade6 >= 50:
             self.semester2_course_equivalent6 = 3
             self.semester2_grade6 = 'C'
-        elif self.semester2_course_grade6 >= 35:
+        elif self.semester2_course_grade6 >= 40:
             self.semester2_course_equivalent6 = 2
             self.semester2_grade6 = 'D'
         elif self.semester2_course_grade6 >= 20:
@@ -2455,7 +2576,7 @@ class BitResult(models.Model):
         elif self.semester3_course_grade2 >= 50:
             self.semester3_course_equivalent2 = 3
             self.semester3_grade2 = 'C'
-        elif self.semester3_course_grade2 >= 35:
+        elif self.semester3_course_grade2 >= 40:
             self.semester3_course_equivalent2 = 2
             self.semester3_grade2 = 'D'
         elif self.semester3_course_grade2 >= 20:
@@ -2478,7 +2599,7 @@ class BitResult(models.Model):
         elif self.semester3_course_grade3 >= 50:
             self.semester3_course_equivalent3 = 3
             self.semester3_grade3 = 'C'
-        elif self.semester3_course_grade3 >= 35:
+        elif self.semester3_course_grade3 >= 40:
             self.semester3_course_equivalent3 = 2
             self.semester3_grade3 = 'D'
         elif self.semester3_course_grade3 >= 20:
@@ -2522,7 +2643,7 @@ class BitResult(models.Model):
         elif self.semester3_course_grade5 >= 50:
             self.semester3_course_equivalent5 = 3
             self.semester3_grade5 = 'C'
-        elif self.semester3_course_grade5 >= 35:
+        elif self.semester3_course_grade5 >= 40:
             self.semester3_course_equivalent5 = 2
             self.semester3_grade5 = 'D'
         elif self.semester3_course_grade5 >= 20:
@@ -2544,7 +2665,7 @@ class BitResult(models.Model):
         elif self.semester3_course_grade6 >= 50:
             self.semester3_course_equivalent6 = 3
             self.semester3_grade6 = 'C'
-        elif self.semester3_course_grade6 >= 35:
+        elif self.semester3_course_grade6 >= 40:
             self.semester3_course_equivalent6 = 2
             self.semester3_grade6 = 'D'
         elif self.semester3_module_grade6 >= 20:
@@ -2566,7 +2687,7 @@ class BitResult(models.Model):
         elif self.semester4_course_grade1 >= 50:
             self.semester4_course_equivalent1 = 3
             self.semester4_grade1 = 'C'
-        elif self.semester4_course_grade1 >= 35:
+        elif self.semester4_course_grade1 >= 40:
             self.semester4_course_equivalent1 = 2
             self.semester4_grade1 = 'D'
         elif self.semester4_course_grade1 >= 20:
@@ -2611,7 +2732,7 @@ class BitResult(models.Model):
         elif self.semester4_course_grade3 >= 50:
             self.semester4_course_equivalent3 = 3
             self.semester4_grade3 = 'C'
-        elif self.semester4_course_grade3 >= 35:
+        elif self.semester4_course_grade3 >= 40:
             self.semester4_course_equivalent3 = 2
             self.semester4_grade3 = 'D'
         elif self.semester4_course_grade1 >= 20:
@@ -2655,7 +2776,7 @@ class BitResult(models.Model):
         elif self.semester4_course_grade5 >= 50:
             self.semester4_course_equivalent5 = 3
             self.semester4_grade5 = 'C'
-        elif self.semester4_course_grade5 >= 35:
+        elif self.semester4_course_grade5 >= 40:
             self.semester4_course_equivalent5 = 2
             self.semester4_grade5 = 'D'
         elif self.semester4_course_grade5 >= 20:
@@ -2677,7 +2798,7 @@ class BitResult(models.Model):
         elif self.semester4_course_grade6 >= 50:
             self.semester4_course_equivalent6 = 3
             self.semester4_grade6 = 'C'
-        elif self.semester4_course_grade6 >= 35:
+        elif self.semester4_course_grade6 >= 40:
             self.semester4_course_equivalent6 = 2
             self.semester4_grade6 = 'D'
         elif self.semester4_course_grade6 >= 20:
@@ -2700,7 +2821,7 @@ class BitResult(models.Model):
         elif self.semester5_course_grade1 >= 50:
             self.semester5_course_equivalent1 = 3
             self.semester5_grade1 = 'C'
-        elif self.semester5_course_grade1 >= 35:
+        elif self.semester5_course_grade1 >= 40:
             self.semester5_course_equivalent1 = 2
             self.semester5_grade1 = 'D'
         elif self.semester5_course_grade1 >= 20:
@@ -2722,7 +2843,7 @@ class BitResult(models.Model):
         elif self.semester5_course_grade2 >= 50:
             self.semester5_course_equivalent2 = 3
             self.semester5_grade2 = 'C'
-        elif self.semester5_course_grade2 >= 35:
+        elif self.semester5_course_grade2 >= 40:
             self.semester5_course_equivalent2 = 2
             self.semester5_grade2 = 'D'
         elif self.semester5_course_grade2 >= 20:
@@ -2745,7 +2866,7 @@ class BitResult(models.Model):
         elif self.semester5_course_grade3 >= 50:
             self.semester5_course_equivalent3 = 3
             self.semester5_grade3 = 'C'
-        elif self.semester5_course_grade3 >= 35:
+        elif self.semester5_course_grade3 >= 40:
             self.semester5_course_equivalent3 = 2
             self.semester5_grade3 = 'D'
         elif self.semester5_course_grade3 >= 20:
@@ -2767,7 +2888,7 @@ class BitResult(models.Model):
         elif self.semester5_course_grade4 >= 50:
             self.semester5_course_equivalent4 = 3
             self.semester5_grade4 = 'C'
-        elif self.semester5_course_grade4 >= 35:
+        elif self.semester5_course_grade4 >= 40:
             self.semester5_course_equivalent4 = 2
             self.semester5_grade4 = 'D'
         elif self.semester5_course_grade4 >= 20:
@@ -2789,7 +2910,7 @@ class BitResult(models.Model):
         elif self.semester5_course_grade5 >= 50:
             self.semester5_course_equivalent5 = 3
             self.semester5_grade5 = 'C'
-        elif self.semester5_course_grade5 >= 35:
+        elif self.semester5_course_grade5 >= 40:
             self.semester5_course_equivalent5 = 2
             self.semester5_grade5 = 'D'
         elif self.semester5_course_grade5 >= 20:
@@ -2811,7 +2932,7 @@ class BitResult(models.Model):
         elif self.semester5_course_grade6>= 50:
             self.semester5_course_equivalent6 = 3
             self.semester5_grade6 = 'C'
-        elif self.semester5_course_grade6 >= 35:
+        elif self.semester5_course_grade6 >= 40:
             self.semester5_course_equivalent6 = 2
             self.semester5_grade6 = 'D'
         elif self.semester5_course_grade6 >= 20:
@@ -2834,7 +2955,7 @@ class BitResult(models.Model):
         elif self.semester6_course_grade1 >= 50:
             self.semester6_course_equivalent1 = 3
             self.semester6_grade1 = 'C'
-        elif self.semester6_course_grade1 >= 35:
+        elif self.semester6_course_grade1 >= 40:
             self.semester6_course_equivalent1 = 2
             self.semester6_grade1 = 'D'
         elif self.semester6_course_grade1 >= 20:
@@ -2856,7 +2977,7 @@ class BitResult(models.Model):
         elif self.semester6_course_grade2 >= 50:
             self.semester6_course_equivalent2 = 3
             self.semester6_grade2 = 'C'
-        elif self.semester6_course_grade2 >= 35:
+        elif self.semester6_course_grade2 >= 40:
             self.semester6_course_equivalent2 = 2
             self.semester6_grade2 = 'D'
         elif self.semester6_course_grade2 >= 20:
@@ -2879,7 +3000,7 @@ class BitResult(models.Model):
         elif self.semester6_course_grade3 >= 50:
             self.semester6_course_equivalent3 = 3
             self.semester6_grade3 = 'C'
-        elif self.semester6_course_grade3 >= 35:
+        elif self.semester6_course_grade3 >= 40:
             self.semester6_course_equivalent3 = 2
             self.semester6_grade3 = 'D'
         elif self.semester6_course_grade3 >= 20:
@@ -2901,7 +3022,7 @@ class BitResult(models.Model):
         elif self.semester6_course_grade4 >= 50:
             self.semester6_course_equivalent4 = 3
             self.semester6_grade4 = 'C'
-        elif self.semester6_course_grade24>= 35:
+        elif self.semester6_course_grade24>= 40:
             self.semester6_course_equivalent4 = 2
             self.semester6_grade4 = 'D'
         elif self.semester6_course_grade4 >= 20:
@@ -2923,7 +3044,7 @@ class BitResult(models.Model):
         elif self.semester6_course_grade2 >= 50:
             self.semester6_course_equivalent5 = 3
             self.semester6_grade5 = 'C'
-        elif self.semester6_course_grade5 >= 35:
+        elif self.semester6_course_grade5 >= 40:
             self.semester6_course_equivalent5 = 2
             self.semester6_grade5 = 'D'
         elif self.semester6_course_grade5 >= 20:
@@ -2945,7 +3066,7 @@ class BitResult(models.Model):
         elif self.semester6_course_grade6 >= 50:
             self.semester6_course_equivalent6 = 3
             self.semester6_grade6 = 'C'
-        elif self.semester6_course_grade6 >= 35:
+        elif self.semester6_course_grade6 >= 40:
             self.semester6_course_equivalent6 = 2
             self.semester6_grade6 = 'D'
         elif self.semester6_course_grade6 >= 20:
@@ -2967,7 +3088,7 @@ class BitResult(models.Model):
         elif self.semester7_course_grade1 >= 50:
             self.semester7_course_equivalent1 = 3
             self.semester7_grade1 = 'C'
-        elif self.semester7_course_grade1 >= 35:
+        elif self.semester7_course_grade1 >= 40:
             self.semester7_course_equivalent1 = 2
             self.semester7_grade1 = 'D'
         elif self.semester7_course_grade1 >= 20:
@@ -2989,7 +3110,7 @@ class BitResult(models.Model):
         elif self.semester7_course_grade2 >= 50:
             self.semester7_course_equivalent2 = 3
             self.semester7_grade2 = 'C'
-        elif self.semester7_course_grade2 >= 35:
+        elif self.semester7_course_grade2 >= 40:
             self.semester7_course_equivalent2 = 2
             self.semester7_grade2 = 'D'
         elif self.semester7_course_grade2 >= 20:
@@ -3012,7 +3133,7 @@ class BitResult(models.Model):
         elif self.semester7_course_grade3 >= 50:
             self.semester7_course_equivalent3 = 3
             self.semester7_grade3 = 'C'
-        elif self.semester7_course_grade3 >= 35:
+        elif self.semester7_course_grade3 >= 40:
             self.semester7_course_equivalent3 = 2
             self.semester7_grade3 = 'D'
         elif self.semester7_course_grade1 >= 20:
@@ -3034,7 +3155,7 @@ class BitResult(models.Model):
         elif self.semester7_course_grade4 >= 50:
             self.semester7_course_equivalent4 = 3
             self.semester7_grade4 = 'C'
-        elif self.semester7_course_grade4 >= 35:
+        elif self.semester7_course_grade4 >= 40:
             self.semester7_course_equivalent4 = 2
             self.semester7_grade4 = 'D'
         elif self.semester7_course_grade4 >= 20:
@@ -3056,7 +3177,7 @@ class BitResult(models.Model):
         elif self.semester7_course_grade5 >= 50:
             self.semester7_course_equivalent5 = 3
             self.semester7_grade5 = 'C'
-        elif self.semester7_course_grade5 >= 35:
+        elif self.semester7_course_grade5 >= 40:
             self.semester7_course_equivalent5 = 2
             self.semester7_grade5 = 'D'
         elif self.semester7_course_grade5 >= 20:
@@ -3081,7 +3202,7 @@ class BitResult(models.Model):
         elif self.semester8_course_grade1 >= 50:
             self.semester8_course_equivalent1 = 3
             self.semester8_grade1 = 'C'
-        elif self.semester8_course_grade1 >= 35:
+        elif self.semester8_course_grade1 >= 40:
             self.semester8_course_equivalent1 = 2
             self.semester8_grade1 = 'D'
         elif self.semester8_course_grade1 >= 20:
@@ -3103,7 +3224,7 @@ class BitResult(models.Model):
         elif self.semester8_course_grade2 >= 50:
             self.semester8_course_equivalent2 = 3
             self.semester8_grade2 = 'C'
-        elif self.semester8_course_grade2 >= 35:
+        elif self.semester8_course_grade2 >= 40:
             self.semester8_course_equivalent2 = 2
             self.semester8_grade2 = 'D'
         elif self.semester8_course_grade2 >= 20:
@@ -3126,7 +3247,7 @@ class BitResult(models.Model):
         elif self.semester8_course_grade3 >= 50:
             self.semester8_course_equivalent3 = 3
             self.semester8_grade3 = 'C'
-        elif self.semester8_course_grade3 >= 35:
+        elif self.semester8_course_grade3 >= 40:
             self.semester8_course_equivalent3 = 2
             self.semester8_grade3 = 'D'
         elif self.semester8_course_grade3 >= 20:
@@ -3136,6 +3257,31 @@ class BitResult(models.Model):
             self.semester8_course_equivalent3 = 0
             self.semester8_grade3 = 'F'
         self.semester8_course_gradepoint3 = self.semester8_course_equivalent3 * 3
+
+
+
+        if self.semester8_course_grade4 >= 75:
+            self.semester8_course_equivalent4 = 5
+            self.semester8_grade4 = 'A'
+        elif self.semester8_course_grade4 >= 65:
+            self.semester8_course_equivalent4 = 4
+            self.semester8_grade4 = 'B'
+        elif self.semester8_course_grade4 >= 50:
+            self.semester8_course_equivalent4 = 3
+            self.semester8_grade4 = 'C'
+        elif self.semester8_course_grade4 >= 40:
+            self.semester8_course_equivalent4 = 2
+            self.semester8_grade4 = 'D'
+        elif self.semester8_course_grade3 >= 20:
+            self.semester8_course_equivalent4 = 1
+            self.semester8_grade4 = 'E'
+        else:
+            self.semester8_course_equivalent4 = 0
+            self.semester8_grade4 = 'F'
+        self.semester8_course_gradepoint4 = self.semester8_course_equivalent4 * 3 
+
+
+        
 
 
 
@@ -3207,10 +3353,38 @@ class BitResult(models.Model):
         self.semester8_sgpa = self.semester8_sgp / self.semester8_totalsch
 
          # *******YEARLY CALCULATIONS****
-        self.year4_tot_cred_hours = self.semester5_totalsch + self.semester6_totalsch
+        self.year4_tot_cred_hours = self.semester7_totalsch + self.semester8_totalsch
         self.year4_cgp = self.semester7_sgp + self.semester8_sgp
         self.year4_cgpa = self.year4_cgp / self.year4_tot_cred_hours
 
+
+
+
+
+
+         # ======================FINAL CUMULATIVE GPA AND DIVISION CALCULATION======================================#
+
+        self.final_credit_hours = self.tot_cred_hours + self.year2_tot_cred_hours + self.year3_tot_cred_hours + self.year4_tot_cred_hours
+        self.final_cgp = self.cgp + self.year2_cgp + self.year3_cgp + self.year4_cgp
+        self.final_cgpa = self.final_cgp / self.final_credit_hours
+        self.internal_assessment = self.final_cgpa * 0.7
+        self.project_assessment = self.semester8_course_equivalent4 * 0.3
+        self.final_grade_point = self.internal_assessment + self.project_assessment
+        
+
+
+        if self.final_grade_point is not None:
+            if self.final_grade_point >= 4.30:
+                self.division = "First Class"
+            elif self.final_grade_point >= 4.00:
+                self.division = "Second Class (First Division)"
+            elif self.final_grade_point >= 3.60:
+                self.division = "Second Class (Second Division)"
+            else:
+                self.division = "Third Class"
+        else:
+            # Handle the case where self.final_grade_point is None
+            self.division = "N/A"  # Or any other appropriate value
         # Save the result
         super(BitResult, self).save(*args, **kwargs)
     def __str__(self):
@@ -3342,12 +3516,12 @@ class MasscomResult(models.Model):
 
     # =====================YEAR ONE=========================================#
     # ****************SEMESTER ONE************************
-    mass_course1 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course1_results',null=True,default='')
-    mass_course2 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course2_results',null=True,default='')
-    mass_course3 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course3_results',null=True,default='')
-    mass_course4 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course4_results',null=True,default='')
-    mass_course5 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course5_results',null=True,default='')
-    mass_course6 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course6_results',null=True,default='')
+    mass_course1 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course1_results',null=True)
+    mass_course2 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course2_results',null=True)
+    mass_course3 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course3_results',null=True)
+    mass_course4 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course4_results',null=True)
+    mass_course5 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course5_results',null=True)
+    mass_course6 = models.ForeignKey(masscom_year1_semester1, on_delete=models.CASCADE, related_name='masscom_course6_results',null=True)
     mass_course_grade1 = models.IntegerField(null=True,default='')
     mass_course_grade2 = models.IntegerField(null=True,default='')
     mass_course_grade3 = models.IntegerField(null=True,default='')
@@ -3668,6 +3842,18 @@ class MasscomResult(models.Model):
     year4_tot_cred_hours = models.IntegerField(null=True, default=0)
     year4_cgp = models.IntegerField(null=True, default=0 )
     year4_cgpa = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+
+
+    # =================FINAL CALCULATION=====================
+    final_credit_hours = models.IntegerField(null=True)
+    final_cgp = models.IntegerField(null=True)
+    final_cgpa = models.DecimalField(max_digits=5, decimal_places=2)
+    internal_assessment = models.DecimalField(max_digits=5, decimal_places=2)
+    final_grade_point = models.DecimalField(max_digits=5, decimal_places=2)
+    project_assessment = models.DecimalField(max_digits=5, decimal_places=2)
+    division = models.TextField(max_length=20)
+
+
 
     def save(self, *args, **kwargs):
         # **********SEMESTER ONE************************
@@ -4667,6 +4853,33 @@ class MasscomResult(models.Model):
         self.year4_tot_cred_hours = self.semester5_totalsch + self.semester6_totalsch
         self.year4_cgp = self.semester7_sgp + self.semester8_sgp
         self.year4_cgpa = self.year4_cgp / self.year4_tot_cred_hours
+
+
+
+
+        # ======================FINAL CUMULATIVE GPA AND DIVISION CALCULATION======================================#
+
+        self.final_credit_hours = self.tot_cred_hours + self.year2_tot_cred_hours + self.year3_tot_cred_hours + self.year4_tot_cred_hours
+        self.final_cgp = self.cgp + self.year2_cgp + self.year3_cgp + self.year4_cgp
+        self.final_cgpa = self.final_cgp / self.final_credit_hours
+        self.internal_assessment = self.final_cgpa * 0.7
+        self.project_assessment = self.semester8_mass_course_equivalent2 * 0.3
+        self.final_grade_point = self.internal_assessment + self.project_assessment
+        
+
+
+        if self.final_grade_point is not None:
+            if self.final_grade_point >= 4.30:
+                self.division = "First Class"
+            elif self.final_grade_point >= 4.00:
+                self.division = "Second Class (First Division)"
+            elif self.final_grade_point >= 3.60:
+                self.division = "Second Class (Second Division)"
+            else:
+                self.division = "Third Class"
+        else:
+            # Handle the case where self.final_grade_point is None
+            self.division = "N/A"  # Or any other appropriate value
 
         # Save the result
         super(MasscomResult, self).save(*args, **kwargs)

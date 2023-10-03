@@ -10,6 +10,18 @@ urlpatterns = [
     path('masscom_home_search/', views.masscom_home_search, name='masscom_home_search'),
     path('request_transcript/', views.request_transcript, name='request_transcript'),
     path('verify/', views.verify, name='verify'),
+    path('bit_login/', views.bit_login, name='bit_login'),
+    path('comsci_login/', views.comsci_login, name='comsci_login'),
+    path('mass_login/', views.mass_login, name='mass_login'),
+    path('student_detail/', views.student_detail, name='student_detail'),
+    path('certificate/', views.certificate, name='certificate'),
+    path('search_certificate/', views.search_certificate, name='search_certificate'),
+    path('admin_certificate/', views.admin_certificate, name='admin_certificate'),
+    path('transcript/',views.transcript,name='transcript'),
+    path('search_student_certificate/',views.search_student_certificate,name='search_student_certificate'),
+    
+
+
 
               # LOGIN-REGISTER PAGE
     #***************************************
@@ -391,6 +403,8 @@ urlpatterns = [
     #*****************************************
     path('search_result/', views.search_result, name='search_result'),
     path('view_student_result/<str:email>/<str:id_number>/', views.view_student_result, name='view_student_result'),
+    path('search_comsci_result/', views.search_comsci_result, name='search_comsci_result'),
+    path('view_comsci_result/', views.view_comsci_result, name='view_comsci_result'),
     
 
 
@@ -403,7 +417,8 @@ urlpatterns = [
     path('view_bit_result/<int:pk>/', views.view_bit_result, name='view_bit_result'),
     path('search_bit_result/', views.search_bit_result, name='search_bit_result'),
     path('view_bit_student_result/<str:email>/<str:id_number>/', views.view_bit_student_result, name='view_bit_student_result'),
-
+    path('search_bitresult/', views.search_bitresult, name='search_bitresult'),
+    path('view_bitresult/', views.view_bitresult, name='view_bitresult'),
 
     # ***************************************
                  # MASSCOM  STUDENTS RESULTS
@@ -414,6 +429,8 @@ urlpatterns = [
     path('view_masscom_result/<int:pk>/', views.view_masscom_result, name='view_masscom_result'),
     path('search_masscom_result/', views.search_masscom_result, name='search_masscom_result'),
     path('view_masscom_student_result/<str:email>/<str:id_number>/', views.view_masscom_student_result, name='view_masscom_student_result'),
+    path('search_masscomresult/', views.search_masscomresult, name='search_masscomresult'),
+    path('view_masscomresult/', views.view_masscomresult, name='view_masscomresult'),
 
 
 
